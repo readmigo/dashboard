@@ -1,0 +1,54 @@
+export type Environment = 'local' | 'debugging' | 'staging' | 'production';
+
+export interface EnvironmentConfig {
+  name: string;
+  apiUrl: string;
+  color: 'warning' | 'info' | 'success';
+  description: string;
+  requireConfirmation?: boolean;
+}
+
+export const environments: Record<Environment, EnvironmentConfig> = {
+  local: {
+    name: 'Local',
+    apiUrl: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+    color: 'warning',
+    description: 'Local development environment',
+  },
+  debugging: {
+    name: 'Debugging',
+    apiUrl: import.meta.env.VITE_DEBUG_API_URL || 'https://debug-api.readmigo.app',
+    color: 'warning',
+    description: 'Debugging environment',
+  },
+  staging: {
+    name: 'Staging',
+    apiUrl: import.meta.env.VITE_STAGING_API_URL || 'https://staging-api.readmigo.app',
+    color: 'info',
+    description: 'Testing environment',
+  },
+  production: {
+    name: 'Production',
+    apiUrl: import.meta.env.VITE_PRODUCTION_API_URL || 'https://api.readmigo.app',
+    color: 'success',
+    description: 'Production environment - Use with caution',
+    requireConfirmation: true,
+  },
+};
+
+export const getApiUrl = (env: Environment): string => {
+  return environments[env].apiUrl;
+};
+
+export const getEnvironmentConfig = (env: Environment): EnvironmentConfig => {
+  return environments[env];
+};
+
+// Content filter options
+export type ContentFilter = 'all' | 'en' | 'zh';
+
+export const contentFilterOptions: { value: ContentFilter; label: string }[] = [
+  { value: 'all', label: 'All Languages' },
+  { value: 'en', label: 'English Only' },
+  { value: 'zh', label: 'Chinese Only' },
+];
