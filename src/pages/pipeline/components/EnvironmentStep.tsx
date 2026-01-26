@@ -12,7 +12,7 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import ApiIcon from '@mui/icons-material/Api';
 import { useTranslate } from 'react-admin';
 
-export type PipelineEnvironment = 'local' | 'debugging' | 'staging' | 'production';
+export type PipelineEnvironment = 'local' | 'production';
 
 interface EnvironmentStepProps {
   selectedEnvironment: PipelineEnvironment | null;
@@ -37,22 +37,6 @@ const environments: EnvironmentConfig[] = [
     database: 'Local PostgreSQL',
     storage: 'Local Filesystem',
     api: 'localhost:3000',
-  },
-  {
-    id: 'debugging',
-    name: 'Debug',
-    color: 'success',
-    database: 'Neon Debug',
-    storage: 'R2 Debug',
-    api: 'readmigo-debug.fly.dev',
-  },
-  {
-    id: 'staging',
-    name: 'Staging',
-    color: 'warning',
-    database: 'Neon Staging',
-    storage: 'R2 Staging',
-    api: 'staging-api.readmigo.app',
   },
   {
     id: 'production',

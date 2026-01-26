@@ -18,7 +18,7 @@ const STORAGE_KEY = 'dashboard_environment';
  */
 export const getStoredEnvironment = (): Environment => {
   const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === 'local' || stored === 'debugging' || stored === 'staging' || stored === 'production') {
+  if (stored === 'local' || stored === 'production') {
     return stored;
   }
   // Default to production

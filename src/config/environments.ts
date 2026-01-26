@@ -1,4 +1,4 @@
-export type Environment = 'local' | 'debugging' | 'staging' | 'production';
+export type Environment = 'local' | 'production';
 
 export interface EnvironmentConfig {
   name: string;
@@ -14,18 +14,6 @@ export const environments: Record<Environment, EnvironmentConfig> = {
     apiUrl: import.meta.env.VITE_API_URL || 'http://localhost:3000',
     color: 'warning',
     description: 'Local development environment',
-  },
-  debugging: {
-    name: 'Debugging',
-    apiUrl: import.meta.env.VITE_DEBUG_API_URL || 'https://debug-api.readmigo.app',
-    color: 'warning',
-    description: 'Debugging environment',
-  },
-  staging: {
-    name: 'Staging',
-    apiUrl: import.meta.env.VITE_STAGING_API_URL || 'https://staging-api.readmigo.app',
-    color: 'info',
-    description: 'Testing environment',
   },
   production: {
     name: 'Production',

@@ -17,7 +17,6 @@ import {
   MenuItem,
   Chip,
   CircularProgress,
-  IconButton,
   Paper,
   Skeleton,
 } from '@mui/material';
@@ -31,7 +30,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { useTranslate } from 'react-admin';
 import { useEnvironment } from '../../contexts/EnvironmentContext';
 
-type PipelineEnvironment = 'local' | 'debugging' | 'staging' | 'production';
+type PipelineEnvironment = 'local' | 'production';
 
 interface BooklistInfo {
   path: string;
@@ -80,8 +79,6 @@ interface HistoryItem {
 
 const environmentOptions: { value: PipelineEnvironment; label: string; color: string }[] = [
   { value: 'local', label: 'Local (本机)', color: '#4caf50' },
-  { value: 'debugging', label: 'Debugging (测试)', color: '#2196f3' },
-  { value: 'staging', label: 'Staging (预发布)', color: '#ff9800' },
   { value: 'production', label: 'Production (正式)', color: '#f44336' },
 ];
 

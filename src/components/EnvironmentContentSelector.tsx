@@ -20,7 +20,6 @@ import WarningIcon from '@mui/icons-material/Warning';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloudIcon from '@mui/icons-material/Cloud';
 import ComputerIcon from '@mui/icons-material/Computer';
-import StorageIcon from '@mui/icons-material/Storage';
 import LanguageIcon from '@mui/icons-material/Language';
 import PublishIcon from '@mui/icons-material/Publish';
 import { useRefresh, useTranslate } from 'react-admin';
@@ -48,20 +47,6 @@ const environmentOptions: EnvironmentOption[] = [
     descriptionKey: 'environment.local.description',
     icon: <ComputerIcon fontSize="small" />,
     color: 'warning',
-  },
-  {
-    value: 'debugging',
-    labelKey: 'environment.debugging.label',
-    descriptionKey: 'environment.debugging.description',
-    icon: <StorageIcon fontSize="small" />,
-    color: 'warning',
-  },
-  {
-    value: 'staging',
-    labelKey: 'environment.staging.label',
-    descriptionKey: 'environment.staging.description',
-    icon: <StorageIcon fontSize="small" />,
-    color: 'info',
   },
   {
     value: 'production',

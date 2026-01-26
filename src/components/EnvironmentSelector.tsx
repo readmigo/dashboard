@@ -74,18 +74,14 @@ export const EnvironmentSelector = () => {
               borderColor: 'divider',
               '&.Mui-selected': {
                 backgroundColor:
-                  environment === 'local' || environment === 'debugging'
+                  environment === 'local'
                     ? 'warning.main'
-                    : environment === 'staging'
-                    ? 'secondary.main'
                     : 'success.main',
                 color: 'white',
                 '&:hover': {
                   backgroundColor:
-                    environment === 'local' || environment === 'debugging'
+                    environment === 'local'
                       ? 'warning.dark'
-                      : environment === 'staging'
-                      ? 'secondary.dark'
                       : 'success.dark',
                 },
               },
@@ -93,8 +89,6 @@ export const EnvironmentSelector = () => {
           }}
         >
           <ToggleButton value="local">{translate('environment.local.label')}</ToggleButton>
-          <ToggleButton value="debugging">{translate('environment.debugging.label')}</ToggleButton>
-          <ToggleButton value="staging">{translate('environment.staging.label')}</ToggleButton>
           <ToggleButton value="production">{translate('environment.production.label')}</ToggleButton>
         </ToggleButtonGroup>
       </Box>

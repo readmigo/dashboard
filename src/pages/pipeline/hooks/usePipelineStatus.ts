@@ -80,7 +80,7 @@ export function usePipelineStatus(pipelineId: string | null, pollInterval = 2000
   const [report, setReport] = useState<PipelineReport | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const fetchStatus = useCallback(async () => {
     if (!pipelineId) return;

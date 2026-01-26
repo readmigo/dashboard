@@ -73,8 +73,6 @@ export const Dashboard = () => {
         const env = localStorage.getItem('dashboard_environment') || 'production';
         const apiUrls: Record<string, string> = {
           local: 'http://localhost:3000',
-          debug: 'https://readmigo-debug.fly.dev',
-          staging: 'https://staging-api.readmigo.app',
           production: 'https://api.readmigo.app',
         };
         const baseUrl = apiUrls[env] || apiUrls.production;

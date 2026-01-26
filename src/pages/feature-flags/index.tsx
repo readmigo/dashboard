@@ -36,8 +36,6 @@ import {
 
 const environmentColors: Record<Environment, 'warning' | 'secondary' | 'success'> = {
   local: 'warning',
-  debugging: 'warning',
-  staging: 'secondary',
   production: 'success',
 };
 
@@ -53,7 +51,7 @@ export const FeatureFlagsList = () => {
   const [editValue, setEditValue] = useState('');
   const [copyDialogOpen, setCopyDialogOpen] = useState(false);
   const [copyingFlag, setCopyingFlag] = useState<FeatureFlag | null>(null);
-  const [targetEnv, setTargetEnv] = useState<Environment>('staging');
+  const [targetEnv, setTargetEnv] = useState<Environment>('production');
 
   const loadFlags = useCallback(async () => {
     setLoading(true);
@@ -116,9 +114,9 @@ export const FeatureFlagsList = () => {
   const handleCopyClick = (flag: FeatureFlag) => {
     setCopyingFlag(flag);
     // Set default target environment
-    const envOrder: Environment[] = ['local', 'debugging', 'staging', 'production'];
+    const envOrder: Environment[] = ['local', 'production'];
     const currentIndex = envOrder.indexOf(flag.environment as Environment);
-    setTargetEnv(envOrder[(currentIndex + 1) % 4]);
+    setTargetEnv(envOrder[(currentIndex + 1) % 2]);
     setCopyDialogOpen(true);
   };
 
@@ -332,7 +330,7 @@ export const FeatureFlagsList = () => {
               {translate('featureFlags.dialogs.copy.to')}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
-              {(['local', 'debugging', 'staging', 'production'] as Environment[])
+              {(['local', 'production'] as Environment[])
                 .filter((env) => env !== copyingFlag?.environment)
                 .map((env) => (
                   <Chip
