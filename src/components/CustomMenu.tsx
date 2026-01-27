@@ -24,6 +24,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import GroupIcon from '@mui/icons-material/Group';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
@@ -199,6 +200,13 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.operations.pipeline', { _: 'Pipeline' })}
         leftIcon={<BuildCircleIcon />}
         selected={isSelected('/pipeline')}
+        sidebarIsOpen={open}
+      />
+      <MenuItemLink
+        to="/se-import"
+        primaryText={translate('sidebar.operations.seImport', { _: 'SE Import' })}
+        leftIcon={<CloudDownloadIcon />}
+        selected={isSelected('/se-import')}
         sidebarIsOpen={open}
       />
       {/* Content Studio - External Link */}
