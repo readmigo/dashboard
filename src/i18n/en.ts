@@ -1217,6 +1217,54 @@ export const englishTranslations = {
       viewDetails: 'View Details',
     },
   },
+  // SE Import
+  seImport: {
+    title: 'SE Incremental Import',
+    description: 'Automatically detect new books from R2 raw-epubs/, parse and import to database',
+    startImport: 'Start Import',
+    selectEnvironment: 'Target Environment',
+    submitting: 'Submitting...',
+    pipelineFlow: 'Pipeline: Incremental Calc → Parse & Fix → Data Fill → Discover Tab',
+    nodes: {
+      node1: 'Incremental Calc',
+      node2: 'Parse & Fix',
+      node3: 'Data Fill',
+      node4: 'Discover Tab',
+    },
+    environments: {
+      local: 'Local',
+      production: 'Production',
+    },
+    confirmDialog: {
+      title: 'Confirm Production Submission',
+      message: 'You are about to execute SE incremental import on PRODUCTION environment. This will directly write to the live database. Are you sure you want to continue?',
+      cancel: 'Cancel',
+      confirm: 'Confirm',
+    },
+    status: {
+      title: 'Import Status',
+      refresh: 'Refresh',
+      newImport: 'New Import',
+      runId: 'Run ID',
+      startTime: 'Start Time',
+      elapsed: 'Elapsed Time',
+      progress: 'Progress',
+      completed: 'SE Incremental Import Completed',
+      completedDesc: 'New books have been imported and automatically categorized in Discover Tab',
+      duration: '%{minutes}m %{seconds}s',
+      pending: 'Pending',
+      running: 'Running',
+      started: 'Started',
+      failed: 'Failed',
+    },
+    nodeDescription: {
+      title: 'Pipeline Node Description',
+      node1: 'Compare R2 raw-epubs/ with DB, identify new books',
+      node2: 'Parse EPUB, extract metadata, cover, chapters (CSS preserved)',
+      node3: 'Write to DB (Author, Book, Chapter) + Upload covers to R2',
+      node4: 'Auto-categorize, booklist association, Featured recommendations',
+    },
+  },
   // Retention
   retention: {
     title: 'Retention Analysis',
@@ -1374,6 +1422,8 @@ export const englishTranslations = {
       retention: 'Retention Analysis',
       demographics: 'User Demographics',
       pipeline: 'Book Import',
+      importBatches: 'Import Batches',
+      seImport: 'SE Import',
       contentStudio: 'Book Typesetting',
     },
     support: {

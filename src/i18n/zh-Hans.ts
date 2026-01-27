@@ -1210,6 +1210,54 @@ export const chineseTranslations = {
       viewDetails: '查看详情',
     },
   },
+  // SE Import
+  seImport: {
+    title: 'SE 增量导入',
+    description: '从 R2 raw-epubs/ 自动检测新增书籍，解析并导入到数据库',
+    startImport: '开始导入',
+    selectEnvironment: '目标环境',
+    submitting: '提交中...',
+    pipelineFlow: 'Pipeline 流程: 增量计算 → 解析修正 → 数据填充 → Discover Tab',
+    nodes: {
+      node1: '增量计算',
+      node2: '解析修正',
+      node3: '数据填充',
+      node4: 'Discover Tab',
+    },
+    environments: {
+      local: 'Local (本机)',
+      production: 'Production (正式)',
+    },
+    confirmDialog: {
+      title: '确认提交到生产环境',
+      message: '您即将向 PRODUCTION 环境执行 SE 增量导入。这将直接写入线上数据库，确定要继续吗？',
+      cancel: '取消',
+      confirm: '确认执行',
+    },
+    status: {
+      title: '导入状态',
+      refresh: '刷新',
+      newImport: '新建导入',
+      runId: 'Run ID',
+      startTime: '开始时间',
+      elapsed: '已用时间',
+      progress: '处理进度',
+      completed: 'SE 增量导入完成',
+      completedDesc: '新书籍已导入数据库并自动分类到 Discover Tab',
+      duration: '%{minutes}分%{seconds}秒',
+      pending: '等待中',
+      running: '运行中',
+      started: '已启动',
+      failed: '失败',
+    },
+    nodeDescription: {
+      title: 'Pipeline 节点说明',
+      node1: '比较 R2 raw-epubs/ 与 DB，找出新增书籍',
+      node2: '解析 EPUB，提取元数据、封面、章节内容 (CSS 保留)',
+      node3: '写入 DB (Author, Book, Chapter) + 上传封面到 R2',
+      node4: '自动分类、书单关联、Featured 推荐',
+    },
+  },
   // Retention
   retention: {
     title: '留存分析',
@@ -1367,6 +1415,8 @@ export const chineseTranslations = {
       retention: '留存分析',
       demographics: '用户画像',
       pipeline: '书籍导入',
+      importBatches: '导入批次',
+      seImport: 'SE 增量导入',
       contentStudio: '书籍排版',
     },
     support: {
