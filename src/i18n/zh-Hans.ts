@@ -1414,7 +1414,6 @@ export const chineseTranslations = {
       readingStats: '阅读统计',
       retention: '留存分析',
       demographics: '用户画像',
-      pipeline: '书籍导入',
       importBatches: '导入批次',
       seImport: 'SE 增量导入',
       contentStudio: '书籍排版',

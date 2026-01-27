@@ -23,7 +23,6 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import GroupIcon from '@mui/icons-material/Group';
-import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import RateReviewIcon from '@mui/icons-material/RateReview';
@@ -194,13 +193,6 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.operations.demographics')}
         leftIcon={<GroupIcon />}
         selected={isSelected('/demographics')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/pipeline"
-        primaryText={translate('sidebar.operations.pipeline', { _: 'Pipeline' })}
-        leftIcon={<BuildCircleIcon />}
-        selected={isSelected('/pipeline')}
         sidebarIsOpen={open}
       />
       <MenuItemLink

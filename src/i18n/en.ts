@@ -1421,7 +1421,6 @@ export const englishTranslations = {
       readingStats: 'Reading Stats',
       retention: 'Retention Analysis',
       demographics: 'User Demographics',
-      pipeline: 'Book Import',
       importBatches: 'Import Batches',
       seImport: 'SE Import',
       contentStudio: 'Book Typesetting',

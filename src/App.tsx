@@ -30,7 +30,6 @@ import { OperationsDashboard, PerformanceDashboard } from './pages/operations';
 import { ReadingStatsPage } from './pages/reading-stats';
 import { RetentionPage } from './pages/retention';
 import { DemographicsPage } from './pages/demographics';
-import { PipelineDashboard } from './pages/pipeline';
 import { SEIncrementalImport } from './pages/se-import';
 import BookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
@@ -164,7 +163,6 @@ export const App = () => (
               <Route path="/reading-stats" element={<ReadingStatsPage />} />
               <Route path="/retention" element={<RetentionPage />} />
               <Route path="/demographics" element={<DemographicsPage />} />
-              <Route path="/pipeline" element={<PipelineDashboard />} />
               <Route path="/se-import" element={<SEIncrementalImport />} />
             </CustomRoutes>
           </Admin>
