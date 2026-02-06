@@ -1,5 +1,7 @@
 # Readmigo Dashboard
 
+[![CI](https://github.com/readmigo/dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/readmigo/dashboard/actions/workflows/ci.yml)
+
 Admin dashboard for managing Readmigo platform.
 
 ## Tech Stack
