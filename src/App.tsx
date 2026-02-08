@@ -27,6 +27,7 @@ import { FeedbackList, FeedbackShow } from './pages/feedback';
 import { OrderList, OrderShow } from './pages/orders';
 import { SupportDashboard } from './pages/support';
 import { OperationsDashboard, PerformanceDashboard } from './pages/operations';
+import { EventAnalyticsPage } from './pages/event-analytics';
 import { ReadingStatsPage } from './pages/reading-stats';
 import { RetentionPage } from './pages/retention';
 import { DemographicsPage } from './pages/demographics';
@@ -163,6 +164,7 @@ export const App = () => (
               <Route path="/reading-stats" element={<ReadingStatsPage />} />
               <Route path="/retention" element={<RetentionPage />} />
               <Route path="/demographics" element={<DemographicsPage />} />
+              <Route path="/event-analytics" element={<EventAnalyticsPage />} />
               <Route path="/se-import" element={<SEIncrementalImport />} />
             </CustomRoutes>
           </Admin>
