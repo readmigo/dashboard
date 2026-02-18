@@ -1,7 +1,7 @@
 import { Menu, MenuItemLink, useSidebarState, useTranslate } from 'react-admin';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Divider, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { gradients, shadows, textColors } from '../theme/brandTokens';
+import { gradients, textColors } from '../theme/brandTokens';
 import { useEnvironment } from '../contexts/EnvironmentContext';
 import BookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
@@ -13,7 +13,6 @@ import StyleIcon from '@mui/icons-material/Style';
 import PersonIcon from '@mui/icons-material/Person';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import FlagIcon from '@mui/icons-material/Flag';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import FeedbackIcon from '@mui/icons-material/Feedback';
@@ -56,19 +55,14 @@ export const CustomMenu = () => {
         }}
       >
         <Box
+          component="img"
+          src="/logo-mark.svg"
+          alt="Readmigo"
           sx={{
             width: 36,
             height: 36,
-            borderRadius: '8px',
-            background: gradients.brand,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: shadows.brand,
           }}
-        >
-          <AutoStoriesIcon sx={{ color: 'white', fontSize: 20 }} />
-        </Box>
+        />
         {open && (
           <Typography
             variant="h6"
@@ -91,6 +85,13 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.dashboard')}
         leftIcon={<DashboardIcon />}
         selected={location.pathname === '/'}
+        sidebarIsOpen={open}
+      />
+      <MenuItemLink
+        to="/services"
+        primaryText={translate('sidebar.platform.serviceHub')}
+        leftIcon={<HubIcon />}
+        selected={isSelected('/services')}
         sidebarIsOpen={open}
       />
       <MenuItemLink
@@ -304,22 +305,6 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.support.messages')}
         leftIcon={<MailIcon />}
         selected={isSelected('/messages')}
-        sidebarIsOpen={open}
-      />
-      <Divider sx={{ my: 1, mx: 2 }} />
-      {open && (
-        <Typography
-          variant="caption"
-          sx={{ px: 2, py: 0.5, color: textColors.secondary, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}
-        >
-          {translate('sidebar.sections.platform')}
-        </Typography>
-      )}
-      <MenuItemLink
-        to="/services"
-        primaryText={translate('sidebar.platform.serviceHub')}
-        leftIcon={<HubIcon />}
-        selected={isSelected('/services')}
         sidebarIsOpen={open}
       />
     </Menu>
