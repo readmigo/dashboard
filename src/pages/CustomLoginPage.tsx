@@ -13,7 +13,7 @@ import {
   Divider,
 } from '@mui/material';
 import { Visibility, VisibilityOff, Email, Lock } from '@mui/icons-material';
-import { brandColors } from '../theme';
+import { brandColors, gradients, shadows, textColors, bgColors, alpha } from '../theme/brandTokens';
 
 export const CustomLoginPage = () => {
   const [email, setEmail] = useState('');
@@ -44,7 +44,7 @@ export const CustomLoginPage = () => {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        background: `linear-gradient(135deg, ${brandColors.gradientStart}15 0%, ${brandColors.gradientMiddle}15 50%, ${brandColors.gradientEnd}15 100%)`,
+        background: `linear-gradient(135deg, ${alpha(brandColors.blue, 0.08)} 0%, ${alpha(brandColors.purple, 0.08)} 50%, ${alpha(brandColors.pink, 0.08)} 100%)`,
       }}
     >
       {/* Main Content */}
@@ -64,7 +64,7 @@ export const CustomLoginPage = () => {
             p: 4,
             borderRadius: 3,
             boxShadow: '0 8px 32px rgba(124, 141, 245, 0.15)',
-            border: `1px solid ${brandColors.backgroundSubtle}`,
+            border: `1px solid ${bgColors.subtle}`,
           }}
         >
           {/* Logo & Header */}
@@ -85,7 +85,7 @@ export const CustomLoginPage = () => {
               variant="h4"
               sx={{
                 fontWeight: 700,
-                background: `linear-gradient(135deg, ${brandColors.gradientStart} 0%, ${brandColors.gradientMiddle} 50%, ${brandColors.gradientEnd} 100%)`,
+                background: gradients.brand,
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -96,7 +96,7 @@ export const CustomLoginPage = () => {
             </Typography>
             <Typography
               variant="body2"
-              sx={{ color: brandColors.textSecondary }}
+              sx={{ color: textColors.secondary }}
             >
               {translate('login.subtitle')}
             </Typography>
@@ -117,7 +117,7 @@ export const CustomLoginPage = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Email sx={{ color: brandColors.textHint }} />
+                    <Email sx={{ color: textColors.hint }} />
                   </InputAdornment>
                 ),
               }}
@@ -135,7 +135,7 @@ export const CustomLoginPage = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Lock sx={{ color: brandColors.textHint }} />
+                    <Lock sx={{ color: textColors.hint }} />
                   </InputAdornment>
                 ),
                 endAdornment: (
@@ -146,9 +146,9 @@ export const CustomLoginPage = () => {
                       size="small"
                     >
                       {showPassword ? (
-                        <VisibilityOff sx={{ color: brandColors.textHint }} />
+                        <VisibilityOff sx={{ color: textColors.hint }} />
                       ) : (
-                        <Visibility sx={{ color: brandColors.textHint }} />
+                        <Visibility sx={{ color: textColors.hint }} />
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -166,8 +166,8 @@ export const CustomLoginPage = () => {
                 py: 1.5,
                 fontSize: '1rem',
                 fontWeight: 600,
-                backgroundImage: `linear-gradient(135deg, ${brandColors.gradientStart} 0%, ${brandColors.gradientMiddle} 50%, ${brandColors.gradientEnd} 100%)`,
-                boxShadow: '0 4px 12px rgba(139, 185, 255, 0.4)',
+                backgroundImage: gradients.brand,
+                boxShadow: shadows.brandHover,
                 '&:hover': {
                   boxShadow: '0 6px 16px rgba(139, 185, 255, 0.5)',
                 },
@@ -192,7 +192,7 @@ export const CustomLoginPage = () => {
           py: 3,
           px: 2,
           textAlign: 'center',
-          borderTop: `1px solid ${brandColors.backgroundSubtle}`,
+          borderTop: `1px solid ${bgColors.subtle}`,
           backgroundColor: 'rgba(255, 255, 255, 0.8)',
         }}
       >
@@ -211,7 +211,7 @@ export const CustomLoginPage = () => {
             target="_blank"
             rel="noopener noreferrer"
             sx={{
-              color: brandColors.textSecondary,
+              color: textColors.secondary,
               textDecoration: 'none',
               fontSize: '0.875rem',
               '&:hover': { color: brandColors.primary },
@@ -225,7 +225,7 @@ export const CustomLoginPage = () => {
             target="_blank"
             rel="noopener noreferrer"
             sx={{
-              color: brandColors.textSecondary,
+              color: textColors.secondary,
               textDecoration: 'none',
               fontSize: '0.875rem',
               '&:hover': { color: brandColors.primary },
@@ -239,7 +239,7 @@ export const CustomLoginPage = () => {
             target="_blank"
             rel="noopener noreferrer"
             sx={{
-              color: brandColors.textSecondary,
+              color: textColors.secondary,
               textDecoration: 'none',
               fontSize: '0.875rem',
               '&:hover': { color: brandColors.primary },
@@ -251,7 +251,7 @@ export const CustomLoginPage = () => {
         <Typography
           variant="caption"
           sx={{
-            color: brandColors.textHint,
+            color: textColors.hint,
             display: 'block',
           }}
         >

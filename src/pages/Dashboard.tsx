@@ -1,4 +1,4 @@
-import { Card, CardContent, Grid, Typography, Box, Skeleton, Chip } from '@mui/material';
+import { Card, CardContent, Grid, Typography, Box, Chip } from '@mui/material';
 import { useGetList, useTranslate } from 'react-admin';
 import { useState, useEffect } from 'react';
 import BookIcon from '@mui/icons-material/MenuBook';
@@ -7,43 +7,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useTimezone } from '../contexts/TimezoneContext';
 import { brandColors, semanticColors } from '../theme/brandTokens';
-
-interface StatCardProps {
-  title: string;
-  value: string | number;
-  icon: React.ReactNode;
-  color: string;
-  loading?: boolean;
-}
-
-const StatCard = ({ title, value, icon, color, loading = false }: StatCardProps) => (
-  <Card sx={{ minWidth: 200 }}>
-    <CardContent>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Box sx={{ flex: 1 }}>
-          <Typography color="textSecondary" gutterBottom variant="overline">
-            {title}
-          </Typography>
-          {loading ? (
-            <Skeleton variant="text" width="60%" height={48} />
-          ) : (
-            <Typography variant="h4">{value}</Typography>
-          )}
-        </Box>
-        <Box
-          sx={{
-            backgroundColor: color,
-            borderRadius: 2,
-            p: 1.5,
-            color: 'white',
-          }}
-        >
-          {icon}
-        </Box>
-      </Box>
-    </CardContent>
-  </Card>
-);
+import { StatCard } from '../components/common/StatCard';
 
 interface OperationsOverview {
   dau: { total: number };
@@ -144,14 +108,20 @@ export const Dashboard = () => {
       </Grid>
 
       <Box mt={4}>
-        <Card>
+        <Card
+          sx={{
+            background: `linear-gradient(135deg, ${brandColors.primary}08 0%, ${brandColors.accentPink}08 100%)`,
+            border: '1px solid',
+            borderColor: `${brandColors.primary}20`,
+          }}
+        >
           <CardContent>
             <Typography variant="h6" gutterBottom>
               {translate('dashboard.moreAnalytics', { _: 'More Analytics' })}
             </Typography>
             <Typography variant="body2" color="textSecondary">
               {translate('dashboard.viewOperations', { _: 'For detailed DAU/MAU trends, reading statistics, and hot content rankings, please visit the' })}{' '}
-              <a href="#/operations" style={{ color: brandColors.primary, textDecoration: 'none' }}>
+              <a href="#/operations" style={{ color: brandColors.primary, textDecoration: 'none', fontWeight: 500 }}>
                 {translate('dashboard.operationsDashboard', { _: 'Operations Dashboard' })}
               </a>
             </Typography>

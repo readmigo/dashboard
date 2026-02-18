@@ -1,6 +1,7 @@
 import { Menu, MenuItemLink, useSidebarState, useTranslate } from 'react-admin';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Divider, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { gradients, shadows, textColors } from '../theme/brandTokens';
 import BookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -57,11 +58,11 @@ export const CustomMenu = () => {
             width: 36,
             height: 36,
             borderRadius: '8px',
-            background: 'linear-gradient(135deg, #8BB9FF 0%, #B9B3F5 50%, #F6B6E8 100%)',
+            background: gradients.brand,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 2px 8px rgba(139, 185, 255, 0.3)',
+            boxShadow: shadows.brand,
           }}
         >
           <AutoStoriesIcon sx={{ color: 'white', fontSize: 20 }} />
@@ -72,7 +73,7 @@ export const CustomMenu = () => {
             sx={{
               ml: 1.5,
               fontWeight: 700,
-              background: 'linear-gradient(135deg, #8BB9FF 0%, #B9B3F5 50%, #F6B6E8 100%)',
+              background: gradients.brand,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -157,7 +158,7 @@ export const CustomMenu = () => {
       {open && (
         <Typography
           variant="caption"
-          sx={{ px: 2, py: 0.5, color: 'text.secondary', fontWeight: 600 }}
+          sx={{ px: 2, py: 0.5, color: textColors.secondary, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}
         >
           {translate('sidebar.sections.operations')}
         </Typography>
@@ -256,7 +257,7 @@ export const CustomMenu = () => {
       {open && (
         <Typography
           variant="caption"
-          sx={{ px: 2, py: 0.5, color: 'text.secondary', fontWeight: 600 }}
+          sx={{ px: 2, py: 0.5, color: textColors.secondary, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}
         >
           {translate('sidebar.sections.support')}
         </Typography>
@@ -307,7 +308,7 @@ export const CustomMenu = () => {
       {open && (
         <Typography
           variant="caption"
-          sx={{ px: 2, py: 0.5, color: 'text.secondary', fontWeight: 600 }}
+          sx={{ px: 2, py: 0.5, color: textColors.secondary, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}
         >
           {translate('sidebar.sections.platform')}
         </Typography>
