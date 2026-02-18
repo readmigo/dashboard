@@ -1496,6 +1496,7 @@ export const traditionalChineseTranslations = {
       audiolab: { name: 'AudioLab', desc: '有聲書處理與 AI TTS 管線' },
       droplet: { name: '伺服器維運', desc: '伺服器維運腳本工具集' },
       posthog: { name: 'PostHog 資料分析', desc: '產品資料分析與使用者行為追蹤' },
+      appStoreConnect: { name: 'App Store Connect', desc: 'iOS 應用管理、TestFlight 與應用提交' },
     },
   },
   // Override default ra messages

@@ -1492,6 +1492,7 @@ export const chineseTranslations = {
       audiolab: { name: 'AudioLab', desc: '有声书处理与 AI TTS 管道' },
       droplet: { name: '服务器运维', desc: '服务器运维脚本工具集' },
       posthog: { name: 'PostHog 数据分析', desc: '产品数据分析与用户行为追踪' },
+      appStoreConnect: { name: 'App Store Connect', desc: 'iOS 应用管理、TestFlight 与应用提交' },
     },
   },
   // Override default ra messages

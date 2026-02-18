@@ -173,6 +173,13 @@ const services: ServiceItem[] = [
     category: 'ops',
     techStack: 'PostHog Cloud',
   },
+  {
+    nameKey: 'services.items.appStoreConnect.name',
+    descKey: 'services.items.appStoreConnect.desc',
+    url: 'https://appstoreconnect.apple.com/login',
+    category: 'ops',
+    techStack: 'Apple Developer',
+  },
 ];
 
 const categoryConfig: Record<string, { icon: ReactNode; color: string; labelKey: string }> = {

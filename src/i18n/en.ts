@@ -1499,6 +1499,7 @@ export const englishTranslations = {
       audiolab: { name: 'AudioLab', desc: 'Audiobook processing and AI TTS pipeline' },
       droplet: { name: 'Droplet Ops', desc: 'Server operation scripts and tools' },
       posthog: { name: 'PostHog Analytics', desc: 'Product analytics and user behavior tracking' },
+      appStoreConnect: { name: 'App Store Connect', desc: 'iOS app management, TestFlight and app submission' },
     },
   },
 };
