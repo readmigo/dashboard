@@ -6,6 +6,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useTimezone } from '../contexts/TimezoneContext';
+import { brandColors, semanticColors } from '../theme/brandTokens';
 
 interface StatCardProps {
   title: string;
@@ -118,7 +119,7 @@ export const Dashboard = () => {
             title={translate('dashboard.stats.totalBooks')}
             value={totalBooks || 0}
             icon={<BookIcon fontSize="large" />}
-            color="#7C8DF5"
+            color={brandColors.primary}
             loading={booksLoading}
           />
         </Grid>
@@ -127,7 +128,7 @@ export const Dashboard = () => {
             title={translate('dashboard.stats.totalUsers')}
             value={totalUsers || 0}
             icon={<PeopleIcon fontSize="large" />}
-            color="#6ED6A8"
+            color={semanticColors.success}
             loading={usersLoading}
           />
         </Grid>
@@ -136,7 +137,7 @@ export const Dashboard = () => {
             title={translate('dashboard.stats.activeToday')}
             value={operationsData?.dau?.total || 0}
             icon={<TrendingUpIcon fontSize="large" />}
-            color="#F3A6DC"
+            color={brandColors.accentPink}
             loading={dauLoading}
           />
         </Grid>
@@ -150,7 +151,7 @@ export const Dashboard = () => {
             </Typography>
             <Typography variant="body2" color="textSecondary">
               {translate('dashboard.viewOperations', { _: 'For detailed DAU/MAU trends, reading statistics, and hot content rankings, please visit the' })}{' '}
-              <a href="#/operations" style={{ color: '#7C8DF5', textDecoration: 'none' }}>
+              <a href="#/operations" style={{ color: brandColors.primary, textDecoration: 'none' }}>
                 {translate('dashboard.operationsDashboard', { _: 'Operations Dashboard' })}
               </a>
             </Typography>

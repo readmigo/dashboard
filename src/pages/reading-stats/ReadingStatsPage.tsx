@@ -24,6 +24,7 @@ import { CategoryChart } from './components/CategoryChart';
 import { TimeHeatmap } from './components/TimeHeatmap';
 import { useEnvironment } from '../../contexts/EnvironmentContext';
 import { useTimezone } from '../../contexts/TimezoneContext';
+import { brandColors, semanticColors } from '../../theme/brandTokens';
 
 interface ReadingStatsOverview {
   totalReadingMinutes: number;
@@ -235,7 +236,7 @@ export const ReadingStatsPage = () => {
             title={translate('readingStats.statCards.totalReadingMinutes')}
             value={overview?.totalReadingMinutes || 0}
             icon={<MenuBookIcon fontSize="large" />}
-            color="#7C8DF5"
+            color={brandColors.primary}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -243,7 +244,7 @@ export const ReadingStatsPage = () => {
             title={translate('readingStats.statCards.activeReaders')}
             value={overview?.activeReaders || 0}
             icon={<PeopleIcon fontSize="large" />}
-            color="#9A8CF2"
+            color={brandColors.accentPurple}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -251,7 +252,7 @@ export const ReadingStatsPage = () => {
             title={translate('readingStats.statCards.totalSessions')}
             value={overview?.totalSessions || 0}
             icon={<AccessTimeIcon fontSize="large" />}
-            color="#6ED6A8"
+            color={semanticColors.success}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -259,7 +260,7 @@ export const ReadingStatsPage = () => {
             title={translate('readingStats.statCards.avgSessionDuration')}
             value={`${overview?.averageSessionDuration || 0} min`}
             icon={<MenuBookIcon fontSize="large" />}
-            color="#F3A6DC"
+            color={brandColors.accentPink}
           />
         </Grid>
       </Grid>
@@ -271,8 +272,8 @@ export const ReadingStatsPage = () => {
             title={translate('readingStats.chartTitle')}
             data={trendData}
             lines={[
-              { key: 'totalMinutes', name: translate('readingStats.statCards.totalReadingMinutes'), color: '#7C8DF5' },
-              { key: 'activeUsers', name: translate('readingStats.statCards.activeReaders'), color: '#6ED6A8' },
+              { key: 'totalMinutes', name: translate('readingStats.statCards.totalReadingMinutes'), color: brandColors.primary },
+              { key: 'activeUsers', name: translate('readingStats.statCards.activeReaders'), color: semanticColors.success },
             ]}
           />
         </Grid>

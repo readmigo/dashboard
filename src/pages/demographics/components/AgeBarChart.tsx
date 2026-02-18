@@ -1,5 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Box, Typography } from '@mui/material';
+import { brandColors, semanticColors } from '../../../theme/brandTokens';
 
 interface AgeDistribution {
   ageRange: string;
@@ -27,8 +28,8 @@ export const AgeBarChart = ({ data }: AgeBarChartProps) => {
           <YAxis tick={{ fontSize: 12 }} label={{ value: 'User Count', angle: -90, position: 'insideLeft' }} />
           <Tooltip formatter={(value: number) => value.toLocaleString()} />
           <Legend />
-          <Bar dataKey="userCount" name="Total Users" fill="#7C8DF5" />
-          <Bar dataKey="activeUsers" name="Active Users" fill="#6ED6A8" />
+          <Bar dataKey="userCount" name="Total Users" fill={brandColors.primary} />
+          <Bar dataKey="activeUsers" name="Active Users" fill={semanticColors.success} />
         </BarChart>
       </ResponsiveContainer>
 

@@ -21,6 +21,7 @@ import AppleIcon from '@mui/icons-material/Apple';
 import AndroidIcon from '@mui/icons-material/Android';
 import LanguageIcon from '@mui/icons-material/Language';
 import { TrendChart } from './TrendChart';
+import { brandColors, semanticColors } from '../../../theme/brandTokens';
 
 interface VersionStatsItem {
   version: string;
@@ -138,7 +139,7 @@ export const VersionStatsSection = ({ title, data, labels }: VersionStatsSection
   // Generate colors for trend lines
   const getTrendLines = () => {
     const topVersions = getTopVersions();
-    const colors = ['#7C8DF5', '#6ED6A8', '#F3A6DC', '#FFD36A', '#7BAAFF'];
+    const colors = [brandColors.primary, semanticColors.success, brandColors.accentPink, brandColors.achievementGold, semanticColors.info];
 
     return topVersions.map((version, index) => ({
       key: version,
@@ -262,9 +263,9 @@ export const VersionStatsSection = ({ title, data, labels }: VersionStatsSection
                       <TableCell align="right">
                         <Box display="flex" alignItems="center" justifyContent="flex-end">
                           <Typography variant="body2">{row.percentage}%</Typography>
-                          {index === 0 && <TrendingUpIcon sx={{ fontSize: 16, color: '#6ED6A8', ml: 0.5 }} />}
+                          {index === 0 && <TrendingUpIcon sx={{ fontSize: 16, color: semanticColors.success, ml: 0.5 }} />}
                           {index === tableData.length - 1 && tableData.length > 1 && (
-                            <TrendingDownIcon sx={{ fontSize: 16, color: '#FF6B6B', ml: 0.5 }} />
+                            <TrendingDownIcon sx={{ fontSize: 16, color: semanticColors.error, ml: 0.5 }} />
                           )}
                           {index !== 0 && index !== tableData.length - 1 && tableData.length > 2 && (
                             <RemoveIcon sx={{ fontSize: 16, color: '#999', ml: 0.5 }} />

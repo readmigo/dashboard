@@ -3,11 +3,12 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import AppleIcon from '@mui/icons-material/Apple';
 import AndroidIcon from '@mui/icons-material/Android';
 import WebIcon from '@mui/icons-material/Language';
+import { brandColors, semanticColors } from '../../../theme/brandTokens';
 
 const PLATFORM_COLORS = {
-  iOS: '#7C8DF5',
-  Android: '#6ED6A8',
-  Web: '#F3A6DC',
+  iOS: brandColors.primary,
+  Android: semanticColors.success,
+  Web: brandColors.accentPink,
 };
 
 interface PlatformBreakdownProps {

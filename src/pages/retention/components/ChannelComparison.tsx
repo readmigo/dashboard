@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { Box, Typography } from '@mui/material';
+import { brandColors, semanticColors } from '../../../theme/brandTokens';
 
 interface ChannelRetention {
   channel: string;
@@ -47,9 +48,9 @@ export const ChannelComparison = ({ data }: ChannelComparisonProps) => {
             labelFormatter={(label) => `Channel: ${label}`}
           />
           <Legend />
-          <Bar dataKey="d1Rate" name="D1 Retention" fill="#7C8DF5" />
-          <Bar dataKey="d7Rate" name="D7 Retention" fill="#9A8CF2" />
-          <Bar dataKey="d30Rate" name="D30 Retention" fill="#6ED6A8" />
+          <Bar dataKey="d1Rate" name="D1 Retention" fill={brandColors.primary} />
+          <Bar dataKey="d7Rate" name="D7 Retention" fill={brandColors.accentPurple} />
+          <Bar dataKey="d30Rate" name="D30 Retention" fill={semanticColors.success} />
         </BarChart>
       </ResponsiveContainer>
 

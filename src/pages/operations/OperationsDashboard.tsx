@@ -6,6 +6,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { brandColors, semanticColors } from '../../theme/brandTokens';
 import { StatCard } from './components/StatCard';
 import { PlatformBreakdown } from './components/PlatformBreakdown';
 import { TrendChart } from './components/TrendChart';
@@ -253,7 +254,7 @@ export const OperationsDashboard = () => {
             title={translate('operations.dauToday')}
             value={overview?.dau.total || 0}
             icon={<PeopleIcon fontSize="large" />}
-            color="#7C8DF5"
+            color={brandColors.primary}
             change={overview?.dau.changePercent}
             changeLabel={translate('operations.vsYesterday')}
           />
@@ -263,7 +264,7 @@ export const OperationsDashboard = () => {
             title={translate('operations.mau')}
             value={overview?.mau.total || 0}
             icon={<PeopleIcon fontSize="large" />}
-            color="#9A8CF2"
+            color={brandColors.accentPurple}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -271,7 +272,7 @@ export const OperationsDashboard = () => {
             title={translate('operations.newUsersToday')}
             value={overview?.newUsers.total || 0}
             icon={<PersonAddIcon fontSize="large" />}
-            color="#6ED6A8"
+            color={semanticColors.success}
             change={overview?.newUsers.change}
           />
         </Grid>
@@ -280,7 +281,7 @@ export const OperationsDashboard = () => {
             title={translate('operations.aiInteractions')}
             value={overview?.ai.totalInteractions || 0}
             icon={<SmartToyIcon fontSize="large" />}
-            color="#F3A6DC"
+            color={brandColors.accentPink}
           />
         </Grid>
       </Grid>
@@ -292,7 +293,7 @@ export const OperationsDashboard = () => {
             title={translate('operations.readingMinutes')}
             value={overview?.reading.totalMinutes || 0}
             icon={<MenuBookIcon fontSize="large" />}
-            color="#7BAAFF"
+            color={semanticColors.info}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -300,7 +301,7 @@ export const OperationsDashboard = () => {
             title={translate('operations.pagesRead')}
             value={overview?.reading.totalPages || 0}
             icon={<MenuBookIcon fontSize="large" />}
-            color="#A5C7FF"
+            color={brandColors.accentBlue}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -308,7 +309,7 @@ export const OperationsDashboard = () => {
             title={translate('operations.booksFinished')}
             value={overview?.reading.totalBooksFinished || 0}
             icon={<MenuBookIcon fontSize="large" />}
-            color="#FFD36A"
+            color={brandColors.achievementGold}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -316,7 +317,7 @@ export const OperationsDashboard = () => {
             title={translate('operations.avgMinutesPerUser')}
             value={overview?.reading.avgMinutesPerUser || 0}
             icon={<MenuBookIcon fontSize="large" />}
-            color="#FFC26A"
+            color={semanticColors.warning}
           />
         </Grid>
       </Grid>
@@ -328,8 +329,8 @@ export const OperationsDashboard = () => {
             title={translate('operations.dauTrend')}
             data={dailyTrend}
             lines={[
-              { key: 'dauTotal', name: translate('operations.totalDau'), color: '#7C8DF5' },
-              { key: 'newUsersTotal', name: translate('operations.newUsers'), color: '#6ED6A8' },
+              { key: 'dauTotal', name: translate('operations.totalDau'), color: brandColors.primary },
+              { key: 'newUsersTotal', name: translate('operations.newUsers'), color: semanticColors.success },
             ]}
           />
         </Grid>

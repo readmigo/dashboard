@@ -4,6 +4,7 @@ import AndroidIcon from '@mui/icons-material/Android';
 import LanguageIcon from '@mui/icons-material/Language';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+import { semanticColors } from '../../../theme/brandTokens';
 
 interface PlatformData {
   total: number;
@@ -73,11 +74,11 @@ const PlatformCard = ({
     return (
       <Box display="flex" alignItems="center" ml={1}>
         {isPositive ? (
-          <TrendingUpIcon sx={{ fontSize: 14, color: '#6ED6A8' }} />
+          <TrendingUpIcon sx={{ fontSize: 14, color: semanticColors.success }} />
         ) : (
-          <TrendingDownIcon sx={{ fontSize: 14, color: '#FF6B6B' }} />
+          <TrendingDownIcon sx={{ fontSize: 14, color: semanticColors.error }} />
         )}
-        <Typography variant="caption" sx={{ color: isPositive ? '#6ED6A8' : '#FF6B6B', ml: 0.25 }}>
+        <Typography variant="caption" sx={{ color: isPositive ? semanticColors.success : semanticColors.error, ml: 0.25 }}>
           {isPositive ? '+' : ''}{change}
         </Typography>
       </Box>

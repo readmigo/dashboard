@@ -1,4 +1,5 @@
 import { Box, Typography, Tooltip, Stack } from '@mui/material';
+import { brandColors } from '../../../theme/brandTokens';
 
 interface TimePattern {
   hour: number;
@@ -17,8 +18,8 @@ export const TimeHeatmap = ({ patterns }: TimeHeatmapProps) => {
 
   const getColor = (minutes: number) => {
     const intensity = minutes / maxMinutes;
-    if (intensity > 0.8) return '#7C8DF5';
-    if (intensity > 0.6) return '#9A8CF2';
+    if (intensity > 0.8) return brandColors.primary;
+    if (intensity > 0.6) return brandColors.accentPurple;
     if (intensity > 0.4) return '#B8A9F4';
     if (intensity > 0.2) return '#D6C6F6';
     return '#E8E0FA';

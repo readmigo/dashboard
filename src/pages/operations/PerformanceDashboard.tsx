@@ -25,6 +25,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import { useTranslate } from 'react-admin';
 import { StatCard } from './components/StatCard';
 import { useEnvironment } from '../../contexts/EnvironmentContext';
+import { brandColors, semanticColors } from '../../theme/brandTokens';
 
 interface PerformanceOverview {
   systemHealth: {
@@ -206,11 +207,11 @@ export const PerformanceDashboard = () => {
 
   const getExceptionTypeColor = (type: string) => {
     const colors: Record<string, string> = {
-      CRASH: '#FF6B6B',
-      ANR: '#FFC26A',
-      JS_ERROR: '#9A8CF2',
-      NETWORK_ERROR: '#7BAAFF',
-      API_ERROR: '#F3A6DC',
+      CRASH: semanticColors.error,
+      ANR: semanticColors.warning,
+      JS_ERROR: brandColors.accentPurple,
+      NETWORK_ERROR: semanticColors.info,
+      API_ERROR: brandColors.accentPink,
       OTHER: '#9E9E9E',
     };
     return colors[type] || colors.OTHER;
@@ -228,14 +229,14 @@ export const PerformanceDashboard = () => {
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      auth: '#7C8DF5',
-      user: '#9A8CF2',
-      books: '#6ED6A8',
-      reading: '#7BAAFF',
-      ai: '#F3A6DC',
-      vocabulary: '#FFD36A',
-      subscriptions: '#FF6B6B',
-      recommendation: '#FFC26A',
+      auth: brandColors.primary,
+      user: brandColors.accentPurple,
+      books: semanticColors.success,
+      reading: semanticColors.info,
+      ai: brandColors.accentPink,
+      vocabulary: brandColors.achievementGold,
+      subscriptions: semanticColors.error,
+      recommendation: semanticColors.warning,
       search: '#9E9E9E',
       highlights: '#E0E0E0',
       sync: '#B0BEC5',
@@ -285,7 +286,7 @@ export const PerformanceDashboard = () => {
             title={translate('performance.statCards.apiErrorRate')}
             value={`${overview?.systemHealth.apiErrorRate || 0}%`}
             icon={<ErrorIcon fontSize="large" />}
-            color={overview?.systemHealth.apiErrorRate && overview.systemHealth.apiErrorRate > 1 ? '#FF6B6B' : '#6ED6A8'}
+            color={overview?.systemHealth.apiErrorRate && overview.systemHealth.apiErrorRate > 1 ? semanticColors.error : semanticColors.success}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -293,7 +294,7 @@ export const PerformanceDashboard = () => {
             title={translate('performance.statCards.avgApiLatency')}
             value={`${overview?.systemHealth.avgApiLatency || 0}ms`}
             icon={<SpeedIcon fontSize="large" />}
-            color="#7C8DF5"
+            color={brandColors.primary}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -301,7 +302,7 @@ export const PerformanceDashboard = () => {
             title={translate('performance.statCards.crashFreeRate')}
             value={`${overview?.systemHealth.crashFreeRate?.toFixed(1) || 100}%`}
             icon={<CheckCircleIcon fontSize="large" />}
-            color="#6ED6A8"
+            color={semanticColors.success}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -309,7 +310,7 @@ export const PerformanceDashboard = () => {
             title={translate('performance.statCards.openIssues')}
             value={overview?.exceptions.openIssues || 0}
             icon={<BugReportIcon fontSize="large" />}
-            color="#FFC26A"
+            color={semanticColors.warning}
           />
         </Grid>
       </Grid>
@@ -324,7 +325,7 @@ export const PerformanceDashboard = () => {
             title={translate('performance.clientPerformance.pageLoadTime')}
             value={`${overview?.clientPerformance.avgPageLoadTime || 0}ms`}
             icon={<SpeedIcon fontSize="large" />}
-            color="#9A8CF2"
+            color={brandColors.accentPurple}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -332,7 +333,7 @@ export const PerformanceDashboard = () => {
             title={translate('performance.clientPerformance.averageFps')}
             value={overview?.clientPerformance.avgFps || 60}
             icon={<SpeedIcon fontSize="large" />}
-            color="#7BAAFF"
+            color={semanticColors.info}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -340,7 +341,7 @@ export const PerformanceDashboard = () => {
             title={translate('performance.clientPerformance.memoryUsage')}
             value={`${overview?.clientPerformance.avgMemoryUsage || 0}MB`}
             icon={<SpeedIcon fontSize="large" />}
-            color="#F3A6DC"
+            color={brandColors.accentPink}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -348,7 +349,7 @@ export const PerformanceDashboard = () => {
             title={translate('performance.clientPerformance.appStartupTime')}
             value={`${overview?.clientPerformance.avgAppStartupTime || 0}ms`}
             icon={<SpeedIcon fontSize="large" />}
-            color="#FFD36A"
+            color={brandColors.achievementGold}
           />
         </Grid>
       </Grid>

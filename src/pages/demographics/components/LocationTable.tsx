@@ -9,6 +9,7 @@ import {
   LinearProgress,
   Box,
 } from '@mui/material';
+import { brandColors } from '../../../theme/brandTokens';
 
 interface LocationDistribution {
   location: string;
@@ -71,7 +72,7 @@ export const LocationTable = ({ data }: LocationTableProps) => {
                       borderRadius: 4,
                       backgroundColor: '#E0E0E0',
                       '& .MuiLinearProgress-bar': {
-                        backgroundColor: '#7C8DF5',
+                        backgroundColor: brandColors.primary,
                       },
                     }}
                   />

@@ -24,6 +24,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { StatCard } from '../operations/components/StatCard';
 import { TrendChart } from '../operations/components/TrendChart';
 import { useEnvironment } from '../../contexts/EnvironmentContext';
+import { brandColors, semanticColors } from '../../theme/brandTokens';
 
 interface EventOverview {
   totalEvents: number;
@@ -56,14 +57,14 @@ interface ActivityOverview {
 }
 
 const EVENT_TYPE_COLORS: Record<string, string> = {
-  READING: '#7C8DF5',
-  AI: '#F3A6DC',
-  LEARNING: '#6ED6A8',
-  SOCIAL: '#FFD36A',
-  NAVIGATION: '#7BAAFF',
-  SUBSCRIPTION: '#A5C7FF',
-  SEARCH: '#9A8CF2',
-  LIFECYCLE: '#FFC26A',
+  READING: brandColors.primary,
+  AI: brandColors.accentPink,
+  LEARNING: semanticColors.success,
+  SOCIAL: brandColors.achievementGold,
+  NAVIGATION: semanticColors.info,
+  SUBSCRIPTION: brandColors.accentBlue,
+  SEARCH: brandColors.accentPurple,
+  LIFECYCLE: semanticColors.warning,
   SYSTEM: '#B0BEC5',
   OTHER: '#90A4AE',
 };
@@ -172,7 +173,7 @@ export const EventAnalyticsPage = () => {
             title={translate('eventAnalytics.totalEvents')}
             value={overview?.totalEvents || 0}
             icon={<EventIcon fontSize="large" />}
-            color="#7C8DF5"
+            color={brandColors.primary}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -180,7 +181,7 @@ export const EventAnalyticsPage = () => {
             title={translate('eventAnalytics.uniqueUsers')}
             value={overview?.uniqueUsers || 0}
             icon={<PeopleIcon fontSize="large" />}
-            color="#6ED6A8"
+            color={semanticColors.success}
           />
         </Grid>
       </Grid>
@@ -192,11 +193,11 @@ export const EventAnalyticsPage = () => {
             title={translate('eventAnalytics.dailyTrend')}
             data={dailyTrend}
             lines={[
-              { key: 'total', name: translate('eventAnalytics.total'), color: '#7C8DF5' },
-              { key: 'reading', name: translate('eventAnalytics.reading'), color: '#7BAAFF' },
-              { key: 'ai', name: translate('eventAnalytics.ai'), color: '#F3A6DC' },
-              { key: 'learning', name: translate('eventAnalytics.learning'), color: '#6ED6A8' },
-              { key: 'social', name: translate('eventAnalytics.social'), color: '#FFD36A' },
+              { key: 'total', name: translate('eventAnalytics.total'), color: brandColors.primary },
+              { key: 'reading', name: translate('eventAnalytics.reading'), color: semanticColors.info },
+              { key: 'ai', name: translate('eventAnalytics.ai'), color: brandColors.accentPink },
+              { key: 'learning', name: translate('eventAnalytics.learning'), color: semanticColors.success },
+              { key: 'social', name: translate('eventAnalytics.social'), color: brandColors.achievementGold },
             ]}
             height={350}
           />

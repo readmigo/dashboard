@@ -1,5 +1,6 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { Box, Typography, Grid } from '@mui/material';
+import { brandColors, semanticColors } from '../../../theme/brandTokens';
 
 interface GenderDistribution {
   gender: string;
@@ -15,10 +16,10 @@ interface GenderPieChartProps {
 }
 
 const COLORS: Record<string, string> = {
-  MALE: '#7C8DF5',
-  FEMALE: '#F3A6DC',
-  OTHER: '#6ED6A8',
-  PREFER_NOT_TO_SAY: '#FFC26A',
+  MALE: brandColors.primary,
+  FEMALE: brandColors.accentPink,
+  OTHER: semanticColors.success,
+  PREFER_NOT_TO_SAY: semanticColors.warning,
   UNKNOWN: '#E0E0E0',
 };
 

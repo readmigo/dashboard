@@ -16,6 +16,7 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import BuildIcon from '@mui/icons-material/Build';
 import CloudIcon from '@mui/icons-material/Cloud';
 import type { ReactNode } from 'react';
+import { brandColors, semanticColors } from '../../theme/brandTokens';
 
 interface ServiceItem {
   nameKey: string;
@@ -167,10 +168,10 @@ const services: ServiceItem[] = [
 ];
 
 const categoryConfig: Record<string, { icon: ReactNode; color: string; labelKey: string }> = {
-  web: { icon: <LanguageIcon />, color: '#4CAF50', labelKey: 'services.categories.web' },
-  backend: { icon: <StorageIcon />, color: '#2196F3', labelKey: 'services.categories.backend' },
-  app: { icon: <PhoneIphoneIcon />, color: '#FF9800', labelKey: 'services.categories.app' },
-  tool: { icon: <BuildIcon />, color: '#9C27B0', labelKey: 'services.categories.tool' },
+  web: { icon: <LanguageIcon />, color: semanticColors.success, labelKey: 'services.categories.web' },
+  backend: { icon: <StorageIcon />, color: semanticColors.info, labelKey: 'services.categories.backend' },
+  app: { icon: <PhoneIphoneIcon />, color: semanticColors.warning, labelKey: 'services.categories.app' },
+  tool: { icon: <BuildIcon />, color: brandColors.accentPurple, labelKey: 'services.categories.tool' },
   ops: { icon: <CloudIcon />, color: '#607D8B', labelKey: 'services.categories.ops' },
 };
 

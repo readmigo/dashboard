@@ -1,4 +1,5 @@
 import { Box, Typography, LinearProgress, Grid } from '@mui/material';
+import { brandColors } from '../../../theme/brandTokens';
 
 interface CategoryStats {
   categoryId: string;
@@ -40,7 +41,7 @@ export const CategoryChart = ({ categories }: CategoryChartProps) => {
                   mb: 1,
                   backgroundColor: '#E0E0E0',
                   '& .MuiLinearProgress-bar': {
-                    backgroundColor: '#7C8DF5',
+                    backgroundColor: brandColors.primary,
                   },
                 }}
               />

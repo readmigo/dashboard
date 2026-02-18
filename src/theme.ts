@@ -1,39 +1,15 @@
 import { createTheme } from '@mui/material/styles';
-
-// Readmigo Brand Colors from DESIGN_SYSTEM.md
-const brandColors = {
-  // Brand Gradient
-  gradientStart: '#8BB9FF',   // Blue
-  gradientMiddle: '#B9B3F5',  // Purple
-  gradientEnd: '#F6B6E8',     // Pink
-
-  // Primary Brand
-  primary: '#7C8DF5',
-  primaryLight: '#9A8CF2',    // Accent Purple
-  primaryDark: '#6B7BE3',
-
-  // Accent Colors
-  accentPurple: '#9A8CF2',
-  accentPink: '#F3A6DC',
-  accentBlue: '#A5C7FF',
-  achievementGold: '#FFD36A',
-
-  // Text Colors
-  textPrimary: '#2D2E4A',
-  textSecondary: '#6B6F9C',
-  textHint: '#A3A6C8',
-
-  // Background Colors
-  backgroundLight: '#F7F8FD',
-  backgroundCard: '#FFFFFF',
-  backgroundSubtle: '#EEF0FA',
-
-  // Semantic Colors
-  success: '#6ED6A8',
-  warning: '#FFC26A',
-  error: '#FF6B6B',
-  info: '#7BAAFF',
-};
+import {
+  brandColors,
+  semanticColors,
+  textColors,
+  bgColors,
+  grays,
+  gradients,
+  shadows,
+  radii,
+  alpha,
+} from './theme/brandTokens';
 
 export const readmigoTheme = createTheme({
   palette: {
@@ -46,56 +22,68 @@ export const readmigoTheme = createTheme({
     },
     secondary: {
       main: brandColors.accentPink,
-      light: brandColors.gradientEnd,
+      light: brandColors.pink,
       dark: '#E896CC',
       contrastText: '#FFFFFF',
     },
     warning: {
-      main: brandColors.warning,
+      main: semanticColors.warning,
       contrastText: '#FFFFFF',
     },
     success: {
-      main: brandColors.success,
+      main: semanticColors.success,
       contrastText: '#FFFFFF',
     },
     error: {
-      main: brandColors.error,
+      main: semanticColors.error,
       contrastText: '#FFFFFF',
     },
     info: {
-      main: brandColors.info,
+      main: semanticColors.info,
       contrastText: '#FFFFFF',
     },
     background: {
-      default: brandColors.backgroundLight,
-      paper: brandColors.backgroundCard,
+      default: bgColors.light,
+      paper: bgColors.card,
     },
     text: {
-      primary: brandColors.textPrimary,
-      secondary: brandColors.textSecondary,
+      primary: textColors.primary,
+      secondary: textColors.secondary,
     },
+    grey: grays,
   },
   typography: {
     fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    h1: { fontSize: '2.5rem', fontWeight: 700, color: brandColors.textPrimary },
-    h2: { fontSize: '2rem', fontWeight: 600, color: brandColors.textPrimary },
-    h3: { fontSize: '1.5rem', fontWeight: 600, color: brandColors.textPrimary },
-    h4: { fontSize: '1.25rem', fontWeight: 600, color: brandColors.textPrimary },
-    h5: { fontSize: '1.125rem', fontWeight: 600, color: brandColors.textPrimary },
-    h6: { fontSize: '1rem', fontWeight: 600, color: brandColors.textPrimary },
+    h1: { fontSize: '2.125rem', fontWeight: 700, lineHeight: 1.18 },
+    h2: { fontSize: '1.75rem', fontWeight: 700, lineHeight: 1.21 },
+    h3: { fontSize: '1.375rem', fontWeight: 600, lineHeight: 1.27 },
+    h4: { fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.25 },
+    h5: { fontSize: '1.0625rem', fontWeight: 600, lineHeight: 1.29 },
+    h6: { fontSize: '1rem', fontWeight: 600, lineHeight: 1.375 },
     body1: { fontSize: '1rem', lineHeight: 1.5 },
     body2: { fontSize: '0.875rem', lineHeight: 1.5 },
+    caption: { fontSize: '0.75rem', lineHeight: 1.33 },
+    overline: { fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.08em', lineHeight: 1.18 },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: radii.default,
   },
+  shadows: [
+    'none',
+    shadows.sm,
+    shadows.md,
+    shadows.lg,
+    shadows.xl,
+    // Fill remaining MUI shadow slots with xl
+    ...Array(20).fill(shadows.xl),
+  ] as unknown as typeof createTheme extends (o: infer O) => unknown ? O extends { shadows?: infer S } ? S : never : never,
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none',
+          textTransform: 'none' as const,
           fontWeight: 500,
-          borderRadius: 8,
+          borderRadius: radii.default,
         },
         contained: {
           boxShadow: '0 2px 4px rgba(124, 141, 245, 0.2)',
@@ -108,8 +96,8 @@ export const readmigoTheme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: '0 4px 6px rgba(0,0,0,0.07)',
-          borderRadius: 12,
+          boxShadow: shadows.lg,
+          borderRadius: radii.lg,
         },
       },
     },
@@ -119,46 +107,46 @@ export const readmigoTheme = createTheme({
           backgroundImage: 'none',
         },
         elevation1: {
-          boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+          boxShadow: shadows.sm,
         },
         elevation2: {
-          boxShadow: '0 4px 6px rgba(0,0,0,0.07)',
+          boxShadow: shadows.lg,
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundImage: `linear-gradient(135deg, ${brandColors.gradientStart} 0%, ${brandColors.gradientMiddle} 50%, ${brandColors.gradientEnd} 100%)`,
-          boxShadow: '0 2px 8px rgba(139, 185, 255, 0.3)',
+          backgroundImage: gradients.brand,
+          boxShadow: shadows.brand,
         },
       },
     },
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: brandColors.backgroundCard,
-          borderRight: `1px solid ${brandColors.backgroundSubtle}`,
+          backgroundColor: bgColors.card,
+          borderRight: `1px solid ${bgColors.subtle}`,
         },
       },
     },
     MuiListItemButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
+          borderRadius: radii.default,
           margin: '2px 8px',
           '&.Mui-selected': {
-            backgroundColor: `${brandColors.primary}15`,
+            backgroundColor: alpha(brandColors.primary, 0.08),
             color: brandColors.primary,
             '& .MuiListItemIcon-root': {
               color: brandColors.primary,
             },
             '&:hover': {
-              backgroundColor: `${brandColors.primary}20`,
+              backgroundColor: alpha(brandColors.primary, 0.12),
             },
           },
           '&:hover': {
-            backgroundColor: brandColors.backgroundSubtle,
+            backgroundColor: bgColors.subtle,
           },
         },
       },
@@ -166,7 +154,7 @@ export const readmigoTheme = createTheme({
     MuiListItemIcon: {
       styleOverrides: {
         root: {
-          color: brandColors.textSecondary,
+          color: textColors.secondary,
           minWidth: 40,
         },
       },
@@ -175,9 +163,9 @@ export const readmigoTheme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiTableCell-head': {
-            backgroundColor: brandColors.backgroundSubtle,
+            backgroundColor: bgColors.subtle,
             fontWeight: 600,
-            color: brandColors.textPrimary,
+            color: textColors.primary,
           },
         },
       },
@@ -186,7 +174,7 @@ export const readmigoTheme = createTheme({
       styleOverrides: {
         root: {
           '&:hover': {
-            backgroundColor: `${brandColors.primary}08`,
+            backgroundColor: alpha(brandColors.primary, 0.03),
           },
         },
       },
@@ -194,14 +182,14 @@ export const readmigoTheme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: 6,
+          borderRadius: radii.md,
         },
         colorPrimary: {
-          backgroundColor: `${brandColors.primary}15`,
+          backgroundColor: alpha(brandColors.primary, 0.08),
           color: brandColors.primary,
         },
         colorSecondary: {
-          backgroundColor: `${brandColors.accentPink}15`,
+          backgroundColor: alpha(brandColors.accentPink, 0.08),
           color: brandColors.accentPink,
         },
       },
@@ -210,7 +198,7 @@ export const readmigoTheme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
-            borderRadius: 8,
+            borderRadius: radii.default,
             '&:hover .MuiOutlinedInput-notchedOutline': {
               borderColor: brandColors.primary,
             },
@@ -224,8 +212,8 @@ export const readmigoTheme = createTheme({
     MuiFab: {
       styleOverrides: {
         primary: {
-          backgroundImage: `linear-gradient(135deg, ${brandColors.gradientStart} 0%, ${brandColors.gradientMiddle} 50%, ${brandColors.gradientEnd} 100%)`,
-          boxShadow: '0 4px 12px rgba(139, 185, 255, 0.4)',
+          backgroundImage: gradients.brand,
+          boxShadow: shadows.brandHover,
           '&:hover': {
             boxShadow: '0 6px 16px rgba(139, 185, 255, 0.5)',
           },
@@ -235,17 +223,48 @@ export const readmigoTheme = createTheme({
     MuiLinearProgress: {
       styleOverrides: {
         root: {
-          borderRadius: 4,
-          backgroundColor: brandColors.backgroundSubtle,
+          borderRadius: radii.sm,
+          backgroundColor: bgColors.subtle,
         },
         bar: {
-          borderRadius: 4,
-          backgroundImage: `linear-gradient(135deg, ${brandColors.gradientStart} 0%, ${brandColors.gradientMiddle} 50%, ${brandColors.gradientEnd} 100%)`,
+          borderRadius: radii.sm,
+          backgroundImage: gradients.brand,
         },
       },
     },
   },
 });
 
-// Export brand colors for use in custom components
-export { brandColors };
+// Re-export brand tokens for backward compatibility
+// Pages that already use `brandColors.xxx` get the full merged object
+// New code should import granular tokens from `theme/brandTokens`
+export const legacyBrandColors = {
+  // Gradient
+  gradientStart: brandColors.blue,
+  gradientMiddle: brandColors.purple,
+  gradientEnd: brandColors.pink,
+  // Primary
+  primary: brandColors.primary,
+  primaryLight: brandColors.primaryLight,
+  primaryDark: brandColors.primaryDark,
+  // Accent
+  accentPurple: brandColors.accentPurple,
+  accentPink: brandColors.accentPink,
+  accentBlue: brandColors.accentBlue,
+  achievementGold: brandColors.achievementGold,
+  // Text
+  textPrimary: textColors.primary,
+  textSecondary: textColors.secondary,
+  textHint: textColors.hint,
+  // Background
+  backgroundLight: bgColors.light,
+  backgroundCard: bgColors.card,
+  backgroundSubtle: bgColors.subtle,
+  // Semantic
+  success: semanticColors.success,
+  warning: semanticColors.warning,
+  error: semanticColors.error,
+  info: semanticColors.info,
+};
+
+export { legacyBrandColors as brandColors };

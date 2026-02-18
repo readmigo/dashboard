@@ -19,6 +19,7 @@ import { TrendChart } from '../operations/components/TrendChart';
 import { CohortHeatmap } from './components/CohortHeatmap';
 import { ChannelComparison } from './components/ChannelComparison';
 import { useEnvironment } from '../../contexts/EnvironmentContext';
+import { brandColors, semanticColors } from '../../theme/brandTokens';
 
 interface RetentionOverview {
   d1RetentionRate: number;
@@ -208,7 +209,7 @@ export const RetentionPage = () => {
             title={translate('retention.statCards.d1RetentionRate')}
             value={`${overview?.d1RetentionRate.toFixed(1)}%`}
             icon={<TrendingUpIcon fontSize="large" />}
-            color="#7C8DF5"
+            color={brandColors.primary}
             change={overview?.d1Change}
             changeLabel="vs previous period"
           />
@@ -218,7 +219,7 @@ export const RetentionPage = () => {
             title={translate('retention.statCards.d7RetentionRate')}
             value={`${overview?.d7RetentionRate.toFixed(1)}%`}
             icon={<TrendingUpIcon fontSize="large" />}
-            color="#9A8CF2"
+            color={brandColors.accentPurple}
             change={overview?.d7Change}
             changeLabel="vs previous period"
           />
@@ -228,7 +229,7 @@ export const RetentionPage = () => {
             title={translate('retention.statCards.d30RetentionRate')}
             value={`${overview?.d30RetentionRate.toFixed(1)}%`}
             icon={<TrendingUpIcon fontSize="large" />}
-            color="#6ED6A8"
+            color={semanticColors.success}
             change={overview?.d30Change}
             changeLabel="vs previous period"
           />
@@ -272,7 +273,7 @@ export const RetentionPage = () => {
                 title=""
                 data={trendData}
                 lines={[
-                  { key: 'retentionRate', name: 'Retention Rate (%)', color: '#7C8DF5' },
+                  { key: 'retentionRate', name: 'Retention Rate (%)', color: brandColors.primary },
                 ]}
               />
             </CardContent>
