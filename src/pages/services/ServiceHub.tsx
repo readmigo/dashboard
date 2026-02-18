@@ -162,7 +162,7 @@ const services: ServiceItem[] = [
   {
     nameKey: 'services.items.droplet.name',
     descKey: 'services.items.droplet.desc',
-    url: '',
+    url: 'http://mcloud88.com',
     category: 'ops',
     techStack: 'Shell Scripts',
   },
