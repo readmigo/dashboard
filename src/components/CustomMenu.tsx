@@ -28,6 +28,7 @@ import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import HubIcon from '@mui/icons-material/Hub';
 
 export const CustomMenu = () => {
   const location = useLocation();
@@ -300,6 +301,22 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.support.messages')}
         leftIcon={<MailIcon />}
         selected={isSelected('/messages')}
+        sidebarIsOpen={open}
+      />
+      <Divider sx={{ my: 1, mx: 2 }} />
+      {open && (
+        <Typography
+          variant="caption"
+          sx={{ px: 2, py: 0.5, color: 'text.secondary', fontWeight: 600 }}
+        >
+          {translate('sidebar.sections.platform')}
+        </Typography>
+      )}
+      <MenuItemLink
+        to="/services"
+        primaryText={translate('sidebar.platform.serviceHub')}
+        leftIcon={<HubIcon />}
+        selected={isSelected('/services')}
         sidebarIsOpen={open}
       />
     </Menu>

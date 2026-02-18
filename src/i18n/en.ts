@@ -1441,6 +1441,7 @@ export const englishTranslations = {
     sections: {
       operations: 'Operations',
       support: 'Customer Support',
+      platform: 'Platform',
     },
     operations: {
       overview: 'Operations Overview',
@@ -1460,6 +1461,43 @@ export const englishTranslations = {
       guestFeedback: 'Guest Feedback',
       orders: 'Orders',
       messages: 'Messages',
+    },
+    platform: {
+      serviceHub: 'Service Hub',
+    },
+  },
+  // Service Hub
+  services: {
+    title: 'Service Hub',
+    subtitle: 'Central portal to all Readmigo services, apps, and tools',
+    openInNewTab: 'Open in new tab',
+    categories: {
+      web: 'Web Frontend',
+      backend: 'Backend Services',
+      app: 'Client Apps',
+      tool: 'Tools & Engines',
+      ops: 'Operations',
+    },
+    items: {
+      web: { name: 'Web App', desc: 'User-facing main website' },
+      contentStudio: { name: 'Content Studio', desc: 'Book content editor and typesetting' },
+      aiTechReview: { name: 'AI Tech Review', desc: 'AI technology news and insights' },
+      rssReader: { name: 'RSS Reader', desc: 'RSS feed reader with Miniflux backend' },
+      blog: { name: 'Blog', desc: 'Product updates and reading insights' },
+      website: { name: 'Official Website', desc: 'About, privacy, terms, and support pages' },
+      docs: { name: 'Team Docs', desc: 'Team knowledge base and documentation' },
+      api: { name: 'Main API', desc: 'Core backend API service' },
+      gutenberg: { name: 'Gutenberg', desc: 'Public domain book pipeline' },
+      nlp: { name: 'NLP Service', desc: 'Natural language processing service' },
+      tts: { name: 'TTS Service', desc: 'Text-to-speech GPU inference' },
+      ios: { name: 'iOS App', desc: 'Native iOS app (Swift)' },
+      android: { name: 'Android App', desc: 'Native Android app (Kotlin)' },
+      flutter: { name: 'Flutter App', desc: 'Cross-platform client (Dart)' },
+      mobile: { name: 'React Native App', desc: 'Cross-platform client (Expo)' },
+      typesetting: { name: 'Typesetting Engine', desc: 'C++ typesetting static library' },
+      readerEngine: { name: 'Reader Engine', desc: 'Web CSS column-based pagination engine' },
+      audiolab: { name: 'AudioLab', desc: 'Audiobook processing and AI TTS pipeline' },
+      droplet: { name: 'Droplet Ops', desc: 'Server operation scripts and tools' },
     },
   },
 };

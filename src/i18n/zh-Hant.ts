@@ -1437,6 +1437,7 @@ export const traditionalChineseTranslations = {
     sections: {
       operations: '營運',
       support: '客戶支援',
+      platform: '平台',
     },
     operations: {
       overview: '營運概覽',
@@ -1457,6 +1458,43 @@ export const traditionalChineseTranslations = {
       guestFeedback: '訪客回饋',
       orders: '訂單',
       messages: '訊息',
+    },
+    platform: {
+      serviceHub: '服務平台',
+    },
+  },
+  // Service Hub
+  services: {
+    title: '服務平台',
+    subtitle: 'Readmigo 所有服務、應用和工具的集中入口',
+    openInNewTab: '在新分頁開啟',
+    categories: {
+      web: 'Web 前端',
+      backend: '後端服務',
+      app: '用戶端應用',
+      tool: '工具與引擎',
+      ops: '維運',
+    },
+    items: {
+      web: { name: 'Web 主站', desc: '使用者端主網站' },
+      contentStudio: { name: '內容工作室', desc: '書籍內容編輯與排版' },
+      aiTechReview: { name: 'AI 技術評測', desc: 'AI 技術新聞與洞察' },
+      rssReader: { name: 'RSS 閱讀器', desc: '基於 Miniflux 的 RSS 訂閱閱讀' },
+      blog: { name: '部落格', desc: '產品更新與閱讀洞察' },
+      website: { name: '官網', desc: '關於、隱私、條款和支援頁面' },
+      docs: { name: '團隊文件', desc: '團隊知識庫與文件站' },
+      api: { name: '主 API', desc: '核心後端 API 服務' },
+      gutenberg: { name: 'Gutenberg', desc: '公版書內容處理管線' },
+      nlp: { name: 'NLP 服務', desc: '自然語言處理服務' },
+      tts: { name: 'TTS 服務', desc: '語音合成 GPU 推理' },
+      ios: { name: 'iOS 應用', desc: '原生 iOS 應用 (Swift)' },
+      android: { name: 'Android 應用', desc: '原生 Android 應用 (Kotlin)' },
+      flutter: { name: 'Flutter 應用', desc: '跨平台用戶端 (Dart)' },
+      mobile: { name: 'React Native 應用', desc: '跨平台用戶端 (Expo)' },
+      typesetting: { name: '排版引擎', desc: 'C++ 排版靜態函式庫' },
+      readerEngine: { name: '閱讀引擎', desc: 'Web CSS 分欄分頁引擎' },
+      audiolab: { name: 'AudioLab', desc: '有聲書處理與 AI TTS 管線' },
+      droplet: { name: '伺服器維運', desc: '伺服器維運腳本工具集' },
     },
   },
   // Override default ra messages
