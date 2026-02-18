@@ -1,22 +1,23 @@
 import { useTranslate } from 'react-admin';
 import {
   Box,
-  Card,
   CardContent,
+  CardActionArea,
   Typography,
   Grid,
   Chip,
-  IconButton,
-  Tooltip,
+  Card,
 } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LanguageIcon from '@mui/icons-material/Language';
 import StorageIcon from '@mui/icons-material/Storage';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import BuildIcon from '@mui/icons-material/Build';
 import CloudIcon from '@mui/icons-material/Cloud';
+import LinkOffIcon from '@mui/icons-material/LinkOff';
 import type { ReactNode } from 'react';
-import { brandColors, semanticColors } from '../../theme/brandTokens';
+import { brandColors, semanticColors, textColors, bgColors, alpha } from '../../theme/brandTokens';
 
 interface ServiceItem {
   nameKey: string;
@@ -31,28 +32,28 @@ const services: ServiceItem[] = [
   {
     nameKey: 'services.items.web.name',
     descKey: 'services.items.web.desc',
-    url: 'http://localhost:3001',
+    url: 'https://web.readmigo.app',
     category: 'web',
     techStack: 'Next.js',
   },
   {
     nameKey: 'services.items.contentStudio.name',
     descKey: 'services.items.contentStudio.desc',
-    url: 'http://localhost:3002',
+    url: 'https://studio.readmigo.app',
     category: 'web',
     techStack: 'Next.js',
   },
   {
     nameKey: 'services.items.aiTechReview.name',
     descKey: 'services.items.aiTechReview.desc',
-    url: 'https://ai-gold-iota.vercel.app',
+    url: 'https://ai.readmigo.app',
     category: 'web',
     techStack: 'Next.js 16 + React 19',
   },
   {
     nameKey: 'services.items.rssReader.name',
     descKey: 'services.items.rssReader.desc',
-    url: 'https://rss-reader.vercel.app',
+    url: 'https://rss.mcloud88.com',
     category: 'web',
     techStack: 'Vite + React 19 + MUI',
   },
@@ -172,7 +173,7 @@ const categoryConfig: Record<string, { icon: ReactNode; color: string; labelKey:
   backend: { icon: <StorageIcon />, color: semanticColors.info, labelKey: 'services.categories.backend' },
   app: { icon: <PhoneIphoneIcon />, color: semanticColors.warning, labelKey: 'services.categories.app' },
   tool: { icon: <BuildIcon />, color: brandColors.accentPurple, labelKey: 'services.categories.tool' },
-  ops: { icon: <CloudIcon />, color: '#607D8B', labelKey: 'services.categories.ops' },
+  ops: { icon: <CloudIcon />, color: textColors.secondary, labelKey: 'services.categories.ops' },
 };
 
 const categoryOrder = ['web', 'backend', 'app', 'tool', 'ops'] as const;
@@ -191,7 +192,7 @@ export const ServiceHub = () => {
       <Typography variant="h5" sx={{ mb: 0.5, fontWeight: 600 }}>
         {translate('services.title')}
       </Typography>
-      <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary' }}>
+      <Typography variant="body2" sx={{ mb: 3, color: textColors.secondary }}>
         {translate('services.subtitle')}
       </Typography>
 
@@ -205,55 +206,77 @@ export const ServiceHub = () => {
             <Chip
               label={group.items.length}
               size="small"
-              sx={{ height: 20, fontSize: 12 }}
+              sx={{ height: 20, fontSize: 12, backgroundColor: alpha(group.color, 0.12), color: group.color, fontWeight: 600 }}
             />
           </Box>
           <Grid container spacing={2}>
-            {group.items.map((service) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={service.nameKey}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    borderLeft: `3px solid ${group.color}`,
-                    transition: 'box-shadow 0.2s',
-                    '&:hover': {
-                      boxShadow: 4,
-                    },
-                  }}
-                >
-                  <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 600, lineHeight: 1.3 }}>
-                        {translate(service.nameKey)}
-                      </Typography>
-                      {service.url && (
-                        <Tooltip title={translate('services.openInNewTab')}>
-                          <IconButton
-                            size="small"
-                            component="a"
-                            href={service.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            sx={{ ml: 0.5, mt: -0.5 }}
-                          >
-                            <OpenInNewIcon sx={{ fontSize: 16 }} />
-                          </IconButton>
-                        </Tooltip>
-                      )}
-                    </Box>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1.5, minHeight: 40 }}>
-                      {translate(service.descKey)}
+            {group.items.map((service) => {
+              const hasUrl = Boolean(service.url);
+              const cardContent = (
+                <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 }, height: '100%', display: 'flex', flexDirection: 'column' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 600, lineHeight: 1.3 }}>
+                      {translate(service.nameKey)}
                     </Typography>
+                    {hasUrl ? (
+                      <OpenInNewIcon sx={{ fontSize: 16, color: group.color, flexShrink: 0 }} />
+                    ) : (
+                      <LinkOffIcon sx={{ fontSize: 16, color: textColors.hint, flexShrink: 0 }} />
+                    )}
+                  </Box>
+                  <Typography variant="body2" sx={{ color: textColors.secondary, mb: 2, flex: 1 }}>
+                    {translate(service.descKey)}
+                  </Typography>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Chip
                       label={service.techStack}
                       size="small"
                       variant="outlined"
-                      sx={{ fontSize: 11 }}
+                      sx={{ fontSize: 11, borderColor: alpha(group.color, 0.3), color: textColors.secondary }}
                     />
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
+                    {hasUrl && (
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: group.color, fontSize: 12, fontWeight: 500 }}>
+                        {translate('services.open', { _: 'Open' })}
+                        <ArrowForwardIcon sx={{ fontSize: 14 }} />
+                      </Box>
+                    )}
+                  </Box>
+                </CardContent>
+              );
+
+              return (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={service.nameKey}>
+                  <Card
+                    sx={{
+                      height: '100%',
+                      borderLeft: `3px solid ${hasUrl ? group.color : bgColors.subtle}`,
+                      transition: 'all 0.2s ease',
+                      cursor: hasUrl ? 'pointer' : 'default',
+                      opacity: hasUrl ? 1 : 0.65,
+                      '&:hover': hasUrl ? {
+                        boxShadow: `0 4px 16px ${alpha(group.color, 0.2)}`,
+                        borderLeftColor: group.color,
+                        transform: 'translateY(-2px)',
+                      } : {},
+                    }}
+                  >
+                    {hasUrl ? (
+                      <CardActionArea
+                        component="a"
+                        href={service.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
+                      >
+                        {cardContent}
+                      </CardActionArea>
+                    ) : (
+                      cardContent
+                    )}
+                  </Card>
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
       ))}
