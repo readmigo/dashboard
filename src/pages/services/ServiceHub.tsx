@@ -180,6 +180,13 @@ const services: ServiceItem[] = [
     category: 'ops',
     techStack: 'Apple Developer',
   },
+  {
+    nameKey: 'services.items.googlePlayConsole.name',
+    descKey: 'services.items.googlePlayConsole.desc',
+    url: 'https://play.google.com/console/u/0/developers/5113502613387667316?onboardingflow=signup',
+    category: 'ops',
+    techStack: 'Google Play',
+  },
 ];
 
 const categoryConfig: Record<string, { icon: ReactNode; color: string; labelKey: string }> = {

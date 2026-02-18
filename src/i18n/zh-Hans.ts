@@ -1493,6 +1493,7 @@ export const chineseTranslations = {
       droplet: { name: '服务器运维', desc: '服务器运维脚本工具集' },
       posthog: { name: 'PostHog 数据分析', desc: '产品数据分析与用户行为追踪' },
       appStoreConnect: { name: 'App Store Connect', desc: 'iOS 应用管理、TestFlight 与应用提交' },
+      googlePlayConsole: { name: 'Google Play Console', desc: 'Android 应用管理、测试与发布' },
     },
   },
   // Override default ra messages
