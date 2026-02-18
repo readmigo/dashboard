@@ -1498,6 +1498,7 @@ export const englishTranslations = {
       readerEngine: { name: 'Reader Engine', desc: 'Web CSS column-based pagination engine' },
       audiolab: { name: 'AudioLab', desc: 'Audiobook processing and AI TTS pipeline' },
       droplet: { name: 'Droplet Ops', desc: 'Server operation scripts and tools' },
+      posthog: { name: 'PostHog Analytics', desc: 'Product analytics and user behavior tracking' },
     },
   },
 };

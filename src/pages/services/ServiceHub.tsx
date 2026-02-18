@@ -166,6 +166,13 @@ const services: ServiceItem[] = [
     category: 'ops',
     techStack: 'Shell Scripts',
   },
+  {
+    nameKey: 'services.items.posthog.name',
+    descKey: 'services.items.posthog.desc',
+    url: 'https://us.posthog.com/project/312868/dashboard/1276265',
+    category: 'ops',
+    techStack: 'PostHog Cloud',
+  },
 ];
 
 const categoryConfig: Record<string, { icon: ReactNode; color: string; labelKey: string }> = {

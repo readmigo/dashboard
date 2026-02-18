@@ -1495,6 +1495,7 @@ export const traditionalChineseTranslations = {
       readerEngine: { name: '閱讀引擎', desc: 'Web CSS 分欄分頁引擎' },
       audiolab: { name: 'AudioLab', desc: '有聲書處理與 AI TTS 管線' },
       droplet: { name: '伺服器維運', desc: '伺服器維運腳本工具集' },
+      posthog: { name: 'PostHog 資料分析', desc: '產品資料分析與使用者行為追蹤' },
     },
   },
   // Override default ra messages
