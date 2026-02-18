@@ -56,11 +56,12 @@ export const CustomMenu = () => {
       >
         <Box
           component="img"
-          src="/logo-mark.svg"
+          src="/app-icon.png"
           alt="Readmigo"
           sx={{
             width: 36,
             height: 36,
+            borderRadius: '8px',
           }}
         />
         {open && (
