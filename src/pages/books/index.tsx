@@ -37,7 +37,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useContentLanguage } from '../../contexts/ContentLanguageContext';
 import { getStoredEnvironment } from '../../contexts/EnvironmentContext';
-import { getApiUrl } from '../../config/environments';
+import { getApiUrl, getEnvironmentConfig } from '../../config/environments';
 
 // Book status enum matching Prisma schema
 const BOOK_STATUSES = [
@@ -137,7 +137,8 @@ const ReviewInStudioButton = () => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     // Open Content Studio in new tab with book ID
-    const studioUrl = `http://localhost:3002/books/${record.id}`;
+    const studioBaseUrl = getEnvironmentConfig(getStoredEnvironment()).contentStudioUrl;
+    const studioUrl = `${studioBaseUrl}/books/${record.id}`;
     window.open(studioUrl, '_blank');
   };
 

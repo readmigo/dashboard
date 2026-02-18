@@ -2,6 +2,7 @@ import { Menu, MenuItemLink, useSidebarState, useTranslate } from 'react-admin';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Divider, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { gradients, shadows, textColors } from '../theme/brandTokens';
+import { useEnvironment } from '../contexts/EnvironmentContext';
 import BookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -35,6 +36,7 @@ export const CustomMenu = () => {
   const location = useLocation();
   const [open] = useSidebarState();
   const translate = useTranslate();
+  const { config } = useEnvironment();
 
   const isSelected = (path: string) => {
     return location.pathname.startsWith(path);
@@ -222,7 +224,7 @@ export const CustomMenu = () => {
       {/* Content Studio - External Link */}
       <ListItemButton
         component="a"
-        href="http://localhost:3002"
+        href={config.contentStudioUrl}
         target="_blank"
         rel="noopener noreferrer"
         sx={{
