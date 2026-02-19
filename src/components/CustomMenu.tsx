@@ -30,6 +30,7 @@ import AnalyticsIcon from '@mui/icons-material/Analytics';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import HubIcon from '@mui/icons-material/Hub';
+import CardMembershipIcon from '@mui/icons-material/CardMembership';
 
 export const CustomMenu = () => {
   const location = useLocation();
@@ -200,6 +201,13 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.operations.demographics')}
         leftIcon={<GroupIcon />}
         selected={isSelected('/demographics')}
+        sidebarIsOpen={open}
+      />
+      <MenuItemLink
+        to="/subscription-dashboard"
+        primaryText={translate('sidebar.operations.subscriptions')}
+        leftIcon={<CardMembershipIcon />}
+        selected={isSelected('/subscription-dashboard')}
         sidebarIsOpen={open}
       />
       <MenuItemLink

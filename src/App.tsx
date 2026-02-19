@@ -33,6 +33,7 @@ import { RetentionPage } from './pages/retention';
 import { DemographicsPage } from './pages/demographics';
 import { SEIncrementalImport } from './pages/se-import';
 import { ServiceHub } from './pages/services';
+import { SubscriptionDashboard } from './pages/subscriptions';
 import BookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -167,6 +168,7 @@ export const App = () => (
               <Route path="/demographics" element={<DemographicsPage />} />
               <Route path="/event-analytics" element={<EventAnalyticsPage />} />
               <Route path="/se-import" element={<SEIncrementalImport />} />
+              <Route path="/subscription-dashboard" element={<SubscriptionDashboard />} />
               <Route path="/services" element={<ServiceHub />} />
             </CustomRoutes>
           </Admin>

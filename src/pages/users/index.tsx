@@ -1,3 +1,4 @@
+import { useState, useEffect, useCallback } from 'react';
 import {
   List,
   Datagrid,
@@ -16,13 +17,41 @@ import {
   TopToolbar,
   ListButton,
   useTranslate,
+  useNotify,
+  useRefresh,
 } from 'react-admin';
 import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
-import { Chip, Box, Typography, LinearProgress, Grid, Card, CardContent, Avatar, Tooltip } from '@mui/material';
+import {
+  Chip,
+  Box,
+  Typography,
+  LinearProgress,
+  Grid,
+  Card,
+  CardContent,
+  Avatar,
+  Tooltip,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField as MuiTextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  CircularProgress,
+  Alert,
+} from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AppleIcon from '@mui/icons-material/Apple';
 import AndroidIcon from '@mui/icons-material/Android';
 import LanguageIcon from '@mui/icons-material/Language';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import BlockIcon from '@mui/icons-material/Block';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useEnvironment } from '../../contexts/EnvironmentContext';
 
 // English level enum matching Prisma schema (only 3 levels)
 const useEnglishLevelChoices = () => {
@@ -305,6 +334,405 @@ const ShowActions = () => {
   );
 };
 
+// Subscription management tab content
+interface SubscriptionData {
+  userId: string;
+  planType: string;
+  status: string;
+  source?: string;
+  startedAt?: string;
+  expiresAt?: string;
+  autoRenew?: boolean;
+  grantedBy?: string;
+  grantReason?: string;
+  grantExpiresAt?: string;
+  originalTransactionId?: string;
+  message?: string;
+}
+
+const SubscriptionTab = () => {
+  const record = useRecordContext();
+  const translate = useTranslate();
+  const notify = useNotify();
+  const refresh = useRefresh();
+  const { apiBaseUrl } = useEnvironment();
+  const [subscription, setSubscription] = useState<SubscriptionData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Dialog states
+  const [grantOpen, setGrantOpen] = useState(false);
+  const [revokeOpen, setRevokeOpen] = useState(false);
+  const [extendOpen, setExtendOpen] = useState(false);
+  const [actionLoading, setActionLoading] = useState(false);
+
+  // Form states
+  const [grantPlan, setGrantPlan] = useState<'PRO' | 'PREMIUM'>('PRO');
+  const [grantDays, setGrantDays] = useState(30);
+  const [grantReason, setGrantReason] = useState('');
+  const [revokeReason, setRevokeReason] = useState('');
+  const [extendDays, setExtendDays] = useState(30);
+  const [extendReason, setExtendReason] = useState('');
+
+  const fetchSubscription = useCallback(async () => {
+    if (!record?.id) return;
+    setLoading(true);
+    setError(null);
+
+    try {
+      const token = localStorage.getItem('adminToken');
+      const res = await fetch(
+        `${apiBaseUrl}/api/v1/admin/subscriptions/${record.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'X-Admin-Mode': 'true',
+          },
+        },
+      );
+
+      if (!res.ok) {
+        throw new Error(`${res.status} ${res.statusText}`);
+      }
+
+      const data = await res.json();
+      setSubscription(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load');
+    } finally {
+      setLoading(false);
+    }
+  }, [record?.id, apiBaseUrl]);
+
+  useEffect(() => {
+    fetchSubscription();
+  }, [fetchSubscription]);
+
+  const handleAction = async (
+    action: string,
+    body: Record<string, unknown>,
+  ) => {
+    if (!record?.id) return;
+    setActionLoading(true);
+
+    try {
+      const token = localStorage.getItem('adminToken');
+      const res = await fetch(
+        `${apiBaseUrl}/api/v1/admin/subscriptions/${record.id}/${action}`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'X-Admin-Mode': 'true',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        },
+      );
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.message || `${res.status} ${res.statusText}`);
+      }
+
+      notify(translate('resources.users.subscription.notifications.success'), { type: 'success' });
+      setGrantOpen(false);
+      setRevokeOpen(false);
+      setExtendOpen(false);
+      fetchSubscription();
+      refresh();
+    } catch (err) {
+      notify(
+        err instanceof Error ? err.message : translate('resources.users.subscription.notifications.error'),
+        { type: 'error' },
+      );
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  if (!record) return null;
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" py={4}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Alert severity="error" sx={{ m: 2 }}>
+        {error}
+      </Alert>
+    );
+  }
+
+  const planType = subscription?.planType || 'FREE';
+  const status = subscription?.status || 'ACTIVE';
+  const source = subscription?.source;
+
+  const planColors: Record<string, 'default' | 'primary' | 'success'> = {
+    FREE: 'default',
+    PRO: 'primary',
+    PREMIUM: 'success',
+  };
+
+  const sourceLabels: Record<string, string> = {
+    APPLE: 'Apple',
+    GOOGLE: 'Google Play',
+    STRIPE: 'Stripe',
+    ADMIN_GRANT: translate('resources.users.subscription.adminGrant'),
+  };
+
+  const formatDate = (dateStr?: string) => {
+    if (!dateStr) return '-';
+    return new Date(dateStr).toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  return (
+    <Box sx={{ p: 2 }}>
+      {/* Current Plan */}
+      <Card sx={{ mb: 3 }}>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>
+            {translate('resources.users.subscription.currentPlan')}
+          </Typography>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" color="textSecondary">
+                {translate('resources.users.subscription.planType')}
+              </Typography>
+              <Box mt={0.5}>
+                <Chip
+                  label={planType}
+                  color={planColors[planType] || 'default'}
+                  size="medium"
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" color="textSecondary">
+                {translate('resources.users.subscription.status')}
+              </Typography>
+              <Typography variant="body1" mt={0.5}>
+                {status}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" color="textSecondary">
+                {translate('resources.users.subscription.source')}
+              </Typography>
+              <Typography variant="body1" mt={0.5}>
+                {source ? sourceLabels[source] || source : '-'}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" color="textSecondary">
+                {translate('resources.users.subscription.startedAt')}
+              </Typography>
+              <Typography variant="body1" mt={0.5}>
+                {formatDate(subscription?.startedAt)}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" color="textSecondary">
+                {translate('resources.users.subscription.expiresAt')}
+              </Typography>
+              <Typography variant="body1" mt={0.5}>
+                {formatDate(subscription?.expiresAt)}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" color="textSecondary">
+                {translate('resources.users.subscription.autoRenew')}
+              </Typography>
+              <Typography variant="body1" mt={0.5}>
+                {subscription?.autoRenew ? translate('common.yes') : translate('common.no')}
+              </Typography>
+            </Grid>
+            {subscription?.grantedBy && (
+              <>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" color="textSecondary">
+                    {translate('resources.users.subscription.grantedBy')}
+                  </Typography>
+                  <Typography variant="body1" mt={0.5}>
+                    {subscription.grantedBy}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={8}>
+                  <Typography variant="body2" color="textSecondary">
+                    {translate('resources.users.subscription.grantReason')}
+                  </Typography>
+                  <Typography variant="body1" mt={0.5}>
+                    {subscription.grantReason || '-'}
+                  </Typography>
+                </Grid>
+              </>
+            )}
+          </Grid>
+        </CardContent>
+      </Card>
+
+      {/* Action Buttons */}
+      <Box display="flex" gap={2} flexWrap="wrap">
+        <Button
+          variant="contained"
+          startIcon={<CardGiftcardIcon />}
+          onClick={() => setGrantOpen(true)}
+          color="primary"
+        >
+          {translate('resources.users.subscription.actions.grant')}
+        </Button>
+        <Button
+          variant="outlined"
+          startIcon={<AddCircleIcon />}
+          onClick={() => setExtendOpen(true)}
+          disabled={planType === 'FREE'}
+        >
+          {translate('resources.users.subscription.actions.extend')}
+        </Button>
+        <Button
+          variant="outlined"
+          startIcon={<BlockIcon />}
+          onClick={() => setRevokeOpen(true)}
+          color="error"
+          disabled={planType === 'FREE'}
+        >
+          {translate('resources.users.subscription.actions.revoke')}
+        </Button>
+      </Box>
+
+      {/* Grant Dialog */}
+      <Dialog open={grantOpen} onClose={() => setGrantOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>{translate('resources.users.subscription.actions.grant')}</DialogTitle>
+        <DialogContent>
+          <Box sx={{ pt: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <FormControl fullWidth>
+              <InputLabel>{translate('resources.users.subscription.planType')}</InputLabel>
+              <Select
+                value={grantPlan}
+                onChange={(e) => setGrantPlan(e.target.value as 'PRO' | 'PREMIUM')}
+                label={translate('resources.users.subscription.planType')}
+              >
+                <MenuItem value="PRO">Pro</MenuItem>
+                <MenuItem value="PREMIUM">Premium</MenuItem>
+              </Select>
+            </FormControl>
+            <MuiTextField
+              label={translate('resources.users.subscription.durationDays')}
+              type="number"
+              value={grantDays}
+              onChange={(e) => setGrantDays(parseInt(e.target.value) || 0)}
+              inputProps={{ min: 1 }}
+              fullWidth
+            />
+            <MuiTextField
+              label={translate('resources.users.subscription.reason')}
+              value={grantReason}
+              onChange={(e) => setGrantReason(e.target.value)}
+              multiline
+              rows={2}
+              fullWidth
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setGrantOpen(false)}>{translate('common.cancel')}</Button>
+          <Button
+            onClick={() =>
+              handleAction('grant', {
+                planType: grantPlan,
+                durationDays: grantDays,
+                reason: grantReason,
+              })
+            }
+            variant="contained"
+            disabled={actionLoading || grantDays <= 0}
+          >
+            {actionLoading ? <CircularProgress size={20} /> : translate('common.confirm')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Extend Dialog */}
+      <Dialog open={extendOpen} onClose={() => setExtendOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>{translate('resources.users.subscription.actions.extend')}</DialogTitle>
+        <DialogContent>
+          <Box sx={{ pt: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <MuiTextField
+              label={translate('resources.users.subscription.durationDays')}
+              type="number"
+              value={extendDays}
+              onChange={(e) => setExtendDays(parseInt(e.target.value) || 0)}
+              inputProps={{ min: 1 }}
+              fullWidth
+            />
+            <MuiTextField
+              label={translate('resources.users.subscription.reason')}
+              value={extendReason}
+              onChange={(e) => setExtendReason(e.target.value)}
+              multiline
+              rows={2}
+              fullWidth
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setExtendOpen(false)}>{translate('common.cancel')}</Button>
+          <Button
+            onClick={() =>
+              handleAction('extend', { days: extendDays, reason: extendReason })
+            }
+            variant="contained"
+            disabled={actionLoading || extendDays <= 0}
+          >
+            {actionLoading ? <CircularProgress size={20} /> : translate('common.confirm')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Revoke Dialog */}
+      <Dialog open={revokeOpen} onClose={() => setRevokeOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>{translate('resources.users.subscription.actions.revoke')}</DialogTitle>
+        <DialogContent>
+          <Alert severity="warning" sx={{ mb: 2 }}>
+            {translate('resources.users.subscription.revokeWarning')}
+          </Alert>
+          <MuiTextField
+            label={translate('resources.users.subscription.reason')}
+            value={revokeReason}
+            onChange={(e) => setRevokeReason(e.target.value)}
+            multiline
+            rows={2}
+            fullWidth
+            sx={{ mt: 1 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setRevokeOpen(false)}>{translate('common.cancel')}</Button>
+          <Button
+            onClick={() => handleAction('revoke', { reason: revokeReason })}
+            variant="contained"
+            color="error"
+            disabled={actionLoading}
+          >
+            {actionLoading ? <CircularProgress size={20} /> : translate('common.confirm')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
+  );
+};
+
 export const UserShow = () => {
   const translate = useTranslate();
 
@@ -374,6 +802,10 @@ export const UserShow = () => {
               <TimezoneAwareDateField source="nextReviewAt" label={translate('resources.users.vocabulary.nextReview')} />
             </Datagrid>
           </ReferenceManyField>
+        </Tab>
+
+        <Tab label={translate('resources.users.tabs.subscription')}>
+          <SubscriptionTab />
         </Tab>
       </TabbedShowLayout>
     </Show>
