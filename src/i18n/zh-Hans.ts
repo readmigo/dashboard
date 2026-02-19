@@ -1452,6 +1452,74 @@ export const chineseTranslations = {
       flagTypesDesc: '功能开关可以是布尔型（开/关）、百分比型（渐进发布）或用户分群型。使用开关安全地部署新功能。',
     },
   },
+  // Push Notifications
+  pushNotifications: {
+    title: '推送通知',
+    subtitle: '向用户发送推送通知并查看发送历史',
+    broadcastWarning: '广播通知将立即发送给所有目标用户，请在发送前核实内容。',
+    sendForm: {
+      title: '发送通知',
+    },
+    fields: {
+      title: '标题',
+      body: '内容',
+      deepLink: '深链接（可选）',
+      targetType: '目标类型',
+      segment: '用户分组',
+      userIds: '用户ID',
+      userIdsHelper: '多个用户ID用逗号分隔',
+      status: '状态',
+      type: '类型',
+    },
+    targetType: {
+      all: '全量用户',
+      segment: '用户分组',
+      users: '指定用户',
+    },
+    segment: {
+      premium: '付费订阅用户',
+      trial: '试用用户',
+      active_7d: '最近7天活跃',
+    },
+    actions: {
+      send: '发送通知',
+    },
+    confirmDialog: {
+      title: '确认发送',
+      message: '即将发送推送通知，此操作不可撤销。',
+      confirm: '立即发送',
+    },
+    history: {
+      title: '推送历史',
+      allUsers: '全量用户',
+      columns: {
+        time: '时间',
+        title: '标题',
+        body: '内容',
+        type: '类型',
+        status: '状态',
+        target: '目标设备',
+      },
+    },
+    status: {
+      SENT: '已发送',
+      FAILED: '失败',
+      OPENED: '已打开',
+    },
+    type: {
+      broadcast: '广播',
+      direct: '定向',
+    },
+    filters: {
+      allStatuses: '全部状态',
+      allTypes: '全部类型',
+    },
+    notifications: {
+      sent: '推送通知发送成功',
+      sendFailed: '推送通知发送失败',
+      loadFailed: '加载推送历史失败',
+    },
+  },
   // Common buttons
   buttons: {
     retry: '重试',
@@ -1485,6 +1553,7 @@ export const chineseTranslations = {
       subscriptions: '订阅管理',
       eventAnalytics: '事件分析',
       contentStudio: '书籍排版',
+      pushNotifications: '推送通知',
     },
     support: {
       overview: '支持概览',

@@ -1492,6 +1492,7 @@ export const englishTranslations = {
       subscriptions: 'Subscriptions',
       eventAnalytics: 'Event Analytics',
       contentStudio: 'Book Typesetting',
+      pushNotifications: 'Push Notifications',
     },
     support: {
       overview: 'Support Overview',
@@ -1503,6 +1504,74 @@ export const englishTranslations = {
     },
     platform: {
       serviceHub: 'Service Hub',
+    },
+  },
+  // Push Notifications
+  pushNotifications: {
+    title: 'Push Notifications',
+    subtitle: 'Send push notifications to users and view send history',
+    broadcastWarning: 'Broadcast notifications will be sent to all targeted users immediately. Please verify the content before sending.',
+    sendForm: {
+      title: 'Send Notification',
+    },
+    fields: {
+      title: 'Title',
+      body: 'Body',
+      deepLink: 'Deep Link (optional)',
+      targetType: 'Target Type',
+      segment: 'Segment',
+      userIds: 'User IDs',
+      userIdsHelper: 'Enter user IDs separated by commas',
+      status: 'Status',
+      type: 'Type',
+    },
+    targetType: {
+      all: 'All Users',
+      segment: 'User Segment',
+      users: 'Specific Users',
+    },
+    segment: {
+      premium: 'Premium Subscribers',
+      trial: 'Trial Users',
+      active_7d: 'Active Last 7 Days',
+    },
+    actions: {
+      send: 'Send Notification',
+    },
+    confirmDialog: {
+      title: 'Confirm Send',
+      message: 'You are about to send a push notification. This action cannot be undone.',
+      confirm: 'Send Now',
+    },
+    history: {
+      title: 'Push History',
+      allUsers: 'All Users',
+      columns: {
+        time: 'Time',
+        title: 'Title',
+        body: 'Body',
+        type: 'Type',
+        status: 'Status',
+        target: 'Target',
+      },
+    },
+    status: {
+      SENT: 'Sent',
+      FAILED: 'Failed',
+      OPENED: 'Opened',
+    },
+    type: {
+      broadcast: 'Broadcast',
+      direct: 'Direct',
+    },
+    filters: {
+      allStatuses: 'All Statuses',
+      allTypes: 'All Types',
+    },
+    notifications: {
+      sent: 'Push notification sent successfully',
+      sendFailed: 'Failed to send push notification',
+      loadFailed: 'Failed to load push history',
     },
   },
   // Service Hub

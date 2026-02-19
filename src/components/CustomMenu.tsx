@@ -31,6 +31,7 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import HubIcon from '@mui/icons-material/Hub';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 export const CustomMenu = () => {
   const location = useLocation();
@@ -229,6 +230,13 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.operations.seImport', { _: 'SE Import' })}
         leftIcon={<CloudDownloadIcon />}
         selected={isSelected('/se-import')}
+        sidebarIsOpen={open}
+      />
+      <MenuItemLink
+        to="/push-notifications"
+        primaryText={translate('sidebar.operations.pushNotifications', { _: 'Push Notifications' })}
+        leftIcon={<NotificationsActiveIcon />}
+        selected={isSelected('/push-notifications')}
         sidebarIsOpen={open}
       />
       {/* Content Studio - External Link */}

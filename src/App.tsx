@@ -34,6 +34,7 @@ import { DemographicsPage } from './pages/demographics';
 import { SEIncrementalImport } from './pages/se-import';
 import { ServiceHub } from './pages/services';
 import { SubscriptionDashboard } from './pages/subscriptions';
+import { PushNotificationsPage } from './pages/push-notifications';
 import BookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -170,6 +171,7 @@ export const App = () => (
               <Route path="/se-import" element={<SEIncrementalImport />} />
               <Route path="/subscription-dashboard" element={<SubscriptionDashboard />} />
               <Route path="/services" element={<ServiceHub />} />
+              <Route path="/push-notifications" element={<PushNotificationsPage />} />
             </CustomRoutes>
           </Admin>
         </ContentLanguageProvider>

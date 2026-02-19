@@ -1442,6 +1442,74 @@ export const traditionalChineseTranslations = {
       },
     },
   },
+  // Push Notifications
+  pushNotifications: {
+    title: '推播通知',
+    subtitle: '向用戶發送推播通知並查看發送歷史',
+    broadcastWarning: '廣播通知將立即發送給所有目標用戶，請在發送前核實內容。',
+    sendForm: {
+      title: '發送通知',
+    },
+    fields: {
+      title: '標題',
+      body: '內容',
+      deepLink: '深層連結（選填）',
+      targetType: '目標類型',
+      segment: '用戶群組',
+      userIds: '用戶ID',
+      userIdsHelper: '多個用戶ID以逗號分隔',
+      status: '狀態',
+      type: '類型',
+    },
+    targetType: {
+      all: '全體用戶',
+      segment: '用戶群組',
+      users: '指定用戶',
+    },
+    segment: {
+      premium: '付費訂閱用戶',
+      trial: '試用用戶',
+      active_7d: '最近7天活躍',
+    },
+    actions: {
+      send: '發送通知',
+    },
+    confirmDialog: {
+      title: '確認發送',
+      message: '即將發送推播通知，此操作不可撤銷。',
+      confirm: '立即發送',
+    },
+    history: {
+      title: '推播歷史',
+      allUsers: '全體用戶',
+      columns: {
+        time: '時間',
+        title: '標題',
+        body: '內容',
+        type: '類型',
+        status: '狀態',
+        target: '目標裝置',
+      },
+    },
+    status: {
+      SENT: '已發送',
+      FAILED: '失敗',
+      OPENED: '已開啟',
+    },
+    type: {
+      broadcast: '廣播',
+      direct: '定向',
+    },
+    filters: {
+      allStatuses: '全部狀態',
+      allTypes: '全部類型',
+    },
+    notifications: {
+      sent: '推播通知發送成功',
+      sendFailed: '推播通知發送失敗',
+      loadFailed: '載入推播歷史失敗',
+    },
+  },
   // Common buttons
   buttons: {
     retry: '重試',
@@ -1489,6 +1557,7 @@ export const traditionalChineseTranslations = {
       subscriptions: '訂閱管理',
       eventAnalytics: '事件分析',
       contentStudio: '書籍排版',
+      pushNotifications: '推播通知',
     },
     support: {
       overview: '支援概覽',

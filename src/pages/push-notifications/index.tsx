@@ -1,0 +1,1 @@
+export { PushNotificationsPage } from './PushNotificationsPage';
