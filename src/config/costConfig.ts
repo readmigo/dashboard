@@ -1,4 +1,4 @@
-export type CostCategory = 'compute' | 'database' | 'cache' | 'storage' | 'monitoring' | 'selfHosted' | 'other';
+export type CostCategory = 'compute' | 'database' | 'cache' | 'storage' | 'monitoring' | 'other';
 
 export interface MonthlyCost {
   month: string;
@@ -14,6 +14,7 @@ export interface ServiceCost {
   costs: MonthlyCost[];
   url?: string;
   note?: string;
+  sourceDoc?: string;
 }
 
 export interface CostConfig {
@@ -22,6 +23,8 @@ export interface CostConfig {
   categories: { id: CostCategory; label: string; icon: string }[];
 }
 
+// All cost data sourced from /docs/05-operations/deployment/services/
+// Last verified: 2026-02-07
 export const costConfig: CostConfig = {
   globalMonthlyBudget: 100,
   categories: [
@@ -30,10 +33,10 @@ export const costConfig: CostConfig = {
     { id: 'cache', label: 'Cache', icon: 'Memory' },
     { id: 'storage', label: 'Storage & CDN', icon: 'CloudQueue' },
     { id: 'monitoring', label: 'Monitoring', icon: 'Monitor' },
-    { id: 'selfHosted', label: 'Self-hosted', icon: 'Computer' },
     { id: 'other', label: 'Other', icon: 'MoreHoriz' },
   ],
   services: [
+    // --- Compute ---
     {
       id: 'api-server',
       name: 'API Server',
@@ -41,23 +44,45 @@ export const costConfig: CostConfig = {
       provider: 'Fly.io',
       monthlyBudget: 25,
       url: 'https://fly.io/dashboard',
+      note: 'shared-cpu-2x, 2GB, Tokyo (nrt)',
+      sourceDoc: 'docs/05-operations/deployment/services/fly-io.md §7',
       costs: [
-        { month: '2025-09', actual: 19.42 },
-        { month: '2025-10', actual: 20.15 },
-        { month: '2025-11', actual: 18.87 },
-        { month: '2025-12', actual: 21.33 },
-        { month: '2026-01', actual: 20.76 },
-        { month: '2026-02', actual: 19.58 },
+        { month: '2025-09', actual: 20 },
+        { month: '2025-10', actual: 20 },
+        { month: '2025-11', actual: 20 },
+        { month: '2025-12', actual: 20 },
+        { month: '2026-01', actual: 20 },
+        { month: '2026-02', actual: 20 },
       ],
     },
+    {
+      id: 'job-server',
+      name: 'Job Server (Droplet)',
+      category: 'compute',
+      provider: 'DigitalOcean',
+      monthlyBudget: 50,
+      url: 'https://cloud.digitalocean.com',
+      note: '4 vCPU, 8GB RAM, Singapore (SGP1)',
+      sourceDoc: 'docs/05-operations/deployment/services/droplet.md §1',
+      costs: [
+        { month: '2025-09', actual: 48 },
+        { month: '2025-10', actual: 48 },
+        { month: '2025-11', actual: 48 },
+        { month: '2025-12', actual: 48 },
+        { month: '2026-01', actual: 48 },
+        { month: '2026-02', actual: 48 },
+      ],
+    },
+    // --- Database ---
     {
       id: 'postgresql',
       name: 'PostgreSQL',
       category: 'database',
       provider: 'Neon',
-      monthlyBudget: 15,
+      monthlyBudget: 0,
       url: 'https://console.neon.tech',
-      note: 'Free tier',
+      note: 'Free tier, serverless 0.25-4 CU, Singapore',
+      sourceDoc: 'docs/05-operations/deployment/services/neon.md',
       costs: [
         { month: '2025-09', actual: 0 },
         { month: '2025-10', actual: 0 },
@@ -67,6 +92,7 @@ export const costConfig: CostConfig = {
         { month: '2026-02', actual: 0 },
       ],
     },
+    // --- Cache ---
     {
       id: 'redis-cache',
       name: 'Redis Cache',
@@ -74,48 +100,37 @@ export const costConfig: CostConfig = {
       provider: 'Upstash',
       monthlyBudget: 20,
       url: 'https://console.upstash.com',
+      note: '~50M commands/mo, ~500MB, Singapore',
+      sourceDoc: 'docs/05-operations/deployment/services/upstash.md §8',
       costs: [
-        { month: '2025-09', actual: 12.34 },
-        { month: '2025-10', actual: 13.21 },
-        { month: '2025-11', actual: 12.87 },
-        { month: '2025-12', actual: 14.52 },
-        { month: '2026-01', actual: 13.95 },
-        { month: '2026-02', actual: 14.18 },
+        { month: '2025-09', actual: 15 },
+        { month: '2025-10', actual: 15 },
+        { month: '2025-11', actual: 15 },
+        { month: '2025-12', actual: 15 },
+        { month: '2026-01', actual: 15 },
+        { month: '2026-02', actual: 15 },
       ],
     },
+    // --- Storage & CDN ---
     {
-      id: 'object-storage',
-      name: 'Object Storage',
-      category: 'storage',
-      provider: 'Cloudflare R2',
-      monthlyBudget: 5,
-      url: 'https://dash.cloudflare.com',
-      costs: [
-        { month: '2025-09', actual: 1.52 },
-        { month: '2025-10', actual: 1.68 },
-        { month: '2025-11', actual: 1.73 },
-        { month: '2025-12', actual: 1.85 },
-        { month: '2026-01', actual: 1.91 },
-        { month: '2026-02', actual: 1.97 },
-      ],
-    },
-    {
-      id: 'cdn-dns',
-      name: 'CDN & DNS',
+      id: 'cloudflare',
+      name: 'Cloudflare (R2 + DNS + CDN + Pages)',
       category: 'storage',
       provider: 'Cloudflare',
-      monthlyBudget: 0,
+      monthlyBudget: 5,
       url: 'https://dash.cloudflare.com',
-      note: 'Free plan',
+      note: 'R2 ~$0.56 + Domain ~$0.08/mo, rest free',
+      sourceDoc: 'docs/05-operations/deployment/services/cloudflare.md §9',
       costs: [
-        { month: '2025-09', actual: 0 },
-        { month: '2025-10', actual: 0 },
-        { month: '2025-11', actual: 0 },
-        { month: '2025-12', actual: 0 },
-        { month: '2026-01', actual: 0 },
-        { month: '2026-02', actual: 0 },
+        { month: '2025-09', actual: 1.56 },
+        { month: '2025-10', actual: 1.56 },
+        { month: '2025-11', actual: 1.56 },
+        { month: '2025-12', actual: 1.56 },
+        { month: '2026-01', actual: 1.56 },
+        { month: '2026-02', actual: 1.56 },
       ],
     },
+    // --- Monitoring ---
     {
       id: 'error-tracking',
       name: 'Error Tracking',
@@ -139,7 +154,7 @@ export const costConfig: CostConfig = {
       category: 'monitoring',
       provider: 'PostHog',
       monthlyBudget: 0,
-      note: 'Self-hosted',
+      note: 'Self-hosted data, cloud UI',
       costs: [
         { month: '2025-09', actual: 0 },
         { month: '2025-10', actual: 0 },
@@ -166,39 +181,7 @@ export const costConfig: CostConfig = {
         { month: '2026-02', actual: 0 },
       ],
     },
-    {
-      id: 'tts-server',
-      name: 'TTS Server (PC2)',
-      category: 'selfHosted',
-      provider: 'Self-hosted',
-      monthlyBudget: 15,
-      note: 'Electricity cost',
-      costs: [
-        { month: '2025-09', actual: 9.80 },
-        { month: '2025-10', actual: 10.45 },
-        { month: '2025-11', actual: 8.92 },
-        { month: '2025-12', actual: 11.20 },
-        { month: '2026-01', actual: 10.85 },
-        { month: '2026-02', actual: 9.63 },
-      ],
-    },
-    {
-      id: 'domain',
-      name: 'Domain',
-      category: 'other',
-      provider: 'Cloudflare',
-      monthlyBudget: 2,
-      url: 'https://dash.cloudflare.com',
-      note: '~$1/year',
-      costs: [
-        { month: '2025-09', actual: 0.08 },
-        { month: '2025-10', actual: 0.08 },
-        { month: '2025-11', actual: 0.08 },
-        { month: '2025-12', actual: 0.08 },
-        { month: '2026-01', actual: 0.08 },
-        { month: '2026-02', actual: 0.08 },
-      ],
-    },
+    // --- Other ---
     {
       id: 'github-actions',
       name: 'GitHub Actions',
@@ -206,7 +189,7 @@ export const costConfig: CostConfig = {
       provider: 'GitHub',
       monthlyBudget: 0,
       url: 'https://github.com',
-      note: 'Free tier',
+      note: 'Free tier (public repo)',
       costs: [
         { month: '2025-09', actual: 0 },
         { month: '2025-10', actual: 0 },

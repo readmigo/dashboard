@@ -5,7 +5,6 @@ import StorageOutlined from '@mui/icons-material/StorageOutlined';
 import MemoryOutlined from '@mui/icons-material/MemoryOutlined';
 import CloudQueueOutlined from '@mui/icons-material/CloudQueueOutlined';
 import MonitorHeartOutlined from '@mui/icons-material/MonitorHeartOutlined';
-import ComputerOutlined from '@mui/icons-material/ComputerOutlined';
 import MoreHorizOutlined from '@mui/icons-material/MoreHorizOutlined';
 import { PieChart, Pie, Cell } from 'recharts';
 import type { CostCategory, ServiceCost } from '../../../config/costConfig';
@@ -19,7 +18,6 @@ const categoryIcons: Record<CostCategory, React.ReactNode> = {
   cache: <MemoryOutlined />,
   storage: <CloudQueueOutlined />,
   monitoring: <MonitorHeartOutlined />,
-  selfHosted: <ComputerOutlined />,
   other: <MoreHorizOutlined />,
 };
 

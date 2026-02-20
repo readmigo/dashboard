@@ -1638,7 +1638,6 @@ export const traditionalChineseTranslations = {
       cache: '快取',
       storage: '儲存與CDN',
       monitoring: '監控',
-      selfHosted: '自託管',
       other: '其他',
       budget: '預算',
       actual: '實際',

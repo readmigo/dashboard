@@ -33,7 +33,6 @@ const CATEGORY_COLOR_MAP: Record<CostCategory, string> = {
   cache: chartPalette[3],
   storage: chartPalette[4],
   monitoring: chartPalette[5],
-  selfHosted: chartPalette[6],
   other: chartPalette[0],
 };
 

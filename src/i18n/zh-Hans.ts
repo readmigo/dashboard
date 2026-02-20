@@ -1634,7 +1634,6 @@ export const chineseTranslations = {
       cache: '缓存',
       storage: '存储与CDN',
       monitoring: '监控',
-      selfHosted: '自托管',
       other: '其他',
       budget: '预算',
       actual: '实际',

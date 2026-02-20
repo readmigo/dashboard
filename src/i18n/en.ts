@@ -1641,7 +1641,6 @@ export const englishTranslations = {
       cache: 'Cache',
       storage: 'Storage & CDN',
       monitoring: 'Monitoring',
-      selfHosted: 'Self-hosted',
       other: 'Other',
       budget: 'Budget',
       actual: 'Actual',
