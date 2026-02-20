@@ -1602,6 +1602,7 @@ export const traditionalChineseTranslations = {
       eventAnalytics: '事件分析',
       contentStudio: '書籍排版',
       pushNotifications: '推播通知',
+      costManagement: '費用管理',
     },
     support: {
       overview: '支援概覽',
@@ -1613,6 +1614,51 @@ export const traditionalChineseTranslations = {
     },
     platform: {
       serviceHub: '服務平台',
+    },
+  },
+  // Cost Management
+  costManagement: {
+    title: '費用管理',
+    subtitle: '監控服務費用，管理預算',
+    summary: {
+      totalCost: '總費用',
+      thisMonth: '本月',
+      budgetUsage: '預算使用率',
+      monthOverMonth: '環比變化',
+      budgetRemaining: '預算剩餘',
+      vsLastMonth: '較上月',
+    },
+    trend: {
+      title: '費用趨勢（近6個月）',
+    },
+    categories: {
+      title: '分類費用',
+      compute: '運算',
+      database: '資料庫',
+      cache: '快取',
+      storage: '儲存與CDN',
+      monitoring: '監控',
+      selfHosted: '自託管',
+      other: '其他',
+      budget: '預算',
+      actual: '實際',
+    },
+    table: {
+      title: '服務明細',
+      serviceName: '服務名稱',
+      provider: '供應商',
+      category: '分類',
+      monthlyCost: '月費用',
+      budget: '預算',
+      usage: '使用率',
+      status: '狀態',
+      free: '免費',
+    },
+    alerts: {
+      title: '預算警報',
+      allWithinBudget: '所有服務均在預算範圍內',
+      overBudget: '%{service} 已達預算的 %{usage}%（$%{actual} / $%{budget}）',
+      nearBudget: '%{service} 接近預算，已使用 %{usage}%（$%{actual} / $%{budget}）',
     },
   },
   // Service Hub

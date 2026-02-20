@@ -1598,6 +1598,7 @@ export const chineseTranslations = {
       eventAnalytics: '事件分析',
       contentStudio: '书籍排版',
       pushNotifications: '推送通知',
+      costManagement: '费用管理',
     },
     support: {
       overview: '支持概览',
@@ -1609,6 +1610,51 @@ export const chineseTranslations = {
     },
     platform: {
       serviceHub: '服务平台',
+    },
+  },
+  // Cost Management
+  costManagement: {
+    title: '费用管理',
+    subtitle: '监控服务费用，管理预算',
+    summary: {
+      totalCost: '总费用',
+      thisMonth: '本月',
+      budgetUsage: '预算使用率',
+      monthOverMonth: '环比变化',
+      budgetRemaining: '预算剩余',
+      vsLastMonth: '较上月',
+    },
+    trend: {
+      title: '费用趋势（近6个月）',
+    },
+    categories: {
+      title: '分类费用',
+      compute: '计算',
+      database: '数据库',
+      cache: '缓存',
+      storage: '存储与CDN',
+      monitoring: '监控',
+      selfHosted: '自托管',
+      other: '其他',
+      budget: '预算',
+      actual: '实际',
+    },
+    table: {
+      title: '服务明细',
+      serviceName: '服务名称',
+      provider: '提供商',
+      category: '分类',
+      monthlyCost: '月费用',
+      budget: '预算',
+      usage: '使用率',
+      status: '状态',
+      free: '免费',
+    },
+    alerts: {
+      title: '预算告警',
+      allWithinBudget: '所有服务均在预算范围内',
+      overBudget: '%{service} 已达预算的 %{usage}%（$%{actual} / $%{budget}）',
+      nearBudget: '%{service} 接近预算，已使用 %{usage}%（$%{actual} / $%{budget}）',
     },
   },
   // Service Hub
