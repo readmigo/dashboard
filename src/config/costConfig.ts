@@ -26,7 +26,7 @@ export interface CostConfig {
 // All cost data sourced from /docs/05-operations/deployment/services/
 // Last verified: 2026-02-07
 export const costConfig: CostConfig = {
-  globalMonthlyBudget: 100,
+  globalMonthlyBudget: 400,
   categories: [
     { id: 'compute', label: 'Compute', icon: 'DNS' },
     { id: 'database', label: 'Database', icon: 'Storage' },
@@ -183,20 +183,37 @@ export const costConfig: CostConfig = {
     },
     // --- Other ---
     {
+      id: 'claude-code',
+      name: 'Claude Code CLI',
+      category: 'other',
+      provider: 'Anthropic',
+      monthlyBudget: 275,
+      url: 'https://console.anthropic.com',
+      note: 'Max plan, AI-assisted development',
+      costs: [
+        { month: '2025-09', actual: 250 },
+        { month: '2025-10', actual: 250 },
+        { month: '2025-11', actual: 250 },
+        { month: '2025-12', actual: 250 },
+        { month: '2026-01', actual: 250 },
+        { month: '2026-02', actual: 250 },
+      ],
+    },
+    {
       id: 'github-actions',
       name: 'GitHub Actions',
       category: 'other',
       provider: 'GitHub',
-      monthlyBudget: 0,
-      url: 'https://github.com',
-      note: 'Free tier (public repo)',
+      monthlyBudget: 15,
+      url: 'https://github.com/settings/billing',
+      note: 'CI/CD minutes',
       costs: [
-        { month: '2025-09', actual: 0 },
-        { month: '2025-10', actual: 0 },
-        { month: '2025-11', actual: 0 },
-        { month: '2025-12', actual: 0 },
-        { month: '2026-01', actual: 0 },
-        { month: '2026-02', actual: 0 },
+        { month: '2025-09', actual: 9.64 },
+        { month: '2025-10', actual: 9.64 },
+        { month: '2025-11', actual: 9.64 },
+        { month: '2025-12', actual: 9.64 },
+        { month: '2026-01', actual: 9.64 },
+        { month: '2026-02', actual: 9.64 },
       ],
     },
   ],
