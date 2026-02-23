@@ -380,7 +380,7 @@ const SubscriptionTab = () => {
     setError(null);
 
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
       const res = await fetch(
         `${apiBaseUrl}/api/v1/admin/subscriptions/${record.id}`,
         {
@@ -416,7 +416,7 @@ const SubscriptionTab = () => {
     setActionLoading(true);
 
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
       const res = await fetch(
         `${apiBaseUrl}/api/v1/admin/subscriptions/${record.id}/${action}`,
         {

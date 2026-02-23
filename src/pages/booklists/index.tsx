@@ -217,7 +217,7 @@ const PublishButton = () => {
       const response = await fetch(`/api/v1/admin/booklists/${record.id}/publish`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
         },
       });
       if (!response.ok) throw new Error('Failed to publish');
@@ -248,7 +248,7 @@ const UnpublishButton = () => {
       const response = await fetch(`/api/v1/admin/booklists/${record.id}/unpublish`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
         },
       });
       if (!response.ok) throw new Error('Failed to unpublish');
@@ -279,7 +279,7 @@ const DuplicateButton = () => {
       const response = await fetch(`/api/v1/admin/booklists/${record.id}/duplicate`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
         },
       });
       if (!response.ok) throw new Error('Failed to duplicate');

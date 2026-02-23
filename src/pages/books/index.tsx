@@ -313,7 +313,7 @@ const PublishButton = () => {
       const response = await fetch(`${apiUrl}/books/${record.id}/publish`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
           'X-Admin-Mode': 'true',
           'X-Content-Filter': contentLanguage,
         },
@@ -348,7 +348,7 @@ const UnpublishButton = () => {
       const response = await fetch(`${apiUrl}/books/${record.id}/unpublish`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
           'X-Admin-Mode': 'true',
           'X-Content-Filter': contentLanguage,
         },

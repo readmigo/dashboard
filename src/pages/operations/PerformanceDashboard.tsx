@@ -113,7 +113,7 @@ export const PerformanceDashboard = () => {
     setError(null);
 
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
 
       // Debug: Log configuration
       console.log('[Performance Debug] apiBaseUrl:', apiBaseUrl);

@@ -85,7 +85,7 @@ export const ImportMonitoring = () => {
     try {
       const env = getStoredEnvironment();
       const apiUrl = getApiUrl(env);
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
 
       const headers = {
         'Authorization': `Bearer ${token}`,

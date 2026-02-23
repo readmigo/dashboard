@@ -25,8 +25,8 @@ export const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
     // In dev mode with auth disabled, auto-login
     if (AUTH_DISABLED) {
-      localStorage.setItem('adminToken', 'dev-token');
-      localStorage.setItem('adminUser', JSON.stringify(MOCK_ADMIN));
+      sessionStorage.setItem('adminToken', 'dev-token');
+      sessionStorage.setItem('adminUser', JSON.stringify(MOCK_ADMIN));
       return;
     }
 
@@ -41,27 +41,27 @@ export const authProvider: AuthProvider = {
     }
 
     const { accessToken, user } = await response.json();
-    localStorage.setItem('adminToken', accessToken);
-    localStorage.setItem('adminUser', JSON.stringify(user));
+    sessionStorage.setItem('adminToken', accessToken);
+    sessionStorage.setItem('adminUser', JSON.stringify(user));
   },
 
   logout: () => {
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminUser');
+    sessionStorage.removeItem('adminToken');
+    sessionStorage.removeItem('adminUser');
     return Promise.resolve();
   },
 
   checkAuth: () => {
     // In dev mode, auto-authenticate if no token
     if (AUTH_DISABLED) {
-      if (!localStorage.getItem('adminToken')) {
-        localStorage.setItem('adminToken', 'dev-token');
-        localStorage.setItem('adminUser', JSON.stringify(MOCK_ADMIN));
+      if (!sessionStorage.getItem('adminToken')) {
+        sessionStorage.setItem('adminToken', 'dev-token');
+        sessionStorage.setItem('adminUser', JSON.stringify(MOCK_ADMIN));
       }
       return Promise.resolve();
     }
 
-    const token = localStorage.getItem('adminToken');
+    const token = sessionStorage.getItem('adminToken');
     return token ? Promise.resolve() : Promise.reject();
   },
 
@@ -72,8 +72,8 @@ export const authProvider: AuthProvider = {
 
     const status = error.status;
     if (status === 401 || status === 403) {
-      localStorage.removeItem('adminToken');
-      localStorage.removeItem('adminUser');
+      sessionStorage.removeItem('adminToken');
+      sessionStorage.removeItem('adminUser');
       return Promise.reject();
     }
     return Promise.resolve();
@@ -88,7 +88,7 @@ export const authProvider: AuthProvider = {
       });
     }
 
-    const userStr = localStorage.getItem('adminUser');
+    const userStr = sessionStorage.getItem('adminUser');
     if (!userStr) {
       return Promise.reject();
     }
@@ -106,7 +106,7 @@ export const authProvider: AuthProvider = {
       return Promise.resolve(['admin']);
     }
 
-    const userStr = localStorage.getItem('adminUser');
+    const userStr = sessionStorage.getItem('adminUser');
     if (!userStr) {
       return Promise.resolve([]);
     }

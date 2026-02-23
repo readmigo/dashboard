@@ -36,7 +36,7 @@ const getApiBaseUrl = (): string => {
 };
 
 const httpClient = async (url: string, options: fetchUtils.Options = {}) => {
-  const token = localStorage.getItem('adminToken');
+  const token = sessionStorage.getItem('adminToken');
   const contentLanguage = getStoredContentLanguage();
   const headers = new Headers(options.headers);
 

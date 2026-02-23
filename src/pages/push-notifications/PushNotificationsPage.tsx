@@ -120,7 +120,7 @@ const useHttpClient = () => {
 
   return useCallback(
     async (path: string, options: RequestInit = {}) => {
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
       const headers = new Headers(options.headers);
       if (token) headers.set('Authorization', `Bearer ${token}`);
       headers.set('Content-Type', 'application/json');

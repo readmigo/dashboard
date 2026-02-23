@@ -307,7 +307,7 @@ const StatusChange = ({ feedbackId, currentStatus, onSuccess }: StatusChangeProp
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
           'X-Admin-Mode': 'true',
         },
         body: JSON.stringify({ status: newStatus }),
@@ -377,7 +377,7 @@ const ReplyForm = ({ feedbackId, existingReply, onSuccess }: ReplyFormProps) => 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
           'X-Admin-Mode': 'true',
         },
         body: JSON.stringify({ reply: content, closeAfterReply }),

@@ -29,7 +29,7 @@ interface CreateFlagData {
 }
 
 const getAuthHeaders = (): HeadersInit => {
-  const token = localStorage.getItem('adminToken');
+  const token = sessionStorage.getItem('adminToken');
   return {
     'Content-Type': 'application/json',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),

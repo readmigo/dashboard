@@ -76,7 +76,7 @@ export const DemographicsPage = () => {
     setError(null);
 
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
 
       // Debug: Log configuration
       console.log('[Demographics Debug] apiBaseUrl:', apiBaseUrl);

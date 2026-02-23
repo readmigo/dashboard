@@ -175,7 +175,7 @@ const BatchStatsSummary = () => {
       try {
         const env = getStoredEnvironment();
         const apiUrl = getApiUrl(env);
-        const token = localStorage.getItem('adminToken');
+        const token = sessionStorage.getItem('adminToken');
 
         const response = await fetch(`${apiUrl}/admin/import/batches/stats`, {
           headers: {
@@ -267,7 +267,7 @@ const BatchActions = () => {
     try {
       const env = getStoredEnvironment();
       const apiUrl = getApiUrl(env);
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
 
       let method = 'POST';
       let endpoint = `${apiUrl}/admin/import/batches/${record.id}/${action}`;

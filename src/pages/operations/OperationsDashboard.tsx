@@ -134,7 +134,7 @@ export const OperationsDashboard = () => {
     setError(null);
 
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
 
       // Debug: Log API configuration
       console.log('[Operations Debug] apiBaseUrl:', apiBaseUrl);

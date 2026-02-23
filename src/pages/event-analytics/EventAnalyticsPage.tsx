@@ -83,7 +83,7 @@ export const EventAnalyticsPage = () => {
     setError(null);
 
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
       const headers = {
         Authorization: `Bearer ${token}`,
         'X-Admin-Mode': 'true',

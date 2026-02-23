@@ -34,7 +34,7 @@ export const Dashboard = () => {
     const fetchOperationsData = async () => {
       setDauLoading(true);
       try {
-        const token = localStorage.getItem('adminToken');
+        const token = sessionStorage.getItem('adminToken');
         const env = localStorage.getItem('dashboard_environment') || 'production';
         const apiUrls: Record<string, string> = {
           local: 'http://localhost:3000',

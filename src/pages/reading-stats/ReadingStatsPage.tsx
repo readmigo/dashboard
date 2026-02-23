@@ -104,7 +104,7 @@ export const ReadingStatsPage = () => {
     setError(null);
 
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('adminToken');
 
       // Debug: Log configuration
       console.log('[ReadingStats Debug] apiBaseUrl:', apiBaseUrl);
