@@ -1121,7 +1121,7 @@ export const traditionalChineseTranslations = {
     confirm: '確認',
     yes: '是',
     no: '否',
-    loading: '載入中...',
+    loadingText: '載入中...',
     noData: '暫無資料',
   },
   // Language
@@ -1211,7 +1211,7 @@ export const traditionalChineseTranslations = {
     environmentDescription: '選擇要導入書籍的目標環境',
     selectBooklist: '選擇書單檔案',
     booklistDescription: '瀏覽並選擇 JSON 格式的書單檔案',
-    emptyDirectory: '此目錄為空',
+    emptyTitle: '此目錄為空',
     selected: '已選擇',
     configureOptions: '設定選項',
     optionsDescription: '設定導入參數',

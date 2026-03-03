@@ -1110,7 +1110,7 @@ export const chineseTranslations = {
     confirm: '确认',
     yes: '是',
     no: '否',
-    loading: '加载中...',
+    loadingText: '加载中...',
     noData: '暂无数据',
   },
   // Language
@@ -1210,7 +1210,7 @@ export const chineseTranslations = {
     environmentDescription: '选择要导入书籍的目标环境',
     selectBooklist: '选择书单文件',
     booklistDescription: '浏览并选择 JSON 格式的书单文件',
-    emptyDirectory: '此目录为空',
+    emptyTitle: '此目录为空',
     selected: '已选择',
     configureOptions: '配置选项',
     optionsDescription: '设置导入参数',

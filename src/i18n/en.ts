@@ -1104,7 +1104,7 @@ export const englishTranslations = {
     confirm: 'Confirm',
     yes: 'Yes',
     no: 'No',
-    loading: 'Loading...',
+    loadingText: 'Loading...',
     noData: 'No data',
   },
   // Language
@@ -1204,7 +1204,7 @@ export const englishTranslations = {
     environmentDescription: 'Choose the environment where books will be imported',
     selectBooklist: 'Select Booklist File',
     booklistDescription: 'Browse and select a JSON booklist file',
-    emptyDirectory: 'This directory is empty',
+    emptyTitle: 'This directory is empty',
     selected: 'Selected',
     configureOptions: 'Configure Options',
     optionsDescription: 'Set import parameters',
