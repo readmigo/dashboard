@@ -2,21 +2,23 @@ import polyglotI18nProvider from 'ra-i18n-polyglot';
 import { englishTranslations } from './en';
 import { chineseTranslations } from './zh-Hans';
 import { traditionalChineseTranslations } from './zh-Hant';
+import { germanTranslations } from './de';
 
-export type SupportedLocale = 'en' | 'zh-Hans' | 'zh-Hant';
+export type SupportedLocale = 'en' | 'zh-Hans' | 'zh-Hant' | 'de';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const translations: Record<SupportedLocale, any> = {
   en: englishTranslations,
   'zh-Hans': chineseTranslations,
   'zh-Hant': traditionalChineseTranslations,
+  de: germanTranslations,
 };
 
 /**
  * Detect the default locale based on browser settings
  */
 export const detectLocale = (): SupportedLocale => {
-  const browserLang = navigator.language || (navigator as any).userLanguage;
+  const browserLang = navigator.language;
 
   if (browserLang.startsWith('zh')) {
     // Check for Traditional Chinese variants
@@ -30,6 +32,10 @@ export const detectLocale = (): SupportedLocale => {
     return 'zh-Hans';
   }
 
+  if (browserLang.startsWith('de')) {
+    return 'de';
+  }
+
   return 'en';
 };
 
@@ -38,7 +44,7 @@ export const detectLocale = (): SupportedLocale => {
  */
 export const getStoredLocale = (): SupportedLocale | null => {
   const stored = localStorage.getItem('locale');
-  if (stored === 'en' || stored === 'zh-Hans' || stored === 'zh-Hant') {
+  if (stored === 'en' || stored === 'zh-Hans' || stored === 'zh-Hant' || stored === 'de') {
     return stored;
   }
   return null;
@@ -68,7 +74,8 @@ export const i18nProvider = polyglotI18nProvider(
     { locale: 'en', name: 'English' },
     { locale: 'zh-Hans', name: '简体中文' },
     { locale: 'zh-Hant', name: '繁體中文' },
+    { locale: 'de', name: 'Deutsch' },
   ],
 );
 
-export { englishTranslations, chineseTranslations, traditionalChineseTranslations };
+export { englishTranslations, chineseTranslations, traditionalChineseTranslations, germanTranslations };
