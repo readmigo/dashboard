@@ -478,67 +478,6 @@ export const chineseTranslations = {
         sourceZh: '中文出处',
       },
     },
-    'postcard-templates': {
-      name: '明信片模板',
-      fields: {
-        name: '名称',
-        description: '描述',
-        backgroundUrl: '背景图片',
-        isActive: '是否启用',
-      },
-    },
-    postcards: {
-      name: '明信片',
-      fields: {
-        imageUrl: '图片',
-        user: '用户',
-        quote: '名言',
-        template: '模板',
-        createdAt: '创建时间',
-        updatedAt: '更新时间',
-        name: '名称',
-        previewUrl: '预览图片链接',
-        backgroundColor: '背景颜色',
-        fontFamily: '字体',
-        fontColor: '字体颜色',
-        isPremium: '高级',
-        isPremiumTemplate: '高级模板',
-        isActive: '启用',
-        sortOrder: '排序顺序',
-        content: '内容',
-        contentType: '类型',
-        author: '作者',
-        isPublic: '公开',
-        shareCount: '分享数',
-        userId: '用户 ID',
-      },
-      // 列表列标签
-      list: {
-        preview: '预览',
-        style: '样式',
-        background: '背景',
-        noImage: '暂无图片',
-      },
-      // 内容类型
-      contentType: {
-        QUOTE: '名言',
-        HIGHLIGHT: '划线',
-        CUSTOM: '自定义',
-      },
-      // 筛选器
-      filters: {
-        publicOnly: '仅公开',
-      },
-      // 分组标题
-      sections: {
-        styleSettings: '样式设置',
-      },
-      // 详情页
-      show: {
-        attribution: '引用来源',
-        unknown: '未知',
-      },
-    },
     'admin/messages/threads': {
       name: '站内信',
       fields: {
@@ -1578,8 +1517,6 @@ export const chineseTranslations = {
     categories: '分类',
     users: '用户',
     quotes: '引用',
-    postcardTemplates: '明信片模板',
-    postcards: '明信片',
     featureFlags: '功能开关',
     sections: {
       operations: '运营',

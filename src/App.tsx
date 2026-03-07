@@ -16,7 +16,6 @@ import { UserList, UserShow } from './pages/users';
 import { BookListList, BookListEdit, BookListCreate, BookListShow } from './pages/booklists';
 import { CategoryList, CategoryEdit, CategoryCreate } from './pages/categories';
 import { QuoteList, QuoteEdit, QuoteCreate, QuoteShow } from './pages/quotes';
-import { PostcardTemplateList, PostcardTemplateEdit, PostcardTemplateCreate, PostcardList, PostcardShow } from './pages/postcards';
 import { AuthorList, AuthorEdit, AuthorShow } from './pages/authors';
 import { FeatureFlagsList } from './pages/feature-flags';
 import { MessageList, MessageShow } from './pages/messages';
@@ -41,8 +40,6 @@ import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import CategoryIcon from '@mui/icons-material/Category';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import ImageIcon from '@mui/icons-material/Image';
-import StyleIcon from '@mui/icons-material/Style';
 import PersonIcon from '@mui/icons-material/Person';
 import MessageIcon from '@mui/icons-material/Message';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
@@ -110,19 +107,6 @@ export const App = () => (
               create={QuoteCreate}
               show={QuoteShow}
               icon={FormatQuoteIcon}
-            />
-            <Resource
-              name="postcard-templates"
-              list={PostcardTemplateList}
-              edit={PostcardTemplateEdit}
-              create={PostcardTemplateCreate}
-              icon={StyleIcon}
-            />
-            <Resource
-              name="postcards"
-              list={PostcardList}
-              show={PostcardShow}
-              icon={ImageIcon}
             />
             <Resource
               name="messages"

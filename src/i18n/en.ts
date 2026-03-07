@@ -485,67 +485,6 @@ export const englishTranslations = {
         sourceZh: 'Source (Chinese)',
       },
     },
-    'postcard-templates': {
-      name: 'Postcard Template |||| Postcard Templates',
-      fields: {
-        name: 'Name',
-        description: 'Description',
-        backgroundUrl: 'Background Image',
-        isActive: 'Active',
-      },
-    },
-    postcards: {
-      name: 'Postcard |||| Postcards',
-      fields: {
-        imageUrl: 'Image',
-        user: 'User',
-        quote: 'Quote',
-        template: 'Template',
-        createdAt: 'Created At',
-        updatedAt: 'Updated At',
-        name: 'Name',
-        previewUrl: 'Preview Image URL',
-        backgroundColor: 'Background Color',
-        fontFamily: 'Font Family',
-        fontColor: 'Font Color',
-        isPremium: 'Premium',
-        isPremiumTemplate: 'Premium Template',
-        isActive: 'Active',
-        sortOrder: 'Sort Order',
-        content: 'Content',
-        contentType: 'Type',
-        author: 'Author',
-        isPublic: 'Public',
-        shareCount: 'Shares',
-        userId: 'User ID',
-      },
-      // List column labels
-      list: {
-        preview: 'Preview',
-        style: 'Style',
-        background: 'Background',
-        noImage: 'No image',
-      },
-      // Content types
-      contentType: {
-        QUOTE: 'Quote',
-        HIGHLIGHT: 'Highlight',
-        CUSTOM: 'Custom',
-      },
-      // Filters
-      filters: {
-        publicOnly: 'Public Only',
-      },
-      // Section titles
-      sections: {
-        styleSettings: 'Style Settings',
-      },
-      // Show page
-      show: {
-        attribution: 'Attribution',
-        unknown: 'Unknown',
-      },
-    },
     'admin/messages/threads': {
       name: 'Message |||| Messages',
       fields: {
@@ -1473,8 +1412,6 @@ export const englishTranslations = {
     categories: 'Categories',
     users: 'Users',
     quotes: 'Quotes',
-    postcardTemplates: 'Postcard Templates',
-    postcards: 'Postcards',
     featureFlags: 'Feature Flags',
     sections: {
       operations: 'Operations',

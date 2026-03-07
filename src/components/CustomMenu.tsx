@@ -8,8 +8,6 @@ import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import CategoryIcon from '@mui/icons-material/Category';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import ImageIcon from '@mui/icons-material/Image';
-import StyleIcon from '@mui/icons-material/Style';
 import PersonIcon from '@mui/icons-material/Person';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import FlagIcon from '@mui/icons-material/Flag';
@@ -138,20 +136,6 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.quotes')}
         leftIcon={<FormatQuoteIcon />}
         selected={isSelected('/quotes')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/postcard-templates"
-        primaryText={translate('sidebar.postcardTemplates')}
-        leftIcon={<StyleIcon />}
-        selected={isSelected('/postcard-templates')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/postcards"
-        primaryText={translate('sidebar.postcards')}
-        leftIcon={<ImageIcon />}
-        selected={isSelected('/postcards')}
         sidebarIsOpen={open}
       />
       <MenuItemLink
