@@ -239,10 +239,51 @@ BOOKS=$(hogql "SELECT properties.book_id as bid, properties.book_title as title,
 echo "$BOOKS" | python3 -c "
 import json, sys
 data = json.load(sys.stdin)
+# 已知书名中文映射（持续补充）
+ZH_TITLES = {
+    'The Great Gatsby': '了不起的盖茨比', 'グレート・ギャツビー': '了不起的盖茨比',
+    'Tao Te Ching': '道德经', '道德经': '道德经',
+    'The Art of War': '孙子兵法', '孫子の兵法': '孙子兵法',
+    'Alice\\'s Adventures in Wonderland': '爱丽丝梦游仙境', '이상한 나라의 앨리스': '爱丽丝梦游仙境', '爱丽丝梦游仙境': '爱丽丝梦游仙境',
+    'Ulysses': '尤利西斯',
+    'Fables': '寓言集', 'Fábulas': '寓言集',
+    'Pride and Prejudice': '傲慢与偏见',
+    'The Hound of the Baskervilles': '巴斯克维尔的猎犬', '巴斯克维尔的猎犬': '巴斯克维尔的猎犬',
+    'Treasure Island': '金银岛', '金银岛': '金银岛',
+    'Macbeth': '麦克白', '麦克白': '麦克白',
+    'Les Misérables': '悲惨世界', '悲惨世界': '悲惨世界',
+    'The Brothers Karamazov': '卡拉马佐夫兄弟', '卡拉马佐夫兄弟': '卡拉马佐夫兄弟',
+    'A Study in Scarlet': '血字的研究',
+    'The Adventures of Sherlock Holmes': '福尔摩斯探案集', '福尔摩斯探案集': '福尔摩斯探案集', 'Las aventuras de Sherlock Holmes': '福尔摩斯探案集',
+    'His Last Bow': '最后致意', 'Его прощальный поклон': '最后致意',
+    'Robinson Crusoe': '鲁滨逊漂流记', 'Жизнь и удивительные приключения Робинзо': '鲁滨逊漂流记',
+    'All Quiet on the Western Front': '西线无战事', '西线无战事': '西线无战事',
+    'The Three Hostages': '三个人质',
+    'The Blue Castle': '蓝色城堡',
+    'In Search of Lost Time': '追忆似水年华',
+    'Middlemarch': '米德尔马契',
+    'Discourses': '论说集',
+    'Short Fiction': '短篇小说集',
+    'Bleak House': '荒凉山庄',
+    'The Path to Rome': '罗马之路',
+    'The Golf Collection': '高尔夫故事集', '高尔夫故事集': '高尔夫故事集',
+    'Decameron': '十日谈', '十日谈': '十日谈',
+    'Laughing Matter': '笑声不断', '笑声不断': '笑声不断',
+    '우리의 미국인 사촌': '我们的美国表亲',
+    '단편 소설': '短篇小说',
+    '셜록 홈즈의 모험': '福尔摩斯探案集',
+}
+def to_zh(title):
+    if not title: return '未知'
+    if title in ZH_TITLES: return ZH_TITLES[title]
+    # 如果已经是中文就直接返回
+    for ch in title[:3]:
+        if '\u4e00' <= ch <= '\u9fff': return title
+    return title
 print('| # | 书名 | 会话数 | 读者数 |')
 print('|---|------|--------|--------|')
 for i, r in enumerate(data['results'], 1):
-    title = (r[1] or 'Unknown')[:35]
+    title = to_zh(r[1])[:35]
     print(f'| {i} | {title} | {r[2]} | {r[3]} |')
 "
 
@@ -258,12 +299,79 @@ AUDIO=$(hogql "SELECT properties.audiobook_title as title, properties.audiobook_
 echo "$AUDIO" | python3 -c "
 import json, sys
 data = json.load(sys.stdin)
+ZH_TITLES = {
+    'Tao Te Ching': '道德经', '道德经': '道德经',
+    'The Brothers Karamazov': '卡拉马佐夫兄弟', '卡拉马佐夫兄弟': '卡拉马佐夫兄弟',
+    'The Three Hostages': '三个人质',
+    'All Quiet on the Western Front': '西线无战事', '西线无战事': '西线无战事',
+    'The Golf Collection': '高尔夫故事集', '高尔夫故事集': '高尔夫故事集',
+    'The Blue Castle': '蓝色城堡',
+    'In Search of Lost Time': '追忆似水年华',
+    'Middlemarch': '米德尔马契',
+    'Discourses': '论说集',
+    'Short Fiction': '短篇小说集',
+    'Decameron': '十日谈', '十日谈': '十日谈',
+    'Laughing Matter': '笑声不断', '笑声不断': '笑声不断',
+    '셜록 홈즈의 모험': '福尔摩斯探案集',
+    'Pride and Prejudice': '傲慢与偏见',
+    'Ulysses': '尤利西斯',
+    'Bleak House': '荒凉山庄',
+}
+def to_zh(title):
+    if not title: return '未知'
+    if title in ZH_TITLES: return ZH_TITLES[title]
+    for ch in title[:3]:
+        if '\u4e00' <= ch <= '\u9fff': return title
+    return title
 print('| # | 书名 | 播放次数 | 听众数 |')
 print('|---|------|---------|--------|')
 for i, r in enumerate(data['results'], 1):
-    title = (r[0] or 'Unknown')[:35]
+    title = to_zh(r[0])[:35]
     print(f'| {i} | {title} | {r[2]} | {r[3]} |')
 "
+
+# ============================================================
+echo ""
+echo "---"
+echo ""
+echo "## 5.5、业务活跃度对比"
+echo ""
+
+BIZ_EBOOK=$(hogql "SELECT count() as sessions, count(DISTINCT distinct_id) as users FROM events WHERE event IN ('reading_started', 'reading_session_ended') AND timestamp >= now() - INTERVAL ${DAYS} DAY ${EXCLUDE}")
+BIZ_AUDIO=$(hogql "SELECT count() as sessions, count(DISTINCT distinct_id) as users FROM events WHERE event IN ('audiobook_play_started', 'audiobook_started', 'audiobook_session_ended', 'audiobook_play_ended') AND timestamp >= now() - INTERVAL ${DAYS} DAY ${EXCLUDE}")
+BIZ_TTS=$(hogql "SELECT count() as sessions, count(DISTINCT distinct_id) as users FROM events WHERE event IN ('tts_started', 'tts_stopped') AND timestamp >= now() - INTERVAL ${DAYS} DAY ${EXCLUDE}")
+BIZ_SOCIAL=$(hogql "SELECT count() as sessions, count(DISTINCT distinct_id) as users FROM events WHERE event IN ('agora_post_liked', 'highlight_created', 'bookmark_created') AND timestamp >= now() - INTERVAL ${DAYS} DAY ${EXCLUDE}")
+
+python3 -c "
+import json, sys
+lines = sys.stdin.read().split('|||')
+ebook = json.loads(lines[0])['results'][0]
+audio = json.loads(lines[1])['results'][0]
+tts = json.loads(lines[2])['results'][0]
+social = json.loads(lines[3])['results'][0]
+
+biz = [
+    ('📖 电子书阅读', ebook[0], ebook[1]),
+    ('🎧 有声书', audio[0], audio[1]),
+    ('🗣️ TTS 朗读', tts[0], tts[1]),
+    ('💬 社交互动', social[0], social[1]),
+]
+total_sessions = sum(b[1] for b in biz)
+total_users = sum(b[2] for b in biz)
+
+print('| 业务 | 事件数 | 用户数 | 事件占比 | 用户占比 |')
+print('|------|--------|--------|---------|---------|')
+for name, sessions, users in sorted(biz, key=lambda x: -x[1]):
+    s_pct = sessions / total_sessions * 100 if total_sessions > 0 else 0
+    u_pct = users / total_users * 100 if total_users > 0 else 0
+    bar = '█' * int(s_pct / 3)
+    print(f'| {name} | {sessions:,} | {users} | {s_pct:.1f}% {bar} | {u_pct:.1f}% |')
+
+# 找到最活跃业务
+top = max(biz, key=lambda x: x[2])
+print(f'')
+print(f'**最活跃业务: {top[0]}** (覆盖 {top[2]} 用户)')
+" <<< "${BIZ_EBOOK}|||${BIZ_AUDIO}|||${BIZ_TTS}|||${BIZ_SOCIAL}"
 
 # ============================================================
 echo ""
