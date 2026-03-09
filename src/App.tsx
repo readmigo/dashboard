@@ -25,11 +25,9 @@ import { TicketList, TicketShow } from './pages/tickets';
 import { FeedbackList, FeedbackShow } from './pages/feedback';
 import { OrderList, OrderShow } from './pages/orders';
 import { SupportDashboard } from './pages/support';
-import { OperationsDashboard, PerformanceDashboard } from './pages/operations';
+import { PerformanceDashboard } from './pages/operations';
 import { EventAnalyticsPage } from './pages/event-analytics';
 import { ReadingStatsPage } from './pages/reading-stats';
-import { RetentionPage } from './pages/retention';
-import { DemographicsPage } from './pages/demographics';
 import { SEIncrementalImport } from './pages/se-import';
 import { ServiceHub } from './pages/services';
 import { SubscriptionDashboard } from './pages/subscriptions';
@@ -147,11 +145,8 @@ export const App = () => (
             <CustomRoutes>
               <Route path="/feature-flags" element={<FeatureFlagsList />} />
               <Route path="/support-dashboard" element={<SupportDashboard />} />
-              <Route path="/operations" element={<OperationsDashboard />} />
               <Route path="/performance" element={<PerformanceDashboard />} />
               <Route path="/reading-stats" element={<ReadingStatsPage />} />
-              <Route path="/retention" element={<RetentionPage />} />
-              <Route path="/demographics" element={<DemographicsPage />} />
               <Route path="/event-analytics" element={<EventAnalyticsPage />} />
               <Route path="/se-import" element={<SEIncrementalImport />} />
               <Route path="/subscription-dashboard" element={<SubscriptionDashboard />} />

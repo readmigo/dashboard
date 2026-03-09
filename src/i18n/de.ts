@@ -780,7 +780,6 @@ export const germanTranslations = {
       activeReaders: 'Aktive Leser',
       booksReadToday: 'Heute gelesene Bücher',
       aiInteractions: 'KI-Interaktionen',
-      activeToday: 'Heute aktiv',
     },
     charts: {
       readingActivity: 'Leseaktivität',
@@ -1055,21 +1054,6 @@ export const germanTranslations = {
       timePatterns: 'Zeitmuster',
     },
   },
-  // Demographics
-  demographics: {
-    title: 'Benutzerdemografie',
-    statCards: {
-      totalUsers: 'Benutzer gesamt',
-      withProfileData: 'Mit Profildaten',
-      profileCompletion: 'Profilabschluss',
-      averageAge: 'Durchschnittsalter',
-    },
-    tabs: {
-      gender: 'Geschlecht',
-      age: 'Alter',
-      location: 'Standort',
-    },
-  },
   // Pipeline
   pipeline: {
     title: 'Buchimport',
@@ -1189,20 +1173,6 @@ export const germanTranslations = {
       node3: 'In DB schreiben (Autor, Buch, Kapitel) + Cover zu R2 hochladen',
       node4: 'Auto-Kategorisierung, Buchlisten-Zuordnung, Featured-Empfehlungen',
     },
-  },
-  // Retention
-  retention: {
-    title: 'Retention-Analyse',
-    statCards: {
-      d1RetentionRate: 'D1-Retention-Rate',
-      d7RetentionRate: 'D7-Retention-Rate',
-      d30RetentionRate: 'D30-Retention-Rate',
-    },
-    tabs: {
-      cohortAnalysis: 'Kohortenanalyse',
-      channelComparison: 'Kanalvergleich',
-    },
-    trendTitle: 'Retention-Trend',
   },
   // Performance
   performance: {
@@ -1355,11 +1325,8 @@ export const germanTranslations = {
       platform: 'Plattform',
     },
     operations: {
-      overview: 'Operations-Übersicht',
       performance: 'Leistung',
       readingStats: 'Lesestatistiken',
-      retention: 'Retention-Analyse',
-      demographics: 'Benutzerdemografie',
       importBatches: 'Import-Chargen',
       seImport: 'SE-Import',
       subscriptions: 'Abonnements',

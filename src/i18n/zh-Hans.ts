@@ -840,7 +840,6 @@ export const chineseTranslations = {
       activeReaders: '活跃读者',
       booksReadToday: '今日阅读',
       aiInteractions: 'AI 交互',
-      activeToday: '今日活跃',
     },
     charts: {
       readingActivity: '阅读活动',
@@ -1127,21 +1126,6 @@ export const chineseTranslations = {
       timePatterns: '时间模式',
     },
   },
-  // Demographics
-  demographics: {
-    title: '用户画像',
-    statCards: {
-      totalUsers: '总用户数',
-      withProfileData: '已填资料',
-      profileCompletion: '资料完成率',
-      averageAge: '平均年龄',
-    },
-    tabs: {
-      gender: '性别',
-      age: '年龄',
-      location: '地区',
-    },
-  },
   // Pipeline
   pipeline: {
     title: '书籍导入',
@@ -1261,20 +1245,6 @@ export const chineseTranslations = {
       node3: '写入 DB (Author, Book, Chapter) + 上传封面到 R2',
       node4: '自动分类、书单关联、Featured 推荐',
     },
-  },
-  // Retention
-  retention: {
-    title: '留存分析',
-    statCards: {
-      d1RetentionRate: '次日留存率',
-      d7RetentionRate: '7日留存率',
-      d30RetentionRate: '30日留存率',
-    },
-    tabs: {
-      cohortAnalysis: '群组分析',
-      channelComparison: '渠道对比',
-    },
-    trendTitle: '留存趋势',
   },
   // Performance
   performance: {
@@ -1524,11 +1494,8 @@ export const chineseTranslations = {
       platform: '平台',
     },
     operations: {
-      overview: '运营概览',
       performance: '性能监控',
       readingStats: '阅读统计',
-      retention: '留存分析',
-      demographics: '用户画像',
       importBatches: '导入批次',
       seImport: 'SE 增量导入',
       subscriptions: '订阅管理',

@@ -17,11 +17,8 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MailIcon from '@mui/icons-material/Mail';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import SpeedIcon from '@mui/icons-material/Speed';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import GroupIcon from '@mui/icons-material/Group';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
@@ -155,13 +152,6 @@ export const CustomMenu = () => {
         </Typography>
       )}
       <MenuItemLink
-        to="/operations"
-        primaryText={translate('sidebar.operations.overview')}
-        leftIcon={<TrendingUpIcon />}
-        selected={isSelected('/operations')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
         to="/performance"
         primaryText={translate('sidebar.operations.performance')}
         leftIcon={<SpeedIcon />}
@@ -173,20 +163,6 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.operations.readingStats')}
         leftIcon={<BarChartIcon />}
         selected={isSelected('/reading-stats')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/retention"
-        primaryText={translate('sidebar.operations.retention')}
-        leftIcon={<PeopleAltIcon />}
-        selected={isSelected('/retention')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/demographics"
-        primaryText={translate('sidebar.operations.demographics')}
-        leftIcon={<GroupIcon />}
-        selected={isSelected('/demographics')}
         sidebarIsOpen={open}
       />
       <MenuItemLink

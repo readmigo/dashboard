@@ -851,7 +851,6 @@ export const traditionalChineseTranslations = {
       activeReaders: '活躍讀者',
       booksReadToday: '今日閱讀',
       aiInteractions: 'AI 互動',
-      activeToday: '今日活躍',
     },
     charts: {
       readingActivity: '閱讀活動',
@@ -1128,21 +1127,6 @@ export const traditionalChineseTranslations = {
       timePatterns: '時間模式',
     },
   },
-  // Demographics
-  demographics: {
-    title: '使用者畫像',
-    statCards: {
-      totalUsers: '使用者總數',
-      withProfileData: '已填資料',
-      profileCompletion: '資料完成率',
-      averageAge: '平均年齡',
-    },
-    tabs: {
-      gender: '性別',
-      age: '年齡',
-      location: '地區',
-    },
-  },
   // Pipeline
   pipeline: {
     title: '書籍導入',
@@ -1262,20 +1246,6 @@ export const traditionalChineseTranslations = {
       node3: '寫入 DB (Author, Book, Chapter) + 上傳封面到 R2',
       node4: '自動分類、書單關聯、Featured 推薦',
     },
-  },
-  // Retention
-  retention: {
-    title: '留存分析',
-    statCards: {
-      d1RetentionRate: '次日留存率',
-      d7RetentionRate: '7日留存率',
-      d30RetentionRate: '30日留存率',
-    },
-    tabs: {
-      cohortAnalysis: '群組分析',
-      channelComparison: '管道對比',
-    },
-    trendTitle: '留存趨勢',
   },
   // Performance
   performance: {
@@ -1527,11 +1497,8 @@ export const traditionalChineseTranslations = {
       platform: '平台',
     },
     operations: {
-      overview: '營運概覽',
       performance: '效能監控',
       readingStats: '閱讀統計',
-      retention: '留存分析',
-      demographics: '用戶畫像',
       pipeline: '書籍導入',
       importBatches: '導入批次',
       seImport: 'SE 增量導入',

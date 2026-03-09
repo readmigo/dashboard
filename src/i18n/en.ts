@@ -847,7 +847,6 @@ export const englishTranslations = {
       activeReaders: 'Active Readers',
       booksReadToday: 'Books Read Today',
       aiInteractions: 'AI Interactions',
-      activeToday: 'Active Today',
     },
     charts: {
       readingActivity: 'Reading Activity',
@@ -1121,21 +1120,6 @@ export const englishTranslations = {
       timePatterns: 'Time Patterns',
     },
   },
-  // Demographics
-  demographics: {
-    title: 'User Demographics',
-    statCards: {
-      totalUsers: 'Total Users',
-      withProfileData: 'With Profile Data',
-      profileCompletion: 'Profile Completion',
-      averageAge: 'Average Age',
-    },
-    tabs: {
-      gender: 'Gender',
-      age: 'Age',
-      location: 'Location',
-    },
-  },
   // Pipeline
   pipeline: {
     title: 'Book Import',
@@ -1255,20 +1239,6 @@ export const englishTranslations = {
       node3: 'Write to DB (Author, Book, Chapter) + Upload covers to R2',
       node4: 'Auto-categorize, booklist association, Featured recommendations',
     },
-  },
-  // Retention
-  retention: {
-    title: 'Retention Analysis',
-    statCards: {
-      d1RetentionRate: 'D1 Retention Rate',
-      d7RetentionRate: 'D7 Retention Rate',
-      d30RetentionRate: 'D30 Retention Rate',
-    },
-    tabs: {
-      cohortAnalysis: 'Cohort Analysis',
-      channelComparison: 'Channel Comparison',
-    },
-    trendTitle: 'Retention Trend',
   },
   // Performance
   performance: {
@@ -1419,11 +1389,8 @@ export const englishTranslations = {
       platform: 'Platform',
     },
     operations: {
-      overview: 'Operations Overview',
       performance: 'Performance',
       readingStats: 'Reading Stats',
-      retention: 'Retention Analysis',
-      demographics: 'User Demographics',
       importBatches: 'Import Batches',
       seImport: 'SE Import',
       subscriptions: 'Subscriptions',

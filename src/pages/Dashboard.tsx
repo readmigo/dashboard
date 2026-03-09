@@ -1,23 +1,15 @@
 import { Card, CardContent, Grid, Typography, Box, Chip } from '@mui/material';
 import { useGetList, useTranslate } from 'react-admin';
-import { useState, useEffect } from 'react';
 import BookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useTimezone } from '../contexts/TimezoneContext';
 import { brandColors, semanticColors } from '../theme/brandTokens';
 import { StatCard } from '../components/common/StatCard';
 
-interface OperationsOverview {
-  dau: { total: number };
-}
-
 export const Dashboard = () => {
   const translate = useTranslate();
   const { getCurrentTimezoneOption } = useTimezone();
-  const [operationsData, setOperationsData] = useState<OperationsOverview | null>(null);
-  const [dauLoading, setDauLoading] = useState(true);
   const currentTz = getCurrentTimezoneOption();
 
   const { total: totalBooks, isLoading: booksLoading } = useGetList('books', {
@@ -28,40 +20,6 @@ export const Dashboard = () => {
   const { total: totalUsers, isLoading: usersLoading } = useGetList('users', {
     pagination: { page: 1, perPage: 1 },
   });
-
-  // Fetch operations overview data for DAU
-  useEffect(() => {
-    const fetchOperationsData = async () => {
-      setDauLoading(true);
-      try {
-        const token = sessionStorage.getItem('adminToken');
-        const env = localStorage.getItem('dashboard_environment') || 'production';
-        const apiUrls: Record<string, string> = {
-          local: 'http://localhost:3000',
-          production: 'https://api.readmigo.app',
-        };
-        const baseUrl = apiUrls[env] || apiUrls.production;
-
-        const response = await fetch(`${baseUrl}/api/v1/admin/operations/overview`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setOperationsData(data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch operations data:', error);
-      } finally {
-        setDauLoading(false);
-      }
-    };
-
-    fetchOperationsData();
-  }, []);
 
   return (
     <Box p={3}>
@@ -78,7 +36,7 @@ export const Dashboard = () => {
       </Box>
 
       <Grid container spacing={3} mb={4}>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={6}>
           <StatCard
             title={translate('dashboard.stats.totalBooks')}
             value={totalBooks || 0}
@@ -87,22 +45,13 @@ export const Dashboard = () => {
             loading={booksLoading}
           />
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={6}>
           <StatCard
             title={translate('dashboard.stats.totalUsers')}
             value={totalUsers || 0}
             icon={<PeopleIcon fontSize="large" />}
             color={semanticColors.success}
             loading={usersLoading}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <StatCard
-            title={translate('dashboard.stats.activeToday')}
-            value={operationsData?.dau?.total || 0}
-            icon={<TrendingUpIcon fontSize="large" />}
-            color={brandColors.accentPink}
-            loading={dauLoading}
           />
         </Grid>
       </Grid>
@@ -120,9 +69,13 @@ export const Dashboard = () => {
               {translate('dashboard.moreAnalytics', { _: 'More Analytics' })}
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              {translate('dashboard.viewOperations', { _: 'For detailed DAU/MAU trends, reading statistics, and hot content rankings, please visit the' })}{' '}
-              <a href="#/operations" style={{ color: brandColors.primary, textDecoration: 'none', fontWeight: 500 }}>
-                {translate('dashboard.operationsDashboard', { _: 'Operations Dashboard' })}
+              {translate('dashboard.viewOperations', { _: 'For detailed reading statistics and performance data, please visit the' })}{' '}
+              <a href="#/reading-stats" style={{ color: brandColors.primary, textDecoration: 'none', fontWeight: 500 }}>
+                {translate('sidebar.operations.readingStats', { _: 'Reading Stats' })}
+              </a>
+              {' / '}
+              <a href="#/performance" style={{ color: brandColors.primary, textDecoration: 'none', fontWeight: 500 }}>
+                {translate('sidebar.operations.performance', { _: 'Performance' })}
               </a>
             </Typography>
           </CardContent>
