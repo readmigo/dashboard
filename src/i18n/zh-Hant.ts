@@ -1444,7 +1444,6 @@ export const traditionalChineseTranslations = {
     categories: '分類',
     users: '用戶',
     quotes: '引用',
-    featureFlags: '功能開關',
     sections: {
       operations: '營運',
       support: '客戶支援',

@@ -17,7 +17,6 @@ import { BookListList, BookListEdit, BookListCreate, BookListShow } from './page
 import { CategoryList, CategoryEdit, CategoryCreate } from './pages/categories';
 import { QuoteList, QuoteEdit, QuoteCreate, QuoteShow } from './pages/quotes';
 import { AuthorList, AuthorEdit, AuthorShow } from './pages/authors';
-import { FeatureFlagsList } from './pages/feature-flags';
 import { MessageList, MessageShow } from './pages/messages';
 import { GuestFeedbackList, GuestFeedbackShow } from './pages/guest-feedback';
 import { ImportBatchList, ImportBatchShow } from './pages/import-batches';
@@ -141,7 +140,6 @@ export const App = () => (
               icon={ReceiptIcon}
             />
             <CustomRoutes>
-              <Route path="/feature-flags" element={<FeatureFlagsList />} />
               <Route path="/support-dashboard" element={<SupportDashboard />} />
               <Route path="/reading-stats" element={<ReadingStatsPage />} />
               <Route path="/se-import" element={<SEIncrementalImport />} />

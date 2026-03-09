@@ -10,7 +10,6 @@ import CategoryIcon from '@mui/icons-material/Category';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import PersonIcon from '@mui/icons-material/Person';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import FlagIcon from '@mui/icons-material/Flag';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import FeedbackIcon from '@mui/icons-material/Feedback';
@@ -131,13 +130,6 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.quotes')}
         leftIcon={<FormatQuoteIcon />}
         selected={isSelected('/quotes')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/feature-flags"
-        primaryText={translate('sidebar.featureFlags')}
-        leftIcon={<FlagIcon />}
-        selected={isSelected('/feature-flags')}
         sidebarIsOpen={open}
       />
       <Divider sx={{ my: 1, mx: 2 }} />

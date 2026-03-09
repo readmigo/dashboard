@@ -1302,12 +1302,6 @@ export const englishTranslations = {
       metrics: 'Metrics',
       metricsDesc: 'Track AI interactions including chat messages, translations, explanations, and other AI-powered features. Monitor usage patterns and costs.',
     },
-    featureFlags: {
-      title: 'Feature Flags',
-      description: 'Control feature rollouts and A/B testing.',
-      flagTypes: 'Flag Types',
-      flagTypesDesc: 'Feature flags can be boolean (on/off), percentage-based (gradual rollout), or user-segment based. Use flags to safely deploy new features.',
-    },
   },
   // Subscription Dashboard
   subscriptionDashboard: {
@@ -1336,7 +1330,6 @@ export const englishTranslations = {
     categories: 'Categories',
     users: 'Users',
     quotes: 'Quotes',
-    featureFlags: 'Feature Flags',
     sections: {
       operations: 'Operations',
       support: 'Customer Support',

@@ -233,21 +233,6 @@ const helpContents: Record<string, HelpContent> = {
       },
     ],
   },
-  '/feature-flags': {
-    title: 'Feature Flags',
-    description: 'Control feature rollouts and A/B testing.',
-    sections: [
-      {
-        title: 'Flag Types',
-        content: (
-          <Typography variant="body2">
-            Feature flags can be boolean (on/off), percentage-based (gradual rollout),
-            or user-segment based. Use flags to safely deploy new features.
-          </Typography>
-        ),
-      },
-    ],
-  },
 };
 
 const getHelpContent = (pathname: string): HelpContent => {

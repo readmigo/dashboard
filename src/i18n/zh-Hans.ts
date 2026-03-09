@@ -1308,12 +1308,6 @@ export const chineseTranslations = {
       metrics: '指标',
       metricsDesc: '跟踪 AI 交互，包括聊天消息、翻译、解释和其他 AI 驱动的功能。监控使用模式和成本。',
     },
-    featureFlags: {
-      title: '功能开关',
-      description: '控制功能发布和 A/B 测试。',
-      flagTypes: '开关类型',
-      flagTypesDesc: '功能开关可以是布尔型（开/关）、百分比型（渐进发布）或用户分群型。使用开关安全地部署新功能。',
-    },
   },
   // Push Notifications
   pushNotifications: {
@@ -1441,7 +1435,6 @@ export const chineseTranslations = {
     categories: '分类',
     users: '用户',
     quotes: '引用',
-    featureFlags: '功能开关',
     sections: {
       operations: '运营',
       support: '客户支持',

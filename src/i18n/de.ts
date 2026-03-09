@@ -266,16 +266,6 @@ export const germanTranslations = {
         createdAt: 'Erstellt am',
       },
     },
-    'feature-flags': {
-      name: 'Feature-Flag |||| Feature-Flags',
-      fields: {
-        key: 'Schlüssel',
-        description: 'Beschreibung',
-        enabled: 'Aktiviert',
-        rolloutPercentage: 'Rollout-Prozentsatz',
-        updatedAt: 'Aktualisiert am',
-      },
-    },
     authors: {
       name: 'Autor |||| Autoren',
       fields: {
@@ -1236,12 +1226,6 @@ export const germanTranslations = {
       metrics: 'Metriken',
       metricsDesc: 'KI-Interaktionen verfolgen, einschließlich Chat-Nachrichten, Übersetzungen, Erklärungen und anderen KI-gestützten Funktionen. Nutzungsmuster und Kosten überwachen.',
     },
-    featureFlags: {
-      title: 'Feature-Flags',
-      description: 'Feature-Rollouts und A/B-Tests steuern.',
-      flagTypes: 'Flag-Typen',
-      flagTypesDesc: 'Feature-Flags können boolesch (an/aus), prozentbasiert (schrittweiser Rollout) oder benutzersegmentbasiert sein. Verwenden Sie Flags zum sicheren Deployen neuer Features.',
-    },
   },
   // Subscription Dashboard
   subscriptionDashboard: {
@@ -1272,7 +1256,6 @@ export const germanTranslations = {
     quotes: 'Zitate',
     postcardTemplates: 'Postkarten-Vorlagen',
     postcards: 'Postkarten',
-    featureFlags: 'Feature-Flags',
     sections: {
       operations: 'Operations',
       support: 'Kundensupport',
