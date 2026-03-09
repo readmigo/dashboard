@@ -926,33 +926,6 @@ export const englishTranslations = {
       trend: 'Version Activity Trend (30 days)',
     },
   },
-  // Event Analytics
-  eventAnalytics: {
-    title: 'Event Analytics',
-    refresh: 'Refresh',
-    retry: 'Retry',
-    unknownError: 'Unknown error',
-    totalEvents: 'Total Events (7d)',
-    uniqueUsers: 'Unique Users (7d)',
-    dailyTrend: 'Daily Event Trend',
-    total: 'Total',
-    reading: 'Reading',
-    ai: 'AI',
-    learning: 'Learning',
-    social: 'Social',
-    eventsByType: 'Events by Type',
-    topEventNames: 'Top Event Names',
-    eventsByPlatform: 'Events by Platform',
-    activityByPlatform: 'Activity by Platform',
-    type: 'Type',
-    eventName: 'Event Name',
-    count: 'Count',
-    platform: 'Platform',
-    activeUsers: 'Active Users',
-    readingMin: 'Reading (min)',
-    aiInteractions: 'AI Interactions',
-    sessions: 'Sessions',
-  },
   // Import Batches
   importBatches: {
     title: 'Import Batch Management',
@@ -1240,25 +1213,6 @@ export const englishTranslations = {
       node4: 'Auto-categorize, booklist association, Featured recommendations',
     },
   },
-  // Performance
-  performance: {
-    title: 'Performance Monitoring',
-    clientPerformance: 'Client Performance',
-    statCards: {
-      apiErrorRate: 'API Error Rate',
-      avgApiLatency: 'Avg API Latency',
-      crashFreeRate: 'Crash-Free Rate',
-      openIssues: 'Open Issues',
-      pageLoadTime: 'Page Load Time',
-      averageFps: 'Average FPS',
-      memoryUsage: 'Memory Usage',
-      appStartupTime: 'App Startup Time',
-    },
-    cardHeaders: {
-      apiLatencyByEndpoint: 'API Latency by Endpoint',
-      recentExceptions: 'Recent Exceptions',
-    },
-  },
   // Help
   help: {
     tooltip: 'Help',
@@ -1389,12 +1343,10 @@ export const englishTranslations = {
       platform: 'Platform',
     },
     operations: {
-      performance: 'Performance',
       readingStats: 'Reading Stats',
       importBatches: 'Import Batches',
       seImport: 'SE Import',
       subscriptions: 'Subscriptions',
-      eventAnalytics: 'Event Analytics',
       contentStudio: 'Book Typesetting',
       pushNotifications: 'Push Notifications',
       costManagement: 'Cost Management',

@@ -61,7 +61,7 @@ export const costConfig: CostConfig = {
       provider: 'Fly.io',
       monthlyBudget: 25,
       url: 'https://fly.io/dashboard',
-      note: 'shared-cpu-2x, 2GB, Tokyo (nrt)',
+      note: 'shared-cpu-1x, 2GB, Tokyo (nrt), auto-start/stop',
       sourceDoc: 'docs/05-operations/deployment/services/fly-io.md §7',
       freeTier: {
         isOnFreeTier: false,
@@ -69,7 +69,7 @@ export const costConfig: CostConfig = {
       },
       performanceTiers: [
         { name: 'Free', monthlyCost: 0, description: 'shared-cpu-1x, 256MB (3 VMs)' },
-        { name: 'Current', monthlyCost: 20, description: 'shared-cpu-2x, 2GB (1 VM)' },
+        { name: 'Current', monthlyCost: 7, description: 'shared-cpu-1x, 2GB (1 VM, auto-start/stop)' },
         { name: 'Next', monthlyCost: 31, description: 'performance-1x, 2GB (1 VM)' },
       ],
       costs: [
@@ -79,6 +79,7 @@ export const costConfig: CostConfig = {
         { month: '2025-12', actual: 20 },
         { month: '2026-01', actual: 20 },
         { month: '2026-02', actual: 20 },
+        { month: '2026-03', actual: 7 },
       ],
     },
     {
@@ -112,17 +113,17 @@ export const costConfig: CostConfig = {
       category: 'database',
       classification: 'infrastructure',
       provider: 'Neon',
-      monthlyBudget: 0,
+      monthlyBudget: 25,
       url: 'https://console.neon.tech',
-      note: 'Free tier, serverless 0.25-4 CU, Singapore',
+      note: 'Pro plan, serverless auto-scaling CU, Singapore (ap-southeast-1), auto-suspend',
       sourceDoc: 'docs/05-operations/deployment/services/neon.md',
       freeTier: {
-        isOnFreeTier: true,
+        isOnFreeTier: false,
         description: '0.5GB storage, 0.25 CU, 1 project, 10 branches',
       },
       performanceTiers: [
         { name: 'Free', monthlyCost: 0, description: '0.5GB storage, 0.25 CU, 1 project' },
-        { name: 'Launch', monthlyCost: 19, description: '10GB storage, auto-scaling CU' },
+        { name: 'Current (Launch)', monthlyCost: 19, description: '10GB storage, auto-scaling CU, auto-suspend' },
         { name: 'Scale', monthlyCost: 69, description: '50GB storage, higher CU limits' },
       ],
       costs: [
@@ -131,36 +132,8 @@ export const costConfig: CostConfig = {
         { month: '2025-11', actual: 0 },
         { month: '2025-12', actual: 0 },
         { month: '2026-01', actual: 0 },
-        { month: '2026-02', actual: 0 },
-      ],
-    },
-    // --- Cache ---
-    {
-      id: 'redis-cache',
-      name: 'Redis Cache',
-      category: 'cache',
-      classification: 'infrastructure',
-      provider: 'Upstash',
-      monthlyBudget: 20,
-      url: 'https://console.upstash.com',
-      note: '~50M commands/mo, ~500MB, Singapore',
-      sourceDoc: 'docs/05-operations/deployment/services/upstash.md §8',
-      freeTier: {
-        isOnFreeTier: false,
-        description: 'Free: 10K commands/day, 256MB',
-      },
-      performanceTiers: [
-        { name: 'Free', monthlyCost: 0, description: '10K commands/day, 256MB' },
-        { name: 'Current', monthlyCost: 15, description: 'Pay-as-you-go, ~50M cmds/mo, 500MB' },
-        { name: 'Pro', monthlyCost: 280, description: 'Fixed price, unlimited commands, 10GB' },
-      ],
-      costs: [
-        { month: '2025-09', actual: 15 },
-        { month: '2025-10', actual: 15 },
-        { month: '2025-11', actual: 15 },
-        { month: '2025-12', actual: 15 },
-        { month: '2026-01', actual: 15 },
-        { month: '2026-02', actual: 15 },
+        { month: '2026-02', actual: 19 },
+        { month: '2026-03', actual: 19 },
       ],
     },
     // --- Storage & CDN ---
@@ -170,9 +143,9 @@ export const costConfig: CostConfig = {
       category: 'storage',
       classification: 'infrastructure',
       provider: 'Cloudflare',
-      monthlyBudget: 5,
+      monthlyBudget: 15,
       url: 'https://dash.cloudflare.com',
-      note: 'R2 ~$0.56 + Domain ~$0.08/mo, rest free',
+      note: 'R2 ~$11/mo (TTS audio ~1.5TB) + DNS/CDN/Pages free',
       sourceDoc: 'docs/05-operations/deployment/services/cloudflare.md §9',
       freeTier: {
         isOnFreeTier: false,
@@ -180,16 +153,17 @@ export const costConfig: CostConfig = {
       },
       performanceTiers: [
         { name: 'Free', monthlyCost: 0, description: 'DNS, CDN, Pages, Email; R2 10GB' },
-        { name: 'Current', monthlyCost: 1.56, description: 'R2 ~10GB+ storage, domain renewal' },
+        { name: 'Current', monthlyCost: 11, description: 'R2 ~1.5TB TTS audio storage' },
         { name: 'Pro', monthlyCost: 20, description: 'WAF, image optimization, analytics' },
       ],
       costs: [
         { month: '2025-09', actual: 1.56 },
         { month: '2025-10', actual: 1.56 },
         { month: '2025-11', actual: 1.56 },
-        { month: '2025-12', actual: 1.56 },
-        { month: '2026-01', actual: 1.56 },
-        { month: '2026-02', actual: 1.56 },
+        { month: '2025-12', actual: 5 },
+        { month: '2026-01', actual: 8 },
+        { month: '2026-02', actual: 11 },
+        { month: '2026-03', actual: 11 },
       ],
     },
     // --- Monitoring ---

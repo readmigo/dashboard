@@ -859,33 +859,6 @@ export const germanTranslations = {
       trend: 'Versions-Aktivitätstrend (30 Tage)',
     },
   },
-  // Event Analytics
-  eventAnalytics: {
-    title: 'Event-Analytik',
-    refresh: 'Aktualisieren',
-    retry: 'Erneut versuchen',
-    unknownError: 'Unbekannter Fehler',
-    totalEvents: 'Events gesamt (7T)',
-    uniqueUsers: 'Eindeutige Benutzer (7T)',
-    dailyTrend: 'Täglicher Event-Trend',
-    total: 'Gesamt',
-    reading: 'Lesen',
-    ai: 'KI',
-    learning: 'Lernen',
-    social: 'Sozial',
-    eventsByType: 'Events nach Typ',
-    topEventNames: 'Top-Event-Namen',
-    eventsByPlatform: 'Events nach Plattform',
-    activityByPlatform: 'Aktivität nach Plattform',
-    type: 'Typ',
-    eventName: 'Event-Name',
-    count: 'Anzahl',
-    platform: 'Plattform',
-    activeUsers: 'Aktive Benutzer',
-    readingMin: 'Lesen (Min.)',
-    aiInteractions: 'KI-Interaktionen',
-    sessions: 'Sitzungen',
-  },
   // Import Batches
   importBatches: {
     title: 'Import-Chargen-Verwaltung',
@@ -1174,25 +1147,6 @@ export const germanTranslations = {
       node4: 'Auto-Kategorisierung, Buchlisten-Zuordnung, Featured-Empfehlungen',
     },
   },
-  // Performance
-  performance: {
-    title: 'Leistungsüberwachung',
-    clientPerformance: 'Client-Leistung',
-    statCards: {
-      apiErrorRate: 'API-Fehlerrate',
-      avgApiLatency: 'Durchschn. API-Latenz',
-      crashFreeRate: 'Absturzfreie Rate',
-      openIssues: 'Offene Probleme',
-      pageLoadTime: 'Seitenladezeit',
-      averageFps: 'Durchschn. FPS',
-      memoryUsage: 'Speichernutzung',
-      appStartupTime: 'App-Startzeit',
-    },
-    cardHeaders: {
-      apiLatencyByEndpoint: 'API-Latenz nach Endpunkt',
-      recentExceptions: 'Aktuelle Ausnahmen',
-    },
-  },
   // Help
   help: {
     tooltip: 'Hilfe',
@@ -1325,12 +1279,10 @@ export const germanTranslations = {
       platform: 'Plattform',
     },
     operations: {
-      performance: 'Leistung',
       readingStats: 'Lesestatistiken',
       importBatches: 'Import-Chargen',
       seImport: 'SE-Import',
       subscriptions: 'Abonnements',
-      eventAnalytics: 'Event-Analytik',
       contentStudio: 'Buch-Satz',
       pushNotifications: 'Push-Benachrichtigungen',
       costManagement: 'Kostenverwaltung',

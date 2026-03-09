@@ -17,11 +17,9 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MailIcon from '@mui/icons-material/Mail';
-import SpeedIcon from '@mui/icons-material/Speed';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import HubIcon from '@mui/icons-material/Hub';
@@ -152,13 +150,6 @@ export const CustomMenu = () => {
         </Typography>
       )}
       <MenuItemLink
-        to="/performance"
-        primaryText={translate('sidebar.operations.performance')}
-        leftIcon={<SpeedIcon />}
-        selected={isSelected('/performance')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
         to="/reading-stats"
         primaryText={translate('sidebar.operations.readingStats')}
         leftIcon={<BarChartIcon />}
@@ -170,13 +161,6 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.operations.subscriptions')}
         leftIcon={<CardMembershipIcon />}
         selected={isSelected('/subscription-dashboard')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/event-analytics"
-        primaryText={translate('sidebar.operations.eventAnalytics')}
-        leftIcon={<AnalyticsIcon />}
-        selected={isSelected('/event-analytics')}
         sidebarIsOpen={open}
       />
       <MenuItemLink

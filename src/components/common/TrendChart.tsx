@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
-import { useTimezone } from '../../../contexts/TimezoneContext';
+import { useTimezone } from '../../contexts/TimezoneContext';
 
 interface TrendDataPoint {
   date: string;

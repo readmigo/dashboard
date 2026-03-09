@@ -930,33 +930,6 @@ export const traditionalChineseTranslations = {
       trend: '版本活躍趨勢（30天）',
     },
   },
-  // 事件分析
-  eventAnalytics: {
-    title: '事件分析',
-    refresh: '重新整理',
-    retry: '重試',
-    unknownError: '未知錯誤',
-    totalEvents: '總事件數（7天）',
-    uniqueUsers: '獨立使用者（7天）',
-    dailyTrend: '每日事件趨勢',
-    total: '總計',
-    reading: '閱讀',
-    ai: 'AI',
-    learning: '學習',
-    social: '社交',
-    eventsByType: '按類型分佈',
-    topEventNames: '熱門事件名稱',
-    eventsByPlatform: '按平台分佈',
-    activityByPlatform: '平台活躍度',
-    type: '類型',
-    eventName: '事件名稱',
-    count: '數量',
-    platform: '平台',
-    activeUsers: '活躍使用者',
-    readingMin: '閱讀（分鐘）',
-    aiInteractions: 'AI 互動',
-    sessions: '會話數',
-  },
   // 匯入批次
   importBatches: {
     title: '匯入批次管理',
@@ -1247,25 +1220,6 @@ export const traditionalChineseTranslations = {
       node4: '自動分類、書單關聯、Featured 推薦',
     },
   },
-  // Performance
-  performance: {
-    title: '效能監控',
-    clientPerformance: '客戶端效能',
-    statCards: {
-      apiErrorRate: 'API 錯誤率',
-      avgApiLatency: '平均 API 延遲',
-      crashFreeRate: '無崩潰率',
-      openIssues: '待處理問題',
-      pageLoadTime: '頁面載入時間',
-      averageFps: '平均幀率',
-      memoryUsage: '記憶體使用',
-      appStartupTime: '應用啟動時間',
-    },
-    cardHeaders: {
-      apiLatencyByEndpoint: '各接口延遲',
-      recentExceptions: '最近異常',
-    },
-  },
   // Help content
   help: {
     button: {
@@ -1497,13 +1451,11 @@ export const traditionalChineseTranslations = {
       platform: '平台',
     },
     operations: {
-      performance: '效能監控',
       readingStats: '閱讀統計',
       pipeline: '書籍導入',
       importBatches: '導入批次',
       seImport: 'SE 增量導入',
       subscriptions: '訂閱管理',
-      eventAnalytics: '事件分析',
       contentStudio: '書籍排版',
       pushNotifications: '推播通知',
       costManagement: '費用管理',

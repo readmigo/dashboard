@@ -25,8 +25,6 @@ import { TicketList, TicketShow } from './pages/tickets';
 import { FeedbackList, FeedbackShow } from './pages/feedback';
 import { OrderList, OrderShow } from './pages/orders';
 import { SupportDashboard } from './pages/support';
-import { PerformanceDashboard } from './pages/operations';
-import { EventAnalyticsPage } from './pages/event-analytics';
 import { ReadingStatsPage } from './pages/reading-stats';
 import { SEIncrementalImport } from './pages/se-import';
 import { ServiceHub } from './pages/services';
@@ -145,9 +143,7 @@ export const App = () => (
             <CustomRoutes>
               <Route path="/feature-flags" element={<FeatureFlagsList />} />
               <Route path="/support-dashboard" element={<SupportDashboard />} />
-              <Route path="/performance" element={<PerformanceDashboard />} />
               <Route path="/reading-stats" element={<ReadingStatsPage />} />
-              <Route path="/event-analytics" element={<EventAnalyticsPage />} />
               <Route path="/se-import" element={<SEIncrementalImport />} />
               <Route path="/subscription-dashboard" element={<SubscriptionDashboard />} />
               <Route path="/services" element={<ServiceHub />} />
