@@ -327,6 +327,34 @@ export const BookListList = () => {
           render={(record: { itemCount?: number }) => record?.itemCount || 0}
         />
         <StatusField label={translate('resources.booklists.fields.status')} />
+        <FunctionField
+          label="Audio"
+          render={(record: { audiobookCount?: number; ttsCount?: number }) => {
+            const ab = record?.audiobookCount || 0;
+            const tts = record?.ttsCount || 0;
+            if (!ab && !tts) return <span>-</span>;
+            return (
+              <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
+                {ab > 0 && (
+                  <Tooltip title={`${ab} audiobooks`}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+                      <HeadphonesIcon sx={{ fontSize: 16, color: 'primary.main' }} />
+                      <Box component="span" sx={{ fontSize: 12 }}>{ab}</Box>
+                    </Box>
+                  </Tooltip>
+                )}
+                {tts > 0 && (
+                  <Tooltip title={`${tts} TTS`}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+                      <RecordVoiceOverIcon sx={{ fontSize: 16, color: 'secondary.main' }} />
+                      <Box component="span" sx={{ fontSize: 12 }}>{tts}</Box>
+                    </Box>
+                  </Tooltip>
+                )}
+              </Box>
+            );
+          }}
+        />
         <BooleanField source="isAiGenerated" label={translate('resources.booklists.list.ai')} />
         <TimezoneAwareDateField source="updatedAt" label={translate('resources.booklists.list.updated')} />
         <EditButton />

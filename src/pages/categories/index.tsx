@@ -17,9 +17,12 @@ import {
   AutocompleteInput,
   SelectInput,
   NumberField,
+  FunctionField,
   useTranslate,
 } from 'react-admin';
-import { Chip, Box, Stack } from '@mui/material';
+import { Chip, Box, Stack, Tooltip } from '@mui/material';
+import HeadphonesIcon from '@mui/icons-material/Headphones';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import BookIcon from '@mui/icons-material/MenuBook';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -159,6 +162,34 @@ export const CategoryList = () => {
         <TextField source="slug" />
         <LevelField label={translate('resources.categories.list.level')} />
         <NumberField source="bookCount" label={translate('resources.categories.list.books')} />
+        <FunctionField
+          label="Audio"
+          render={(record: { audiobookCount?: number; ttsCount?: number }) => {
+            const ab = record?.audiobookCount || 0;
+            const tts = record?.ttsCount || 0;
+            if (!ab && !tts) return <span>-</span>;
+            return (
+              <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
+                {ab > 0 && (
+                  <Tooltip title={`${ab} audiobooks`}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+                      <HeadphonesIcon sx={{ fontSize: 16, color: 'primary.main' }} />
+                      <Box component="span" sx={{ fontSize: 12 }}>{ab}</Box>
+                    </Box>
+                  </Tooltip>
+                )}
+                {tts > 0 && (
+                  <Tooltip title={`${tts} TTS`}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+                      <RecordVoiceOverIcon sx={{ fontSize: 16, color: 'secondary.main' }} />
+                      <Box component="span" sx={{ fontSize: 12 }}>{tts}</Box>
+                    </Box>
+                  </Tooltip>
+                )}
+              </Box>
+            );
+          }}
+        />
         <NumberField source="sortOrder" label={translate('resources.categories.list.order')} />
         <BooleanField source="isActive" label={translate('resources.categories.list.active')} />
         <EditButton />
