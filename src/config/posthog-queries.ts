@@ -179,6 +179,199 @@ GROUP BY os
 ORDER BY users DESC`;
 
 // ============================================================
+// 8. Internal User Filter (data cleaning)
+// ============================================================
+
+import { INTERNAL_USER_IDS } from './analytics-config';
+
+const internalIdList = INTERNAL_USER_IDS.map((id) => `'${id}'`).join(', ');
+
+/** Standard WHERE clause to exclude internal test users */
+export const excludeInternalWhere = () =>
+  `distinct_id NOT IN (${internalIdList})`;
+
+/** DAU excluding internal users */
+export const cleanDauQuery = (days = 30) => `
+SELECT toDate(timestamp) as day,
+       count(DISTINCT distinct_id) as dau
+FROM events
+WHERE timestamp >= now() - INTERVAL ${days} DAY
+  AND event NOT IN ('$set')
+  AND ${excludeInternalWhere()}
+GROUP BY day
+ORDER BY day`;
+
+/** Internal users activity analysis */
+export const internalUsersAnalysisQuery = (days = 30) => `
+SELECT distinct_id,
+       properties.$os as os,
+       properties.device_model as device,
+       count() as events,
+       count(DISTINCT properties.$app_version) as versions_used,
+       min(timestamp) as first_seen,
+       max(timestamp) as last_seen
+FROM events
+WHERE distinct_id IN (${internalIdList})
+  AND timestamp >= now() - INTERVAL ${days} DAY
+GROUP BY distinct_id, os, device
+ORDER BY events DESC`;
+
+/** Detect potential new internal users (4+ app versions) */
+export const detectInternalUsersQuery = (days = 60) => `
+SELECT distinct_id,
+       count(DISTINCT properties.$app_version) as version_count,
+       count() as total_events,
+       groupArray(DISTINCT properties.$app_version) as versions
+FROM events
+WHERE timestamp >= now() - INTERVAL ${days} DAY
+GROUP BY distinct_id
+HAVING version_count >= 4
+ORDER BY version_count DESC`;
+
+// ============================================================
+// 9. Book Rankings & Content Analysis
+// ============================================================
+
+/** Top books by reading sessions (clean) */
+export const topBooksQuery = (days = 30, limit = 20) => `
+SELECT properties.book_id as book_id,
+       properties.book_title as title,
+       count() as sessions,
+       count(DISTINCT distinct_id) as readers
+FROM events
+WHERE event IN ('reading_started', 'reading_session_ended')
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.book_id IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY book_id, title
+ORDER BY sessions DESC
+LIMIT ${limit}`;
+
+/** Top audiobooks by play count (clean) */
+export const topAudiobooksQuery = (days = 30, limit = 15) => `
+SELECT properties.audiobook_title as title,
+       properties.audiobook_id as audiobook_id,
+       count() as plays,
+       count(DISTINCT distinct_id) as listeners
+FROM events
+WHERE event IN ('audiobook_play_started', 'audiobook_started')
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND ${excludeInternalWhere()}
+GROUP BY title, audiobook_id
+ORDER BY plays DESC
+LIMIT ${limit}`;
+
+/** Books with TTS usage */
+export const booksTtsUsageQuery = (days = 30, limit = 15) => `
+SELECT properties.book_id as book_id,
+       properties.book_title as title,
+       count() as tts_starts,
+       count(DISTINCT distinct_id) as users
+FROM events
+WHERE event = 'tts_started'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.book_id IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY book_id, title
+ORDER BY tts_starts DESC
+LIMIT ${limit}`;
+
+// ============================================================
+// 10. User Language & Locale Analysis
+// ============================================================
+
+/** User locale distribution (clean) */
+export const userLocaleQuery = (days = 30) => `
+SELECT properties.$locale as locale,
+       count(DISTINCT distinct_id) as users,
+       count() as events
+FROM events
+WHERE event = 'Application Opened'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND ${excludeInternalWhere()}
+GROUP BY locale
+ORDER BY users DESC`;
+
+/** Reading language preferences (by book title charset) */
+export const readingLanguageQuery = (days = 30) => `
+SELECT properties.book_title as title,
+       properties.book_id as book_id,
+       count() as sessions,
+       count(DISTINCT distinct_id) as readers
+FROM events
+WHERE event IN ('reading_started', 'reading_session_ended')
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.book_title IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY title, book_id
+ORDER BY sessions DESC
+LIMIT 50`;
+
+// ============================================================
+// 11. User Profile & Engagement Depth
+// ============================================================
+
+/** English level distribution */
+export const englishLevelQuery = (days = 30) => `
+SELECT person.properties.english_level as level,
+       count(DISTINCT distinct_id) as users
+FROM events
+WHERE event = 'Application Opened'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND person.properties.english_level IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY level
+ORDER BY users DESC`;
+
+/** Subscription tier distribution */
+export const subscriptionTierQuery = (days = 30) => `
+SELECT person.properties.subscription_plan as plan,
+       count(DISTINCT distinct_id) as users
+FROM events
+WHERE event = 'Application Opened'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND person.properties.subscription_plan IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY plan
+ORDER BY users DESC`;
+
+/** User country distribution */
+export const userCountryQuery = (days = 30) => `
+SELECT person.properties.country as country,
+       count(DISTINCT distinct_id) as users
+FROM events
+WHERE event = 'Application Opened'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND person.properties.country IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY country
+ORDER BY users DESC`;
+
+// ============================================================
+// 12. Cross-Validation Queries
+// ============================================================
+
+/** Compare internal vs external event counts */
+export const internalVsExternalQuery = (days = 30) => `
+SELECT
+  CASE WHEN distinct_id IN (${internalIdList}) THEN 'internal' ELSE 'external' END as user_type,
+  count() as events,
+  count(DISTINCT distinct_id) as users
+FROM events
+WHERE timestamp >= now() - INTERVAL ${days} DAY
+GROUP BY user_type`;
+
+/** is_internal flag verification */
+export const isInternalFlagQuery = (days = 30) => `
+SELECT properties.is_internal as is_internal,
+       count() as events,
+       count(DISTINCT distinct_id) as users
+FROM events
+WHERE timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.is_internal IS NOT NULL
+GROUP BY is_internal`;
+
+// ============================================================
 // Helper: Build PostHog query request body
 // ============================================================
 

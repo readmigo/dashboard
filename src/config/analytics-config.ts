@@ -94,3 +94,89 @@ export const TIME_RANGES = {
   last30d: '-30d',
   last90d: '-90d',
 } as const;
+
+/**
+ * Internal test user IDs to exclude from analytics
+ * Identified by: 4+ app versions used, is_internal=true flag, dev device names
+ */
+export const INTERNAL_USER_IDS = [
+  '88952c83-83f1-4bdc-a7a0-85f3c3e4c2ab', // iOS/iPad multi-version tester (10 versions, 8854 events)
+  'a14b013d-fd4c-4f23-91e0-41e0dcf92417',  // Android Pixel 3a dev device (11 versions, 898 events)
+  '7ca8da67-4861-4267-a1b5-be3b357b438d',  // Android OnePlus8Pro tester (7 versions, 132 events)
+] as const;
+
+/** HogQL WHERE clause to exclude internal users */
+export const EXCLUDE_INTERNAL_CLAUSE =
+  INTERNAL_USER_IDS.map((id) => `'${id}'`).join(', ');
+
+/** User locale → language group mapping */
+export const LOCALE_TO_LANGUAGE: Record<string, string> = {
+  en: 'English', 'en-US': 'English', 'en-GB': 'English', 'en-AU': 'English',
+  'en-CA': 'English', 'en-IN': 'English', 'en-NZ': 'English', 'en-IE': 'English',
+  'en-ZA': 'English', 'en-SG': 'English', 'en-PH': 'English', 'en-PK': 'English',
+  'en-MY': 'English', 'en-JM': 'English', 'en-KE': 'English', 'en-TT': 'English',
+  'en-TR': 'English',
+  zh: 'Chinese', 'zh-CN': 'Chinese', 'zh-TW': 'Chinese', 'zh-HK': 'Chinese',
+  ru: 'Russian', 'ru-RU': 'Russian', 'ru-KZ': 'Russian',
+  es: 'Spanish', 'es-ES': 'Spanish', 'es-US': 'Spanish', 'es-AR': 'Spanish',
+  pt: 'Portuguese', 'pt-BR': 'Portuguese',
+  fr: 'French', 'fr-FR': 'French', 'fr-DZ': 'French',
+  ko: 'Korean', 'ko-KR': 'Korean',
+  ja: 'Japanese', 'ja-JP': 'Japanese',
+  tr: 'Turkish', 'tr-TR': 'Turkish',
+  ar: 'Arabic', 'ar-EG': 'Arabic',
+  de: 'German', 'de-DE': 'German',
+  uk: 'Ukrainian', 'uk-UA': 'Ukrainian',
+  he: 'Hebrew', 'he-IL': 'Hebrew',
+  nl: 'Dutch', 'nl-NL': 'Dutch',
+  vi: 'Vietnamese', 'vi-VN': 'Vietnamese',
+  fa: 'Persian', 'fa-IR': 'Persian',
+};
+
+/**
+ * All data sources available for cross-validation
+ */
+export const DATA_SOURCES = {
+  posthog: {
+    name: 'PostHog',
+    type: 'product-analytics',
+    queryMethod: 'HogQL',
+    strengths: ['funnels', 'retention', 'feature-flags', 'session-replay'],
+    uniqueData: ['client-side events', 'screen flows'],
+  },
+  selfBuilt: {
+    name: 'Self-Built (API DB)',
+    type: 'source-of-truth',
+    queryMethod: 'REST API',
+    apiBase: 'https://api.readmigo.app/api/v1',
+    endpoints: {
+      overview: '/admin/operations/overview',
+      dailyTrend: '/admin/operations/daily-trend',
+      hotBooks: '/admin/operations/hot-content/books',
+      versionStats: '/admin/operations/version-stats',
+      eventAnalytics: '/admin/operations/event-analytics/overview',
+    },
+    strengths: ['precise reading duration', 'word counts', 'daily streaks'],
+    uniqueData: ['reading minutes precision', 'AI token usage', 'server-side ground truth'],
+  },
+  amplitude: {
+    name: 'Amplitude',
+    type: 'product-analytics',
+    queryMethod: 'SDK',
+    strengths: ['alternative retention calc', 'cohort analysis'],
+    uniqueData: ['different sampling strategy'],
+  },
+  sentry: {
+    name: 'Sentry',
+    type: 'error-tracking',
+    apiBase: 'https://us.sentry.io/api/0',
+    strengths: ['crash reports', 'performance monitoring', 'release health'],
+    uniqueData: ['stack traces', 'API latency', 'error rates'],
+  },
+  checkly: {
+    name: 'Checkly',
+    type: 'uptime-monitoring',
+    strengths: ['multi-region latency', 'uptime tracking'],
+    uniqueData: ['API availability from 4 regions'],
+  },
+} as const;
