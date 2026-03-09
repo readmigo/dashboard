@@ -32,6 +32,9 @@ import PublishIcon from '@mui/icons-material/Publish';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import HeadphonesIcon from '@mui/icons-material/Headphones';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+import { Tooltip } from '@mui/material';
 
 // Helper function to get translated choices
 const useBooklistChoices = () => {
@@ -471,7 +474,7 @@ const BookListShowContent = () => {
 
       <Box sx={{ mt: 2, fontWeight: 'bold' }}>{translate('resources.booklists.sections.booksInList')}</Box>
       <FunctionField
-        render={(record: { items?: Array<{ book: { title: string; author: string; coverThumbUrl?: string } }> }) => (
+        render={(record: { items?: Array<{ book: { title: string; author: string; coverThumbUrl?: string; hasAudiobook?: boolean; hasTts?: boolean } }> }) => (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 1 }}>
             {record?.items?.map((item, index) => (
               <Box key={index} sx={{ display: 'flex', gap: 1, alignItems: 'center', p: 1, bgcolor: '#f5f5f5', borderRadius: 1 }}>
@@ -479,7 +482,19 @@ const BookListShowContent = () => {
                   <img src={item.book.coverThumbUrl} alt="" style={{ width: 30, height: 45, objectFit: 'cover' }} />
                 )}
                 <Box>
-                  <Box sx={{ fontSize: 14, fontWeight: 500 }}>{item.book.title}</Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                    <Box component="span" sx={{ fontSize: 14, fontWeight: 500 }}>{item.book.title}</Box>
+                    {item.book.hasAudiobook && (
+                      <Tooltip title="Audiobook">
+                        <HeadphonesIcon sx={{ fontSize: 14, color: 'primary.main' }} />
+                      </Tooltip>
+                    )}
+                    {item.book.hasTts && (
+                      <Tooltip title="TTS">
+                        <RecordVoiceOverIcon sx={{ fontSize: 14, color: 'secondary.main' }} />
+                      </Tooltip>
+                    )}
+                  </Box>
                   <Box sx={{ fontSize: 12, color: 'text.secondary' }}>{item.book.author}</Box>
                 </Box>
               </Box>

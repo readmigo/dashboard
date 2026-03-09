@@ -35,6 +35,9 @@ import PublishIcon from '@mui/icons-material/Publish';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import RateReviewIcon from '@mui/icons-material/RateReview';
+import HeadphonesIcon from '@mui/icons-material/Headphones';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+import { Tooltip } from '@mui/material';
 import { useContentLanguage } from '../../contexts/ContentLanguageContext';
 import { getStoredEnvironment } from '../../contexts/EnvironmentContext';
 import { getApiUrl, getEnvironmentConfig } from '../../config/environments';
@@ -292,6 +295,29 @@ const WordCountField = ({ label: _label }: { label?: string }) => {
   return <span>{count}</span>;
 };
 
+const AudioIndicatorField = ({ label: _label }: { label?: string }) => {
+  const record = useRecordContext();
+  if (!record) return null;
+
+  const { hasAudiobook, hasTts } = record;
+  if (!hasAudiobook && !hasTts) return <span>-</span>;
+
+  return (
+    <Box sx={{ display: 'flex', gap: 0.5 }}>
+      {hasAudiobook && (
+        <Tooltip title="Audiobook">
+          <HeadphonesIcon sx={{ fontSize: 18, color: 'primary.main' }} />
+        </Tooltip>
+      )}
+      {hasTts && (
+        <Tooltip title="TTS">
+          <RecordVoiceOverIcon sx={{ fontSize: 18, color: 'secondary.main' }} />
+        </Tooltip>
+      )}
+    </Box>
+  );
+};
+
 // Helper to get API base URL
 const getApiBaseUrl = () => {
   const env = getStoredEnvironment();
@@ -433,6 +459,7 @@ export const BookList = () => {
           <StatusField label="Status" />
           <ContentReviewStatusField label="Review" />
           <DifficultyField label="Difficulty" />
+          <AudioIndicatorField label="Audio" />
           <NumberField source="chapterCount" label="Chapters" />
           <WordCountField label="Words" />
           <TimezoneAwareDateField source="createdAt" label="Created" />
