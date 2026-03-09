@@ -13,3 +13,4 @@ playwright/.cache/
 
 # Claude Code local config
 .claude/
+.env.analytics
