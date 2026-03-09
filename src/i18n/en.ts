@@ -1342,6 +1342,7 @@ export const englishTranslations = {
       subscriptions: 'Subscriptions',
       contentStudio: 'Book Typesetting',
       pushNotifications: 'Push Notifications',
+      dailyReport: 'Daily Report',
       costManagement: 'Cost Management',
     },
     support: {

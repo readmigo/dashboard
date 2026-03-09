@@ -1457,6 +1457,7 @@ export const traditionalChineseTranslations = {
       subscriptions: '訂閱管理',
       contentStudio: '書籍排版',
       pushNotifications: '推播通知',
+      dailyReport: '每日營運報告',
       costManagement: '費用管理',
     },
     support: {

@@ -1268,6 +1268,7 @@ export const germanTranslations = {
       subscriptions: 'Abonnements',
       contentStudio: 'Buch-Satz',
       pushNotifications: 'Push-Benachrichtigungen',
+      dailyReport: 'Tagesbericht',
       costManagement: 'Kostenverwaltung',
     },
     support: {

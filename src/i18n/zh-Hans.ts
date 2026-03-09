@@ -1447,6 +1447,7 @@ export const chineseTranslations = {
       subscriptions: '订阅管理',
       contentStudio: '书籍排版',
       pushNotifications: '推送通知',
+      dailyReport: '每日运营报告',
       costManagement: '费用管理',
     },
     support: {
