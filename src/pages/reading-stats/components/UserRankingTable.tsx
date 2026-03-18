@@ -13,7 +13,7 @@ interface UserStats {
   rank: number;
   userId: string;
   displayName: string;
-  totalReadingMinutes: number;
+  totalReadingSeconds: number;
   booksReadCount: number;
   totalSessions: number;
   averageSessionDuration: number;
@@ -23,6 +23,8 @@ interface UserStats {
 interface UserRankingTableProps {
   users: UserStats[];
 }
+
+const toMinutes = (seconds: number) => Math.round(seconds / 60);
 
 export const UserRankingTable = ({ users }: UserRankingTableProps) => {
   return (
@@ -54,7 +56,7 @@ export const UserRankingTable = ({ users }: UserRankingTableProps) => {
               </TableCell>
               <TableCell align="right">
                 <Typography variant="body1" fontWeight="medium">
-                  {user.totalReadingMinutes.toLocaleString()}
+                  {toMinutes(user.totalReadingSeconds).toLocaleString()}
                 </Typography>
               </TableCell>
               <TableCell align="right">
@@ -67,7 +69,7 @@ export const UserRankingTable = ({ users }: UserRankingTableProps) => {
               </TableCell>
               <TableCell align="right">{user.totalSessions.toLocaleString()}</TableCell>
               <TableCell align="right">
-                {user.averageSessionDuration.toFixed(1)} min
+                {(user.averageSessionDuration / 60).toFixed(1)} min
               </TableCell>
               <TableCell align="right">
                 <Chip

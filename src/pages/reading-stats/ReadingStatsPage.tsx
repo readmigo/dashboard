@@ -26,13 +26,15 @@ import { useEnvironment } from '../../contexts/EnvironmentContext';
 import { useTimezone } from '../../contexts/TimezoneContext';
 import { brandColors, semanticColors } from '../../theme/brandTokens';
 
+const toMinutes = (seconds: number) => Math.round(seconds / 60);
+
 interface ReadingStatsOverview {
-  totalReadingMinutes: number;
+  totalReadingSeconds: number;
   totalSessions: number;
   activeReaders: number;
   booksBeingRead: number;
   averageSessionDuration: number;
-  averageDailyMinutes: number;
+  averageDailySeconds: number;
 }
 
 interface BookStats {
@@ -41,17 +43,17 @@ interface BookStats {
   title: string;
   author: string;
   coverUrl: string;
-  totalReadingMinutes: number;
+  totalReadingSeconds: number;
   uniqueReaders: number;
   totalSessions: number;
-  averageMinutesPerReader: number;
+  averageSecondsPerReader: number;
 }
 
 interface UserStats {
   rank: number;
   userId: string;
   displayName: string;
-  totalReadingMinutes: number;
+  totalReadingSeconds: number;
   booksReadCount: number;
   totalSessions: number;
   averageSessionDuration: number;
@@ -61,16 +63,16 @@ interface UserStats {
 interface CategoryStats {
   categoryId: string;
   categoryName: string;
-  totalReadingMinutes: number;
+  totalReadingSeconds: number;
   percentage: number;
   uniqueReaders: number;
   booksCount: number;
-  averageMinutesPerUser: number;
+  averageSecondsPerUser: number;
 }
 
 interface TimePattern {
   hour: number;
-  totalMinutes: number;
+  totalSeconds: number;
   sessionsCount: number;
   uniqueUsers: number;
 }
@@ -106,10 +108,6 @@ export const ReadingStatsPage = () => {
     try {
       const token = sessionStorage.getItem('adminToken');
 
-      // Debug: Log configuration
-      console.log('[ReadingStats Debug] apiBaseUrl:', apiBaseUrl);
-      console.log('[ReadingStats Debug] token exists:', !!token);
-
       const headers = {
         Authorization: `Bearer ${token}`,
         'X-Admin-Mode': 'true',
@@ -127,8 +125,6 @@ export const ReadingStatsPage = () => {
         { name: 'trend', url: `${baseUrl}/trend?granularity=day&timezone=${tzParam}` },
       ];
 
-      console.log('[ReadingStats Debug] Fetching endpoints:', endpoints.map(e => e.url));
-
       const [overviewRes, booksRes, usersRes, categoriesRes, patternsRes, trendRes] = await Promise.all([
         fetch(endpoints[0].url, { headers }),
         fetch(endpoints[1].url, { headers }),
@@ -138,7 +134,6 @@ export const ReadingStatsPage = () => {
         fetch(endpoints[5].url, { headers }),
       ]);
 
-      // Debug: Log response status
       const responses = [
         { name: 'overview', res: overviewRes },
         { name: 'books', res: booksRes },
@@ -148,11 +143,6 @@ export const ReadingStatsPage = () => {
         { name: 'trend', res: trendRes },
       ];
 
-      for (const { name, res } of responses) {
-        console.log(`[ReadingStats Debug] ${name}: status=${res.status}, ok=${res.ok}`);
-      }
-
-      // Check for failures and provide detailed error
       const failedResponses = responses.filter(r => !r.res.ok);
       if (failedResponses.length > 0) {
         const errorDetails = await Promise.all(
@@ -160,13 +150,12 @@ export const ReadingStatsPage = () => {
             let body = '';
             try {
               body = await res.clone().text();
-            } catch (e) {
+            } catch {
               body = 'Could not read response body';
             }
             return `${name}: ${res.status} - ${body}`;
           })
         );
-        console.error('[ReadingStats Debug] Failed responses:', errorDetails);
         throw new Error(`API errors: ${errorDetails.join('; ')}`);
       }
 
@@ -179,16 +168,23 @@ export const ReadingStatsPage = () => {
         trendRes.json(),
       ]);
 
-      console.log('[ReadingStats Debug] Data fetched successfully');
-
       setOverview(overviewData);
       setBookStats(booksData.items || []);
       setUserStats(usersData.items || []);
       setCategoryStats(categoriesData.items || []);
       setTimePatterns(patternsData.items || []);
-      setTrendData(trendDataRes.items || []);
+      // Convert seconds to minutes for trend chart display
+      setTrendData(
+        (trendDataRes.items || []).map((item: { date: string; totalSeconds: number; sessionsCount: number; activeUsers: number; averageSecondsPerUser: number }) => ({
+          date: item.date,
+          totalMinutes: toMinutes(item.totalSeconds),
+          sessionsCount: item.sessionsCount,
+          activeUsers: item.activeUsers,
+          averageMinutesPerUser: Number((item.averageSecondsPerUser / 60).toFixed(1)),
+        }))
+      );
     } catch (err) {
-      console.error('[ReadingStats Debug] Fetch error:', err);
+      console.error('[ReadingStats] Fetch error:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
@@ -234,7 +230,7 @@ export const ReadingStatsPage = () => {
         <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title={translate('readingStats.statCards.totalReadingMinutes')}
-            value={overview?.totalReadingMinutes || 0}
+            value={toMinutes(overview?.totalReadingSeconds || 0)}
             icon={<MenuBookIcon fontSize="large" />}
             color={brandColors.primary}
           />
@@ -258,7 +254,7 @@ export const ReadingStatsPage = () => {
         <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title={translate('readingStats.statCards.avgSessionDuration')}
-            value={`${overview?.averageSessionDuration || 0} min`}
+            value={`${toMinutes(overview?.averageSessionDuration || 0)} min`}
             icon={<MenuBookIcon fontSize="large" />}
             color={brandColors.accentPink}
           />

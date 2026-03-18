@@ -3,7 +3,7 @@ import { brandColors } from '../../../theme/brandTokens';
 
 interface TimePattern {
   hour: number;
-  totalMinutes: number;
+  totalSeconds: number;
   sessionsCount: number;
   uniqueUsers: number;
 }
@@ -12,12 +12,14 @@ interface TimeHeatmapProps {
   patterns: TimePattern[];
 }
 
+const toMinutes = (seconds: number) => Math.round(seconds / 60);
+
 export const TimeHeatmap = ({ patterns }: TimeHeatmapProps) => {
   const sortedPatterns = [...patterns].sort((a, b) => a.hour - b.hour);
-  const maxMinutes = Math.max(...patterns.map((p) => p.totalMinutes), 1);
+  const maxSeconds = Math.max(...patterns.map((p) => p.totalSeconds), 1);
 
-  const getColor = (minutes: number) => {
-    const intensity = minutes / maxMinutes;
+  const getColor = (seconds: number) => {
+    const intensity = seconds / maxSeconds;
     if (intensity > 0.8) return brandColors.primary;
     if (intensity > 0.6) return brandColors.accentPurple;
     if (intensity > 0.4) return '#B8A9F4';
@@ -40,7 +42,8 @@ export const TimeHeatmap = ({ patterns }: TimeHeatmapProps) => {
       <Stack spacing={0.5}>
         {sortedPatterns.map((pattern) => {
           const hourLabel = formatHour(pattern.hour);
-          const barWidth = (pattern.totalMinutes / maxMinutes) * 100;
+          const barWidth = (pattern.totalSeconds / maxSeconds) * 100;
+          const minutes = toMinutes(pattern.totalSeconds);
 
           return (
             <Tooltip
@@ -51,7 +54,7 @@ export const TimeHeatmap = ({ patterns }: TimeHeatmapProps) => {
                     <strong>{hourLabel}</strong>
                   </Typography>
                   <Typography variant="caption">
-                    {pattern.totalMinutes.toLocaleString()} minutes
+                    {minutes.toLocaleString()} minutes
                   </Typography>
                   <br />
                   <Typography variant="caption">
@@ -100,8 +103,8 @@ export const TimeHeatmap = ({ patterns }: TimeHeatmapProps) => {
                     sx={{
                       height: 24,
                       width: `${barWidth}%`,
-                      minWidth: pattern.totalMinutes > 0 ? 4 : 0,
-                      backgroundColor: getColor(pattern.totalMinutes),
+                      minWidth: pattern.totalSeconds > 0 ? 4 : 0,
+                      backgroundColor: getColor(pattern.totalSeconds),
                       borderRadius: 1,
                       transition: 'width 0.3s ease',
                     }}
@@ -113,7 +116,7 @@ export const TimeHeatmap = ({ patterns }: TimeHeatmapProps) => {
                       whiteSpace: 'nowrap',
                     }}
                   >
-                    {pattern.totalMinutes.toLocaleString()} min
+                    {minutes.toLocaleString()} min
                   </Typography>
                 </Box>
               </Box>

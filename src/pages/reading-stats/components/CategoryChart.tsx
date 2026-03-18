@@ -4,19 +4,29 @@ import { brandColors } from '../../../theme/brandTokens';
 interface CategoryStats {
   categoryId: string;
   categoryName: string;
-  totalReadingMinutes: number;
+  totalReadingSeconds: number;
   percentage: number;
   uniqueReaders: number;
   booksCount: number;
-  averageMinutesPerUser: number;
+  averageSecondsPerUser: number;
 }
 
 interface CategoryChartProps {
   categories: CategoryStats[];
 }
 
+const toMinutes = (seconds: number) => Math.round(seconds / 60);
+
 export const CategoryChart = ({ categories }: CategoryChartProps) => {
-  const maxMinutes = Math.max(...categories.map((c) => c.totalReadingMinutes));
+  if (categories.length === 0) {
+    return (
+      <Box p={2}>
+        <Typography color="textSecondary">No category data available</Typography>
+      </Box>
+    );
+  }
+
+  const maxSeconds = Math.max(...categories.map((c) => c.totalReadingSeconds));
 
   return (
     <Box>
@@ -34,7 +44,7 @@ export const CategoryChart = ({ categories }: CategoryChartProps) => {
               </Box>
               <LinearProgress
                 variant="determinate"
-                value={(category.totalReadingMinutes / maxMinutes) * 100}
+                value={(category.totalReadingSeconds / maxSeconds) * 100}
                 sx={{
                   height: 8,
                   borderRadius: 4,
@@ -47,10 +57,10 @@ export const CategoryChart = ({ categories }: CategoryChartProps) => {
               />
               <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Typography variant="caption" color="textSecondary">
-                  {category.totalReadingMinutes.toLocaleString()} min • {category.uniqueReaders} readers • {category.booksCount} books
+                  {toMinutes(category.totalReadingSeconds).toLocaleString()} min • {category.uniqueReaders} readers • {category.booksCount} books
                 </Typography>
                 <Typography variant="caption" color="textSecondary">
-                  {category.averageMinutesPerUser.toFixed(1)} min/user
+                  {(category.averageSecondsPerUser / 60).toFixed(1)} min/user
                 </Typography>
               </Box>
             </Box>

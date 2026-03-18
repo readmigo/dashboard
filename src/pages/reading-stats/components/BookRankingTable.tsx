@@ -16,15 +16,17 @@ interface BookStats {
   title: string;
   author: string;
   coverUrl: string;
-  totalReadingMinutes: number;
+  totalReadingSeconds: number;
   uniqueReaders: number;
   totalSessions: number;
-  averageMinutesPerReader: number;
+  averageSecondsPerReader: number;
 }
 
 interface BookRankingTableProps {
   books: BookStats[];
 }
+
+const toMinutes = (seconds: number) => Math.round(seconds / 60);
 
 export const BookRankingTable = ({ books }: BookRankingTableProps) => {
   return (
@@ -68,13 +70,13 @@ export const BookRankingTable = ({ books }: BookRankingTableProps) => {
               </TableCell>
               <TableCell align="right">
                 <Typography variant="body1" fontWeight="medium">
-                  {book.totalReadingMinutes.toLocaleString()}
+                  {toMinutes(book.totalReadingSeconds).toLocaleString()}
                 </Typography>
               </TableCell>
               <TableCell align="right">{book.uniqueReaders.toLocaleString()}</TableCell>
               <TableCell align="right">{book.totalSessions.toLocaleString()}</TableCell>
               <TableCell align="right">
-                {book.averageMinutesPerReader.toFixed(1)}
+                {(book.averageSecondsPerReader / 60).toFixed(1)}
               </TableCell>
             </TableRow>
           ))}
