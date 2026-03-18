@@ -115,14 +115,18 @@ export const ReadingStatsPage = () => {
 
       const baseUrl = `${apiBaseUrl}/api/v1/admin/reading-stats`;
 
+      const now = new Date();
+      const defaultStart = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+      const defaultEnd = now.toISOString().split('T')[0];
+
       const tzParam = encodeURIComponent(timezone);
       const endpoints = [
-        { name: 'overview', url: `${baseUrl}/overview` },
-        { name: 'books', url: `${baseUrl}/books?limit=20` },
-        { name: 'users', url: `${baseUrl}/users?limit=20&timezone=${tzParam}` },
-        { name: 'categories', url: `${baseUrl}/categories` },
-        { name: 'time-patterns', url: `${baseUrl}/time-patterns?timezone=${tzParam}` },
-        { name: 'trend', url: `${baseUrl}/trend?granularity=day&timezone=${tzParam}` },
+        { name: 'overview', url: `${baseUrl}/overview?startDate=${defaultStart}&endDate=${defaultEnd}` },
+        { name: 'books', url: `${baseUrl}/books?limit=20&startDate=${defaultStart}&endDate=${defaultEnd}` },
+        { name: 'users', url: `${baseUrl}/users?limit=20&timezone=${tzParam}&startDate=${defaultStart}&endDate=${defaultEnd}` },
+        { name: 'categories', url: `${baseUrl}/categories?startDate=${defaultStart}&endDate=${defaultEnd}` },
+        { name: 'time-patterns', url: `${baseUrl}/time-patterns?timezone=${tzParam}&startDate=${defaultStart}&endDate=${defaultEnd}` },
+        { name: 'trend', url: `${baseUrl}/trend?granularity=day&timezone=${tzParam}&startDate=${defaultStart}&endDate=${defaultEnd}` },
       ];
 
       const [overviewRes, booksRes, usersRes, categoriesRes, patternsRes, trendRes] = await Promise.all([
