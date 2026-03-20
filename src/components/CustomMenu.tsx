@@ -26,6 +26,7 @@ import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import HighlightIcon from '@mui/icons-material/Highlight';
 
 export const CustomMenu = () => {
   const location = useLocation();
@@ -175,6 +176,13 @@ export const CustomMenu = () => {
         primaryText={translate('sidebar.operations.pushNotifications', { _: 'Push Notifications' })}
         leftIcon={<NotificationsActiveIcon />}
         selected={isSelected('/push-notifications')}
+        sidebarIsOpen={open}
+      />
+      <MenuItemLink
+        to="/highlight-analytics"
+        primaryText={translate('sidebar.operations.highlightAnalytics', { _: 'Highlight Analytics' })}
+        leftIcon={<HighlightIcon />}
+        selected={isSelected('/highlight-analytics')}
         sidebarIsOpen={open}
       />
       <MenuItemLink

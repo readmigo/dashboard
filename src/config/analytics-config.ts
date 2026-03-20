@@ -29,6 +29,7 @@ export const POSTHOG_DASHBOARDS = {
   bookRankings: 1329231,
   platformComparison: 1329229,
   thoughtsAnalytics: 1339801,
+  highlightAnalytics: 1380661,
 } as const;
 
 /** All tracked event names in PostHog */
@@ -75,6 +76,7 @@ export const POSTHOG_EVENTS = {
   bookmarkDeleted: 'bookmark_deleted',
   highlightCreated: 'highlight_created',
   highlightDeleted: 'highlight_deleted',
+  annotationCreated: 'annotation_created',
 
   // Monetization
   paywallViewed: 'paywall_viewed',

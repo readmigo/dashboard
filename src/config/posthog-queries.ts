@@ -372,6 +372,119 @@ WHERE timestamp >= now() - INTERVAL ${days} DAY
 GROUP BY is_internal`;
 
 // ============================================================
+// 13. Highlight & Annotation Analytics
+// ============================================================
+
+/** Highlight user penetration: daily highlight users vs DAU */
+export const highlightPenetrationQuery = (days = 30) => `
+SELECT toDate(timestamp) as day,
+       count(DISTINCT CASE WHEN event = 'highlight_created' THEN distinct_id END) as highlight_users,
+       count(DISTINCT distinct_id) as all_active_users,
+       round(highlight_users / all_active_users * 100, 1) as penetration_pct
+FROM events
+WHERE timestamp >= now() - INTERVAL ${days} DAY
+  AND event NOT IN ('$set')
+  AND ${excludeInternalWhere()}
+GROUP BY day
+ORDER BY day`;
+
+/** Highlights per user per day */
+export const highlightsPerUserQuery = (days = 30) => `
+SELECT toDate(timestamp) as day,
+       count() as total_highlights,
+       count(DISTINCT distinct_id) as users,
+       round(total_highlights / users, 1) as per_user
+FROM events
+WHERE event = 'highlight_created'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND ${excludeInternalWhere()}
+GROUP BY day
+ORDER BY day`;
+
+/** Highlight color distribution */
+export const highlightColorQuery = (days = 30) => `
+SELECT properties.color as color,
+       count() as cnt,
+       round(cnt / sum(cnt) OVER () * 100, 1) as pct
+FROM events
+WHERE event = 'highlight_created'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.color IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY color
+ORDER BY cnt DESC`;
+
+/** Highlight style distribution */
+export const highlightStyleQuery = (days = 30) => `
+SELECT properties.style as style,
+       count() as cnt,
+       round(cnt / sum(cnt) OVER () * 100, 1) as pct
+FROM events
+WHERE event = 'highlight_created'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.style IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY style
+ORDER BY cnt DESC`;
+
+/** Text length distribution (bucketed) */
+export const highlightTextLengthQuery = (days = 30) => `
+SELECT
+  CASE
+    WHEN toInt64OrNull(toString(properties.text_length)) < 20 THEN '< 20 chars'
+    WHEN toInt64OrNull(toString(properties.text_length)) < 50 THEN '20-50 chars'
+    WHEN toInt64OrNull(toString(properties.text_length)) < 100 THEN '50-100 chars'
+    ELSE '100+ chars'
+  END as length_bucket,
+  count() as cnt,
+  round(cnt / sum(cnt) OVER () * 100, 1) as pct
+FROM events
+WHERE event = 'highlight_created'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.text_length IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY length_bucket
+ORDER BY cnt DESC`;
+
+/** Top highlighted books */
+export const topHighlightedBooksQuery = (days = 30, limit = 10) => `
+SELECT properties.book_title as book,
+       count() as highlights,
+       count(DISTINCT distinct_id) as users
+FROM events
+WHERE event = 'highlight_created'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.book_title IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY book
+ORDER BY highlights DESC
+LIMIT ${limit}`;
+
+/** Highlight create vs delete trend */
+export const highlightCreateDeleteQuery = (days = 30) => `
+SELECT toDate(timestamp) as day,
+       countIf(event = 'highlight_created') as created,
+       countIf(event = 'highlight_deleted') as deleted
+FROM events
+WHERE event IN ('highlight_created', 'highlight_deleted')
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND ${excludeInternalWhere()}
+GROUP BY day
+ORDER BY day`;
+
+/** Highlight platform distribution */
+export const highlightPlatformQuery = (days = 30) => `
+SELECT properties.platform as platform,
+       count() as cnt,
+       count(DISTINCT distinct_id) as users
+FROM events
+WHERE event = 'highlight_created'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND ${excludeInternalWhere()}
+GROUP BY platform
+ORDER BY cnt DESC`;
+
+// ============================================================
 // Helper: Build PostHog query request body
 // ============================================================
 

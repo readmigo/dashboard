@@ -31,6 +31,7 @@ import { SubscriptionDashboard } from './pages/subscriptions';
 import { PushNotificationsPage } from './pages/push-notifications';
 import { CostManagementPage } from './pages/CostManagement';
 import { DailyReportPage } from './pages/daily-report';
+import { HighlightAnalyticsPage } from './pages/highlight-analytics';
 import BookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -149,6 +150,7 @@ export const App = () => (
               <Route path="/push-notifications" element={<PushNotificationsPage />} />
               <Route path="/cost-management" element={<CostManagementPage />} />
               <Route path="/daily-report" element={<DailyReportPage />} />
+              <Route path="/highlight-analytics" element={<HighlightAnalyticsPage />} />
             </CustomRoutes>
           </Admin>
         </ContentLanguageProvider>
