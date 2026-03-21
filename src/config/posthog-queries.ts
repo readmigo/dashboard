@@ -145,7 +145,7 @@ SELECT event,
 FROM events
 WHERE event IN (
   'paywall_viewed', 'paywall_dismissed',
-  'purchase_initiated', 'subscription_purchased',
+  'subscribe_button_tapped', 'subscription_purchased',
   'billing_query_products_success'
 )
   AND timestamp >= now() - INTERVAL ${days} DAY

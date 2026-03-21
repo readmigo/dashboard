@@ -400,16 +400,16 @@ echo ""
 echo "## 七、付费转化"
 echo ""
 
-PAYMENT=$(hogql "SELECT event, count() as cnt, count(DISTINCT distinct_id) as users FROM events WHERE event IN ('paywall_viewed', 'paywall_dismissed', 'purchase_initiated', 'subscription_purchased') AND timestamp >= now() - INTERVAL ${DAYS} DAY ${EXCLUDE} GROUP BY event ORDER BY cnt DESC")
+PAYMENT=$(hogql "SELECT event, count() as cnt, count(DISTINCT distinct_id) as users FROM events WHERE event IN ('paywall_viewed', 'paywall_dismissed', 'subscribe_button_tapped', 'subscription_purchased') AND timestamp >= now() - INTERVAL ${DAYS} DAY ${EXCLUDE} GROUP BY event ORDER BY cnt DESC")
 
 echo "$PAYMENT" | python3 -c "
 import json, sys
 data = json.load(sys.stdin)
-names = {'paywall_viewed':'Paywall 曝光','paywall_dismissed':'Paywall 关闭','purchase_initiated':'发起购买','subscription_purchased':'购买成功'}
+names = {'paywall_viewed':'Paywall 曝光','paywall_dismissed':'Paywall 关闭','subscribe_button_tapped':'点击订阅','subscription_purchased':'购买成功'}
 metrics = {r[0]: r for r in data['results']}
 print('| 指标 | 次数 | 用户数 |')
 print('|------|------|--------|')
-for key in ['paywall_viewed','paywall_dismissed','purchase_initiated','subscription_purchased']:
+for key in ['paywall_viewed','paywall_dismissed','subscribe_button_tapped','subscription_purchased']:
     r = metrics.get(key, [key, 0, 0])
     print(f'| {names[key]} | {r[1]} | {r[2]} |')
 pv = metrics.get('paywall_viewed', [0,0,0])

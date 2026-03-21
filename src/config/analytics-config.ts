@@ -81,7 +81,7 @@ export const POSTHOG_EVENTS = {
   // Monetization
   paywallViewed: 'paywall_viewed',
   paywallDismissed: 'paywall_dismissed',
-  purchaseInitiated: 'purchase_initiated',
+  subscribeButtonTapped: 'subscribe_button_tapped',
   subscriptionPurchased: 'subscription_purchased',
   billingQueryProductsSuccess: 'billing_query_products_success',
 
