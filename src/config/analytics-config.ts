@@ -105,6 +105,7 @@ export const INTERNAL_USER_IDS = [
   '88952c83-83f1-4bdc-a7a0-85f3c3e4c2ab', // iOS/iPad multi-version tester (10 versions, 8854 events)
   'a14b013d-fd4c-4f23-91e0-41e0dcf92417',  // Android Pixel 3a dev device (11 versions, 898 events)
   '7ca8da67-4861-4267-a1b5-be3b357b438d',  // Android OnePlus8Pro tester (7 versions, 132 events)
+  '88c99ab9-4f25-52cc-8999-3e58d559ec41',  // iOS iPhone 11 Pro Max test device (10+ versions, 15000+ events)
 ] as const;
 
 /** HogQL WHERE clause to exclude internal users */
