@@ -1357,6 +1357,24 @@ export const englishTranslations = {
       serviceHub: 'Service Hub',
     },
   },
+  // Daily Report View
+  dailyReportView: {
+    title: 'Daily Operations Report',
+    subtitle: 'From pipeline daily_reports table, internal test users excluded · Timezone UTC',
+    refresh: 'Refresh',
+    notFound: 'No report found for this date',
+    legacyNotice: 'This is a legacy report — only core metrics are shown. Top content, engagement, and push details are only available for reports generated after the storage upgrade.',
+    footer: 'Data source: pipeline daily_reports table · Generated daily at 00:10 UTC by GitHub Actions',
+    tab: { view: 'Daily View', trend: 'Trends & Forecast' },
+    quick: { yesterday: 'Yesterday', dayBefore: 'Day Before', weekAgo: '7 Days Ago' },
+    kpi: { signups: 'New Signups', readingMin: 'Reading (min)', conversion: 'Conversion', errors: 'Sentry Errors', uptime: 'API Uptime' },
+    section: {
+      user: 'Users', ebook: 'Ebook Reading', audiobook: 'Audiobook',
+      businessMix: 'Business Mix', engagement: 'User Engagement', monetization: 'Monetization',
+      push: 'Push Notifications', website: 'Website Traffic (readmigo.app)',
+      health: 'System Health', crossCheck: 'Cross-Validation', contentInteract: 'Content Interaction',
+    },
+  },
   // Push Notifications
   pushNotifications: {
     title: 'Push Notifications',

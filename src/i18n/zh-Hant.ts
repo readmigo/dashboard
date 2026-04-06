@@ -1305,6 +1305,24 @@ export const traditionalChineseTranslations = {
       },
     },
   },
+  // 每日營運日報
+  dailyReportView: {
+    title: '每日營運日報',
+    subtitle: '來自 pipeline daily_reports 表，已排除內部測試用戶 · 時區 UTC',
+    refresh: '重新整理',
+    notFound: '此日期暫無日報資料',
+    legacyNotice: '此日期為舊版日報，僅顯示核心指標。Top 內容、參與度比較、推播明細等需要 storage 升級後產生的日報才能查閱。',
+    footer: '資料來源：pipeline daily_reports 表 · 由 GitHub Actions 每日 00:10 UTC 自動產生',
+    tab: { view: '日報查閱', trend: '趨勢預測' },
+    quick: { yesterday: '昨日', dayBefore: '前日', weekAgo: '7日前' },
+    kpi: { signups: '新註冊', readingMin: '閱讀時長 (分鐘)', conversion: '付費轉化', errors: 'Sentry 錯誤', uptime: 'API 可用率' },
+    section: {
+      user: '用戶', ebook: '電子書閱讀', audiobook: '有聲書',
+      businessMix: '業務比重', engagement: '用戶參與度比較', monetization: '變現',
+      push: 'Push 通知', website: '官網流量 (readmigo.app)',
+      health: '系統健康', crossCheck: '交叉驗證', contentInteract: '內容互動',
+    },
+  },
   // Push Notifications
   pushNotifications: {
     title: '推播通知',

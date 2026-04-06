@@ -1309,6 +1309,24 @@ export const chineseTranslations = {
       metricsDesc: '跟踪 AI 交互，包括聊天消息、翻译、解释和其他 AI 驱动的功能。监控使用模式和成本。',
     },
   },
+  // 每日运营日报
+  dailyReportView: {
+    title: '每日运营日报',
+    subtitle: '来自 pipeline daily_reports 表，已排除内部测试用户 · 时区 UTC',
+    refresh: '刷新',
+    notFound: '该日期暂无日报数据',
+    legacyNotice: '此日期为旧版日报，仅展示核心指标。Top 内容、参与度对比、推送明细等需要 storage 升级后产生的日报才能查看。',
+    footer: '数据来源：pipeline daily_reports 表 · 由 GitHub Actions 每日 00:10 UTC 自动生成',
+    tab: { view: '日报查阅', trend: '趋势预测' },
+    quick: { yesterday: '昨日', dayBefore: '前日', weekAgo: '7日前' },
+    kpi: { signups: '新注册', readingMin: '阅读时长 (分钟)', conversion: '付费转化', errors: 'Sentry 错误', uptime: 'API 可用率' },
+    section: {
+      user: '用户', ebook: '电子书阅读', audiobook: '有声书',
+      businessMix: '业务比重', engagement: '用户参与度对比', monetization: '变现',
+      push: 'Push 通知', website: '官网流量 (readmigo.app)',
+      health: '系统健康', crossCheck: '交叉验证', contentInteract: '内容互动',
+    },
+  },
   // Push Notifications
   pushNotifications: {
     title: '推送通知',
