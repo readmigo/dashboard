@@ -61,11 +61,22 @@ export const POSTHOG_EVENTS = {
   readerSettingChanged: 'reader_setting_changed',
 
   // Audiobook
+  // Properties added 2026-04-26 to most player events: audiobook_source ("librivox" | "tts_v3"),
+  // voice_id (string | null, set when audiobook_source = "tts_v3"). audiobook_play_started also
+  // carries is_resume (bool, true when the session resumes from saved progress).
   audiobookStarted: 'audiobook_started',
   audiobookLoadStarted: 'audiobook_load_started',
   audiobookPlayStarted: 'audiobook_play_started',
   audiobookPlayEnded: 'audiobook_play_ended',
   audiobookSessionEnded: 'audiobook_session_ended',
+  audiobookListViewed: 'audiobook_list_viewed',
+  audiobookCardTapped: 'audiobook_card_tapped',
+  // sub_tab: "librivox" | "tts_v3", carried by list/grid/continue events for source segmentation.
+  audiobookSubtabSwitched: 'audiobook_subtab_switched',
+  audiobookGridLoaded: 'audiobook_grid_loaded',
+  audiobookGridLoadFailed: 'audiobook_grid_load_failed',
+  audiobookContinueListeningTapped: 'audiobook_continue_listening_tapped',
+  ttsAudiobookVoiceChanged: 'tts_audiobook_voice_changed',
 
   // TTS
   ttsStarted: 'tts_started',

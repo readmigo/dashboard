@@ -277,6 +277,52 @@ ORDER BY tts_starts DESC
 LIMIT ${limit}`;
 
 // ============================================================
+// 9b. Audiobook source breakdown (added 2026-04-26)
+// Requires events emitted with audiobook_source / voice_id / sub_tab.
+// Events shipped on iOS only; rows pre-2026-04-26 will have null values.
+// ============================================================
+
+/** Plays split by audiobook source (librivox vs tts_v3) */
+export const audiobookPlaysBySourceQuery = (days = 30) => `
+SELECT properties.audiobook_source as source,
+       count() as plays,
+       count(DISTINCT distinct_id) as listeners
+FROM events
+WHERE event = 'audiobook_play_started'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.audiobook_source IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY source
+ORDER BY plays DESC`;
+
+/** Top AI 伴读 voices by play count */
+export const topTtsVoicesQuery = (days = 30, limit = 10) => `
+SELECT properties.voice_id as voice_id,
+       count() as plays,
+       count(DISTINCT distinct_id) as listeners
+FROM events
+WHERE event = 'audiobook_play_started'
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND properties.audiobook_source = 'tts_v3'
+  AND properties.voice_id IS NOT NULL
+  AND ${excludeInternalWhere()}
+GROUP BY voice_id
+ORDER BY plays DESC
+LIMIT ${limit}`;
+
+/** Continue Listening entry conversion: tap → play_started (resume) */
+export const continueListeningConversionQuery = (days = 30) => `
+SELECT properties.sub_tab as sub_tab,
+       countIf(event = 'audiobook_continue_listening_tapped') as taps,
+       countIf(event = 'audiobook_play_started' AND properties.is_resume = true) as resumed_plays
+FROM events
+WHERE event IN ('audiobook_continue_listening_tapped', 'audiobook_play_started')
+  AND timestamp >= now() - INTERVAL ${days} DAY
+  AND ${excludeInternalWhere()}
+GROUP BY sub_tab
+ORDER BY taps DESC`;
+
+// ============================================================
 // 10. User Language & Locale Analysis
 // ============================================================
 
