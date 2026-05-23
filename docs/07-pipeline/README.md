@@ -1,16 +1,16 @@
 ---
-title: CI/CD 流水线
+title: CI / CD Pipeline
 phase: pipeline
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# CI/CD 流水线
+# CI / CD Pipeline
 
-## 索引
+## Index
 
-- [ci.md](./ci.md) — CI 流程
-- [cd.md](./cd.md) — CD 流程
-- [secrets.md](./secrets.md) — 密钥管理
-- [twelve-factor-audit.md](./twelve-factor-audit.md) — Twelve-Factor 自审（仅 Service）
+- [ci.md](./ci.md) — CI flow
+- [cd.md](./cd.md) — CD flow
+- [secrets.md](./secrets.md) — Secrets management
+- [twelve-factor-audit.md](./twelve-factor-audit.md) — Twelve-Factor self-audit (services only)

@@ -1,26 +1,26 @@
 ---
-title: 打包构建产物
+title: Packaging & Build Artefacts
 phase: app
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 打包构建产物
+# Packaging & Build Artefacts
 
-## 产物形态
+## Artefact format
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 构建命令
+## Build commands
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 签名/校验
+## Signing & verification
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 产物分发
+## Artefact distribution
 
-_待团队补全_。
+_TODO: team to fill in._
 

@@ -1,42 +1,42 @@
 ---
-title: 单元测试计划 (IEEE 829)
+title: Unit Test Plan (IEEE 829)
 phase: ut
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 单元测试计划 (IEEE 829)
+# Unit Test Plan (IEEE 829)
 
-## 范围 (Scope)
+## Scope
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 测试项 (Items)
+## Test items
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 需测特性 (Features to be Tested)
+## Features to be tested
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 不测特性 (Features Not to be Tested)
+## Features not to be tested
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 方法 (Approach)
+## Approach
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 通过/失败标准 (Pass/Fail Criteria)
+## Pass/Fail criteria
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 挂起/恢复条件 (Suspension/Resumption)
+## Suspension & resumption criteria
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 产出物 (Deliverables)
+## Deliverables
 
-_待团队补全_。
+_TODO: team to fill in._
 

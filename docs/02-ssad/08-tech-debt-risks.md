@@ -1,22 +1,22 @@
 ---
-title: arc42 §8 — 技术债与风险
+title: arc42 §8 — Technical Debt & Risks
 phase: ssad
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# arc42 §8 — 技术债与风险
+# arc42 §8 — Technical Debt & Risks
 
-## 已知技术债
+## Known technical debt
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 风险登记册
+## Risk register
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 演进路线
+## Evolution roadmap
 
-_待团队补全_。
+_TODO: team to fill in._
 

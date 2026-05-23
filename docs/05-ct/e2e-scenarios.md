@@ -1,22 +1,22 @@
 ---
-title: E2E 场景
+title: E2E Scenarios
 phase: ct
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# E2E 场景
+# E2E Scenarios
 
-## 关键用户旅程
+## Key user journeys
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 场景矩阵
+## Scenario matrix
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 执行命令
+## Execution commands
 
-_待团队补全_。
+_TODO: team to fill in._
 

@@ -1,26 +1,26 @@
 ---
-title: CD 流程
+title: CD Flow
 phase: pipeline
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# CD 流程
+# CD Flow
 
-## 触发条件
+## Triggers
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 环境矩阵
+## Environment matrix
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 发布步骤
+## Release steps
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 回滚联动
+## Rollback coupling
 
-_待团队补全_。
+_TODO: team to fill in._
 

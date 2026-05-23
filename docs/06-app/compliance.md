@@ -1,26 +1,26 @@
 ---
-title: 合规
+title: Compliance
 phase: app
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 合规
+# Compliance
 
-## 隐私政策对应
+## Privacy policy mapping
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 年龄分级
+## Age rating
 
-_待团队补全_。
+_TODO: team to fill in._
 
 ## GDPR / CCPA
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 版权与许可证
+## Copyright & licensing
 
-_待团队补全_。
+_TODO: team to fill in._
 

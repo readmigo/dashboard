@@ -1,22 +1,22 @@
 ---
-title: 测试金字塔（单测层）
+title: Test Pyramid (unit layer)
 phase: ut
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 测试金字塔（单测层）
+# Test Pyramid (unit layer)
 
-## 单测在金字塔的位置
+## Position in the pyramid
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 边界 vs CT/E2E
+## Boundary vs CT / E2E
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 比例目标
+## Ratio targets
 
-_待团队补全_。
+_TODO: team to fill in._
 

@@ -1,22 +1,22 @@
 ---
-title: 设计理由
+title: Design Rationale
 phase: sdd
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 设计理由
+# Design Rationale
 
-## 关键决策与依据
+## Key decisions & justification
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 相关 ADR
+## Related ADRs
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 权衡分析
+## Trade-off analysis
 
-_待团队补全_。
+_TODO: team to fill in._
 

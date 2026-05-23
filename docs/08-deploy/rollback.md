@@ -1,26 +1,26 @@
 ---
-title: 回滚手册
+title: Rollback Runbook
 phase: deploy
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 回滚手册
+# Rollback Runbook
 
-## 触发条件
+## Trigger conditions
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 回滚步骤
+## Rollback steps
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 验证步骤
+## Verification steps
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 事后通报
+## Post-rollback communication
 
-_待团队补全_。
+_TODO: team to fill in._
 

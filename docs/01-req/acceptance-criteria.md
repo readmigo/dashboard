@@ -1,22 +1,22 @@
 ---
-title: 验收标准
+title: Acceptance Criteria
 phase: req
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 验收标准
+# Acceptance Criteria
 
-## 功能性验收
+## Functional acceptance
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 性能验收
+## Performance acceptance
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 安全验收
+## Security acceptance
 
-_待团队补全_。
+_TODO: team to fill in._
 

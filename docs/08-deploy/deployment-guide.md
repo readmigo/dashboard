@@ -1,26 +1,26 @@
 ---
-title: 部署指南
+title: Deployment Guide
 phase: deploy
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 部署指南
+# Deployment Guide
 
-## 环境清单
+## Environment inventory
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 部署步骤
+## Deployment steps
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 前置依赖
+## Prerequisites
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 验证清单
+## Verification checklist
 
-_待团队补全_。
+_TODO: team to fill in._
 

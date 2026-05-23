@@ -1,26 +1,26 @@
 ---
-title: 密钥管理
+title: Secrets Management
 phase: pipeline
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 密钥管理
+# Secrets Management
 
-## 密钥清单
+## Secrets inventory
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 存储位置
+## Storage location
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 轮转流程
+## Rotation policy
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 泄露应急
+## Leak response
 
-_待团队补全_。
+_TODO: team to fill in._
 

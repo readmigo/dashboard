@@ -1,34 +1,34 @@
 ---
-title: arc42 §7 — 横切关注点
+title: arc42 §7 — Cross-Cutting Concepts
 phase: ssad
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# arc42 §7 — 横切关注点
+# arc42 §7 — Cross-Cutting Concepts
 
-## 日志
+## Logging
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 监控与可观测性
+## Monitoring & observability
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 安全
+## Security
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 国际化 (i18n)
+## Internationalization (i18n)
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 性能
+## Performance
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 可访问性 (a11y)
+## Accessibility (a11y)
 
-_待团队补全_。
+_TODO: team to fill in._
 

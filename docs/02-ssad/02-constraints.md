@@ -1,22 +1,22 @@
 ---
-title: arc42 §2 — 约束
+title: arc42 §2 — Constraints
 phase: ssad
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# arc42 §2 — 约束
+# arc42 §2 — Constraints
 
-## 技术约束
+## Technical constraints
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 组织约束
+## Organizational constraints
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 法律/合规约束
+## Legal & compliance constraints
 
-_待团队补全_。
+_TODO: team to fill in._
 

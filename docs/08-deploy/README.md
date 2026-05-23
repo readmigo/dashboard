@@ -1,20 +1,20 @@
 ---
-title: 部署与运维 (Google SRE)
+title: Deployment & Operations (Google SRE)
 phase: deploy
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 部署与运维 (Google SRE)
+# Deployment & Operations (Google SRE)
 
-本阶段对齐 [Google SRE Workbook](https://sre.google/workbook/) 核心实践。
+This phase aligns with the [Google SRE Workbook](https://sre.google/workbook/).
 
-## 索引
+## Index
 
-- [sli-slo.md](./sli-slo.md) — SLI/SLO + Error Budget
-- [deployment-guide.md](./deployment-guide.md) — 部署指南
-- [rollback.md](./rollback.md) — 回滚手册
-- [monitoring.md](./monitoring.md) — 监控告警（含 4 黄金信号）
-- [runbooks.md](./runbooks.md) — On-call 操作手册
-- [postmortem-template.md](./postmortem-template.md) — 事故复盘模板
+- [sli-slo.md](./sli-slo.md) — SLI / SLO / Error Budget
+- [deployment-guide.md](./deployment-guide.md) — Deployment guide
+- [rollback.md](./rollback.md) — Rollback runbook
+- [monitoring.md](./monitoring.md) — Monitoring & alerting (Four Golden Signals)
+- [runbooks.md](./runbooks.md) — On-call runbooks
+- [postmortem-template.md](./postmortem-template.md) — Postmortem template

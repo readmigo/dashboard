@@ -1,26 +1,26 @@
 ---
-title: 覆盖率基线
+title: Coverage Baseline
 phase: ut
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 覆盖率基线
+# Coverage Baseline
 
-## 当前覆盖率
+## Current coverage
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 基线目标
+## Baseline target
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 提升计划
+## Improvement plan
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 工具与命令
+## Tools & commands
 
-_待团队补全_。
+_TODO: team to fill in._
 

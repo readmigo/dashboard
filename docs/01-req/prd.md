@@ -1,26 +1,26 @@
 ---
-title: 产品需求文档
+title: Product Requirements Document
 phase: req
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 产品需求文档
+# Product Requirements Document
 
-## 目标与价值主张
+## Goals & value proposition
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 范围
+## Scope
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 关键功能
+## Key features
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 约束与依赖
+## Constraints & dependencies
 
-_待团队补全_。
+_TODO: team to fill in._
 

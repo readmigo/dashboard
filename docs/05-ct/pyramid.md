@@ -1,22 +1,22 @@
 ---
-title: 测试金字塔（集成层）
+title: Test Pyramid (integration layer)
 phase: ct
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 测试金字塔（集成层）
+# Test Pyramid (integration layer)
 
-## CT 在金字塔的位置
+## Position in the pyramid
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 与单测/E2E 的边界
+## Boundary vs UT / E2E
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 比例目标
+## Ratio targets
 
-_待团队补全_。
+_TODO: team to fill in._
 

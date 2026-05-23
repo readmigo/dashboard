@@ -1,22 +1,22 @@
 ---
-title: arc42 §1 — 引言与目标
+title: arc42 §1 — Introduction & Goals
 phase: ssad
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# arc42 §1 — 引言与目标
+# arc42 §1 — Introduction & Goals
 
-## 任务陈述
+## Task statement
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 质量目标 (top 3)
+## Top 3 quality goals
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 利益相关者
+## Stakeholders
 
-_待团队补全_。
+_TODO: team to fill in._
 

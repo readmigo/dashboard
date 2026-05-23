@@ -1,22 +1,22 @@
 ---
-title: arc42 §6 — 运行时视图
+title: arc42 §6 — Runtime View
 phase: ssad
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# arc42 §6 — 运行时视图
+# arc42 §6 — Runtime View
 
-## 关键场景
+## Key scenarios
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 时序图
+## Sequence diagrams
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 错误恢复路径
+## Error recovery paths
 
-_待团队补全_。
+_TODO: team to fill in._
 

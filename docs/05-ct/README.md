@@ -1,18 +1,18 @@
 ---
-title: 集成测试
+title: Component / Integration Tests
 phase: ct
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 集成测试
+# Component / Integration Tests
 
-本阶段含 IEEE 829 测试计划 + 跨 repo 契约测试。
+This phase covers IEEE 829 test planning plus consumer-driven contract testing.
 
-## 索引
+## Index
 
-- [test-plan.md](./test-plan.md) — 集成测试计划
-- [e2e-scenarios.md](./e2e-scenarios.md) — E2E 场景
-- [contract-testing.md](./contract-testing.md) — 跨 repo 契约 (PACT)
-- [pyramid.md](./pyramid.md) — 测试金字塔位置
+- [test-plan.md](./test-plan.md) — Integration test plan
+- [e2e-scenarios.md](./e2e-scenarios.md) — E2E scenarios
+- [contract-testing.md](./contract-testing.md) — Cross-repo contract tests (PACT-style)
+- [pyramid.md](./pyramid.md) — Position in the test pyramid

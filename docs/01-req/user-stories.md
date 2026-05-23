@@ -1,22 +1,22 @@
 ---
-title: 用户故事
+title: User Stories
 phase: req
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 用户故事
+# User Stories
 
-## 用户角色
+## User roles
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 主要故事
+## Primary stories
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 边缘故事
+## Edge stories
 
-_待团队补全_。
+_TODO: team to fill in._
 

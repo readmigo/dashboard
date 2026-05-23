@@ -8,19 +8,19 @@ last_updated: 2026-05-23
 
 # On-call Runbooks
 
-## Runbook 索引
+## Runbook index
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 常见告警处置
+## Common alerts & responses
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 升级路径
+## Escalation paths
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 联系人
+## Contacts
 
-_待团队补全_。
+_TODO: team to fill in._
 

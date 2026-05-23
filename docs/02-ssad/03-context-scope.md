@@ -1,22 +1,22 @@
 ---
-title: arc42 §3 — 上下文与范围
+title: arc42 §3 — Context & Scope
 phase: ssad
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# arc42 §3 — 上下文与范围
+# arc42 §3 — Context & Scope
 
-## 业务上下文
+## Business context
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 技术上下文
+## Technical context
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 外部接口
+## External interfaces
 
-_待团队补全_。
+_TODO: team to fill in._
 

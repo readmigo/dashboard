@@ -1,42 +1,42 @@
 ---
-title: 非功能需求 (ISO 25010)
+title: Non-functional Requirements (ISO 25010)
 phase: req
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 非功能需求 (ISO 25010)
+# Non-functional Requirements (ISO 25010)
 
-## 功能适合性 (Functional Suitability)
+## Functional Suitability
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 性能效率 (Performance Efficiency)
+## Performance Efficiency
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 兼容性 (Compatibility)
+## Compatibility
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 易用性 (Usability)
+## Usability
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 可靠性 (Reliability)
+## Reliability
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 安全性 (Security)
+## Security
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 可维护性 (Maintainability)
+## Maintainability
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 可移植性 (Portability)
+## Portability
 
-_待团队补全_。
+_TODO: team to fill in._
 

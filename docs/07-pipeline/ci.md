@@ -1,26 +1,26 @@
 ---
-title: CI 流程
+title: CI Flow
 phase: pipeline
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# CI 流程
+# CI Flow
 
-## 触发条件
+## Triggers
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 步骤
+## Steps
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 门禁
+## Gates
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 加速策略 (cache/matrix)
+## Acceleration (cache / matrix)
 
-_待团队补全_。
+_TODO: team to fill in._
 

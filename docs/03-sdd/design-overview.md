@@ -1,22 +1,22 @@
 ---
-title: 设计概览
+title: Design Overview
 phase: sdd
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 设计概览
+# Design Overview
 
-## 整体方法
+## Overall approach
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 关键设计决策
+## Key design decisions
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 与 02-ssad 的对应
+## Mapping to 02-ssad
 
-_待团队补全_。
+_TODO: team to fill in._
 

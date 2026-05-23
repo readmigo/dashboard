@@ -1,26 +1,26 @@
 ---
-title: 设计视图
+title: Design Views
 phase: sdd
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 设计视图
+# Design Views
 
-## 接口视图 (Interface View)
+## Interface View
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 模块视图 (Module View)
+## Module View
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 数据视图 (Data View)
+## Data View
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 状态视图 (State View)
+## State View
 
-_待团队补全_。
+_TODO: team to fill in._
 

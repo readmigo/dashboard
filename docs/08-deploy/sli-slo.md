@@ -8,8 +8,8 @@ last_updated: 2026-05-23
 
 # SLI / SLO / Error Budget
 
-本节必须含 SLI/SLO 表格（status: active 时）。
+When status is `active`, this section must include an SLI/SLO table.
 
-| SLI | 度量方式 | SLO 目标 | 测量窗口 |
+| SLI | Measurement | SLO target | Window |
 |---|---|---|---|
-| _待填_ | _待填_ | _待填_ | _待填_ |
+| _to fill_ | _to fill_ | _to fill_ | _to fill_ |

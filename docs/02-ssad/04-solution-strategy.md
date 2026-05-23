@@ -1,22 +1,22 @@
 ---
-title: arc42 §4 — 解决方案策略
+title: arc42 §4 — Solution Strategy
 phase: ssad
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# arc42 §4 — 解决方案策略
+# arc42 §4 — Solution Strategy
 
-## 技术决策
+## Technical decisions
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 架构模式
+## Architectural patterns
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 关键质量属性的实现策略
+## Quality-attribute strategies
 
-_待团队补全_。
+_TODO: team to fill in._
 

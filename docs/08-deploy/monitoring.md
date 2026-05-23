@@ -1,30 +1,30 @@
 ---
-title: 监控告警 (4 黄金信号)
+title: Monitoring & Alerting (Four Golden Signals)
 phase: deploy
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 监控告警 (4 黄金信号)
+# Monitoring & Alerting (Four Golden Signals)
 
-## 延迟 (Latency)
+## Latency
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 流量 (Traffic)
+## Traffic
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 错误 (Errors)
+## Errors
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 饱和度 (Saturation)
+## Saturation
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 告警路由
+## Alert routing
 
-_待团队补全_。
+_TODO: team to fill in._
 

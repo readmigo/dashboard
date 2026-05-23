@@ -1,22 +1,22 @@
 ---
-title: ADR 索引
+title: ADR index
 phase: adr
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# ADR 索引
+# ADR index
 
-本目录存放 dashboard 的 Architecture Decision Records（Nygard 格式）。每个决策一个文件，文件名 `NNNN-{title}.md`，序号连续。
+This directory stores Architecture Decision Records for dashboard in [Nygard format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions). One ADR per file, named `NNNN-{title}.md` with sequential numbering.
 
-## ADR 列表
+## ADR list
 
-尚无 ADR。新增请用 `pnpm new-adr --title="..."`（工具上线前可手工创建）。
+No ADRs yet. Create new ones with `pnpm new-adr --title="..."` (tool ships in a follow-up phase; manual creation works today).
 
-## Nygard 模板
+## Nygard template
 
-每个 ADR 必须包含：
+Every ADR must contain:
 
 - `## Status` (proposed / accepted / deprecated / superseded)
 - `## Context`

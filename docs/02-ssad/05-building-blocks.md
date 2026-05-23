@@ -1,18 +1,18 @@
 ---
-title: arc42 §5 — 构件视图 (C4)
+title: arc42 §5 — Building Block View (C4)
 phase: ssad
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# arc42 §5 — 构件视图 (C4)
+# arc42 §5 — Building Block View (C4)
 
-本节必须包含至少一张 [Mermaid C4](https://mermaid.js.org/syntax/c4.html) 图。
+This section must include at least one [Mermaid C4](https://mermaid.js.org/syntax/c4.html) diagram.
 
 ## Level 1: System Context
 
 ```mermaid
 C4Context
-  title 系统上下文图（待团队补全）
+  title System context (team to fill in)
 ```

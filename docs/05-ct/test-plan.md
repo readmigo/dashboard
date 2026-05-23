@@ -1,34 +1,34 @@
 ---
-title: 集成测试计划 (IEEE 829)
+title: Integration Test Plan (IEEE 829)
 phase: ct
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 集成测试计划 (IEEE 829)
+# Integration Test Plan (IEEE 829)
 
-## 范围
+## Scope
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 测试项
+## Test items
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 环境
+## Environment
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 方法
+## Approach
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 通过/失败标准
+## Pass/Fail criteria
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 产出物
+## Deliverables
 
-_待团队补全_。
+_TODO: team to fill in._
 

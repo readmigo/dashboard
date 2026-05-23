@@ -1,26 +1,26 @@
 ---
-title: 设计标识
+title: Design Identification
 phase: sdd
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 设计标识
+# Design Identification
 
-## 名称
+## Name
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 范围
+## Scope
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 版本
+## Version
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 关联文档
+## Related documents
 
-_待团队补全_。
+_TODO: team to fill in._
 

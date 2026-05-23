@@ -1,26 +1,26 @@
 ---
-title: 设计语言（类型/Schema/契约）
+title: Design Language (Types / Schemas / Contracts)
 phase: sdd
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 设计语言（类型/Schema/契约）
+# Design Language (Types / Schemas / Contracts)
 
-## 类型定义
+## Type definitions
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## Schema 定义
+## Schema definitions
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 接口契约
+## API contracts
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 错误码
+## Error codes
 
-_待团队补全_。
+_TODO: team to fill in._
 

@@ -1,22 +1,22 @@
 ---
-title: 版本记录
+title: Release Notes
 phase: app
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 版本记录
+# Release Notes
 
-## 当前版本
+## Current release
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 历史版本
+## Release history
 
-_待团队补全_。
+_TODO: team to fill in._
 
 ## Breaking changes
 
-_待团队补全_。
+_TODO: team to fill in._
 

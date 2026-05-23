@@ -1,34 +1,34 @@
 ---
-title: 事故复盘模板
+title: Postmortem Template
 phase: deploy
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 事故复盘模板
+# Postmortem Template
 
-## 事故概要
+## Incident summary
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 时间线
+## Timeline
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 根因分析
+## Root cause analysis
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 影响范围
+## Impact
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 修复与改进项
+## Fixes & improvements
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## Action Items
+## Action items
 
-_待团队补全_。
+_TODO: team to fill in._
 

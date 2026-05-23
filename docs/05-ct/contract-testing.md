@@ -1,26 +1,26 @@
 ---
-title: 跨 repo 契约测试 (PACT 风格)
+title: Cross-repo Contract Testing (PACT-style)
 phase: ct
 status: draft
 owner: data-team
 last_updated: 2026-05-23
 ---
 
-# 跨 repo 契约测试 (PACT 风格)
+# Cross-repo Contract Testing (PACT-style)
 
-## 对端 repo 清单
+## Counterpart repos
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 契约文件位置
+## Contract file locations
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## 生产者/消费者矩阵
+## Producer / consumer matrix
 
-_待团队补全_。
+_TODO: team to fill in._
 
-## CI 集成
+## CI integration
 
-_待团队补全_。
+_TODO: team to fill in._
 
