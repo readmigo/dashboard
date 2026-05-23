@@ -1,0 +1,15 @@
+name: docs-check
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - ".github/workflows/docs-check.yml"
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+
+jobs:
+  docs:
+    uses: readmigo/docs/.github/workflows/sub-repo-docs-check.yml@main
