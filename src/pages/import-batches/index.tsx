@@ -44,8 +44,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import CancelIcon from '@mui/icons-material/Cancel';
 import UndoIcon from '@mui/icons-material/Undo';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { getStoredEnvironment } from '../../contexts/EnvironmentContext';
-import { getApiUrl } from '../../config/environments';
+import { adminFetch } from '../../utils/api-client';
 
 // Status colors
 const STATUS_COLORS: Record<string, 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'> = {
@@ -173,21 +172,8 @@ const BatchStatsSummary = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const env = getStoredEnvironment();
-        const apiUrl = getApiUrl(env);
-        const token = sessionStorage.getItem('adminToken');
-
-        const response = await fetch(`${apiUrl}/admin/import/batches/stats`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'X-Admin-Mode': 'true',
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setStats(data);
-        }
+        const data = await adminFetch<BatchStats>('/admin/import/batches/stats');
+        setStats(data);
       } catch (error) {
         console.error('Failed to fetch batch stats:', error);
       } finally {
@@ -265,35 +251,15 @@ const BatchActions = () => {
   const handleAction = async (action: string) => {
     setLoading(true);
     try {
-      const env = getStoredEnvironment();
-      const apiUrl = getApiUrl(env);
-      const token = sessionStorage.getItem('adminToken');
+      const method = action === 'rollback' ? 'DELETE' : 'POST';
+      const path = `/admin/import/batches/${record.id}/${action}`;
 
-      let method = 'POST';
-      let endpoint = `${apiUrl}/admin/import/batches/${record.id}/${action}`;
-
-      if (action === 'rollback') {
-        method = 'DELETE';
-        endpoint = `${apiUrl}/admin/import/batches/${record.id}/rollback`;
-      }
-
-      const response = await fetch(endpoint, {
-        method,
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'X-Admin-Mode': 'true',
-        },
-      });
-
-      if (response.ok) {
-        notify(translate('importBatches.notifications.actionSuccess', { action }), { type: 'success' });
-        refresh();
-      } else {
-        const error = await response.json();
-        notify(translate('importBatches.notifications.actionFailed', { message: error.message }), { type: 'error' });
-      }
+      await adminFetch(path, { method });
+      notify(translate('importBatches.notifications.actionSuccess', { action }), { type: 'success' });
+      refresh();
     } catch (error) {
-      notify(translate('importBatches.notifications.error', { error: String(error) }), { type: 'error' });
+      const message = error instanceof Error ? error.message : String(error);
+      notify(translate('importBatches.notifications.actionFailed', { message }), { type: 'error' });
     } finally {
       setLoading(false);
       setConfirmDialog(null);

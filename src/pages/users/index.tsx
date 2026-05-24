@@ -51,7 +51,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import BlockIcon from '@mui/icons-material/Block';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useEnvironment } from '../../contexts/EnvironmentContext';
+import { adminFetch } from '../../utils/api-client';
 
 // English level enum matching Prisma schema (only 3 levels)
 const useEnglishLevelChoices = () => {
@@ -355,7 +355,6 @@ const SubscriptionTab = () => {
   const translate = useTranslate();
   const notify = useNotify();
   const refresh = useRefresh();
-  const { apiBaseUrl } = useEnvironment();
   const [subscription, setSubscription] = useState<SubscriptionData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -380,29 +379,14 @@ const SubscriptionTab = () => {
     setError(null);
 
     try {
-      const token = sessionStorage.getItem('adminToken');
-      const res = await fetch(
-        `${apiBaseUrl}/api/v1/admin/subscriptions/${record.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'X-Admin-Mode': 'true',
-          },
-        },
-      );
-
-      if (!res.ok) {
-        throw new Error(`${res.status} ${res.statusText}`);
-      }
-
-      const data = await res.json();
+      const data = await adminFetch<SubscriptionData>(`/api/v1/admin/subscriptions/${record.id}`);
       setSubscription(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load');
     } finally {
       setLoading(false);
     }
-  }, [record?.id, apiBaseUrl]);
+  }, [record?.id]);
 
   useEffect(() => {
     fetchSubscription();
@@ -416,24 +400,10 @@ const SubscriptionTab = () => {
     setActionLoading(true);
 
     try {
-      const token = sessionStorage.getItem('adminToken');
-      const res = await fetch(
-        `${apiBaseUrl}/api/v1/admin/subscriptions/${record.id}/${action}`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'X-Admin-Mode': 'true',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(body),
-        },
-      );
-
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.message || `${res.status} ${res.statusText}`);
-      }
+      await adminFetch(`/api/v1/admin/subscriptions/${record.id}/${action}`, {
+        method: 'POST',
+        body,
+      });
 
       notify(translate('resources.users.subscription.notifications.success'), { type: 'success' });
       setGrantOpen(false);

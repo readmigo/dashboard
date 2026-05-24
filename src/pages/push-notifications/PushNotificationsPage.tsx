@@ -55,7 +55,7 @@ import {
 } from 'recharts';
 import { StatCard } from '../../components/common/StatCard';
 import { brandColors, semanticColors } from '../../theme/brandTokens';
-import { useEnvironment } from '../../contexts/EnvironmentContext';
+import { adminFetch } from '../../utils/api-client';
 import { useTimezone } from '../../contexts/TimezoneContext';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -113,43 +113,18 @@ const STATUS_COLORS: Record<PushLogStatus, 'success' | 'error' | 'info'> = {
   OPENED: 'info',
 };
 
-// ─── Hook: HTTP Client ────────────────────────────────────────────────────────
-
-const useHttpClient = () => {
-  const { apiBaseUrl } = useEnvironment();
-
-  return useCallback(
-    async (path: string, options: RequestInit = {}) => {
-      const token = sessionStorage.getItem('adminToken');
-      const headers = new Headers(options.headers);
-      if (token) headers.set('Authorization', `Bearer ${token}`);
-      headers.set('Content-Type', 'application/json');
-      headers.set('X-Admin-Mode', 'true');
-
-      const res = await fetch(`${apiBaseUrl}${path}`, { ...options, headers });
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.message || `HTTP ${res.status}`);
-      }
-      return res.json();
-    },
-    [apiBaseUrl]
-  );
-};
-
 // ─── Stats Panel ──────────────────────────────────────────────────────────────
 
 const StatsPanel = () => {
   const translate = useTranslate();
   const notify = useNotify();
-  const httpClient = useHttpClient();
   const [stats, setStats] = useState<PushStats | null>(null);
   const [loading, setLoading] = useState(true);
 
   const fetchStats = useCallback(async () => {
     setLoading(true);
     try {
-      const data: PushStats = await httpClient('/api/v1/admin/notifications/stats');
+      const data: PushStats = await adminFetch('/api/v1/admin/notifications/stats');
       setStats(data);
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
@@ -157,7 +132,7 @@ const StatsPanel = () => {
     } finally {
       setLoading(false);
     }
-  }, [httpClient, notify, translate]);
+  }, [notify, translate]);
 
   useEffect(() => {
     fetchStats();
@@ -322,7 +297,6 @@ interface TemplateFormDialogProps {
 const TemplateFormDialog = ({ open, template, onClose, onSaved }: TemplateFormDialogProps) => {
   const translate = useTranslate();
   const notify = useNotify();
-  const httpClient = useHttpClient();
 
   const [name, setName] = useState('');
   const [type, setType] = useState('');
@@ -344,14 +318,14 @@ const TemplateFormDialog = ({ open, template, onClose, onSaved }: TemplateFormDi
     try {
       const payload = { name, type, titleTemplate, bodyTemplate };
       if (template) {
-        await httpClient(`/api/v1/admin/notifications/templates/${template.id}`, {
+        await adminFetch(`/api/v1/admin/notifications/templates/${template.id}`, {
           method: 'PUT',
-          body: JSON.stringify(payload),
+          body: payload,
         });
       } else {
-        await httpClient('/api/v1/admin/notifications/templates', {
+        await adminFetch('/api/v1/admin/notifications/templates', {
           method: 'POST',
-          body: JSON.stringify(payload),
+          body: payload,
         });
       }
       notify(translate('pushNotifications.templates.notifications.saved'), { type: 'success' });
@@ -453,7 +427,6 @@ const TemplateFormDialog = ({ open, template, onClose, onSaved }: TemplateFormDi
 const TemplatesPanel = () => {
   const translate = useTranslate();
   const notify = useNotify();
-  const httpClient = useHttpClient();
   const { formatDateTime } = useTimezone();
 
   const [templates, setTemplates] = useState<PushTemplate[]>([]);
@@ -466,7 +439,7 @@ const TemplatesPanel = () => {
   const fetchTemplates = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await httpClient('/api/v1/admin/notifications/templates');
+      const data = await adminFetch('/api/v1/admin/notifications/templates');
       setTemplates(data.items || data || []);
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
@@ -477,7 +450,7 @@ const TemplatesPanel = () => {
     } finally {
       setLoading(false);
     }
-  }, [httpClient, notify, translate]);
+  }, [notify, translate]);
 
   useEffect(() => {
     fetchTemplates();
@@ -487,7 +460,7 @@ const TemplatesPanel = () => {
     if (!deleteTarget) return;
     setDeleting(true);
     try {
-      await httpClient(`/api/v1/admin/notifications/templates/${deleteTarget.id}`, {
+      await adminFetch(`/api/v1/admin/notifications/templates/${deleteTarget.id}`, {
         method: 'DELETE',
       });
       notify(translate('pushNotifications.templates.notifications.deleted'), { type: 'success' });
@@ -656,7 +629,6 @@ const TemplatesPanel = () => {
 const SendForm = () => {
   const translate = useTranslate();
   const notify = useNotify();
-  const httpClient = useHttpClient();
 
   const [templates, setTemplates] = useState<PushTemplate[]>([]);
   const [selectedTemplateId, setSelectedTemplateId] = useState('');
@@ -670,10 +642,10 @@ const SendForm = () => {
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   useEffect(() => {
-    httpClient('/api/v1/admin/notifications/templates')
-      .then((data) => setTemplates(data.items || data || []))
+    adminFetch<{ items?: PushTemplate[] } | PushTemplate[]>('/api/v1/admin/notifications/templates')
+      .then((data) => setTemplates((data as { items?: PushTemplate[] }).items || (data as PushTemplate[]) || []))
       .catch(() => { /* templates optional */ });
-  }, [httpClient]);
+  }, []);
 
   const handleTemplateSelect = (templateId: string) => {
     setSelectedTemplateId(templateId);
@@ -701,9 +673,9 @@ const SendForm = () => {
         payload.targetIds = userIds.split(',').map((id) => id.trim()).filter(Boolean);
       }
 
-      await httpClient('/api/v1/admin/notifications/broadcast', {
+      await adminFetch('/api/v1/admin/notifications/broadcast', {
         method: 'POST',
-        body: JSON.stringify(payload),
+        body: payload,
       });
 
       notify(translate('pushNotifications.notifications.sent'), { type: 'success' });
@@ -919,7 +891,6 @@ const SendForm = () => {
 const PushLogsTable = () => {
   const translate = useTranslate();
   const notify = useNotify();
-  const httpClient = useHttpClient();
   const { formatDateTime } = useTimezone();
 
   const [logs, setLogs] = useState<PushLog[]>([]);
@@ -937,7 +908,7 @@ const PushLogsTable = () => {
       if (statusFilter) params.set('status', statusFilter);
       if (typeFilter) params.set('type', typeFilter);
 
-      const data: PushLogsResponse = await httpClient(
+      const data: PushLogsResponse = await adminFetch(
         `/api/v1/admin/notifications/push-logs?${params}`
       );
       setLogs(data.items || []);
@@ -950,7 +921,7 @@ const PushLogsTable = () => {
     } finally {
       setLoading(false);
     }
-  }, [httpClient, notify, page, rowsPerPage, statusFilter, typeFilter, translate]);
+  }, [notify, page, rowsPerPage, statusFilter, typeFilter, translate]);
 
   useEffect(() => {
     fetchLogs();

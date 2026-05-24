@@ -24,8 +24,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WarningIcon from '@mui/icons-material/Warning';
 import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
-import { getStoredEnvironment } from '../../contexts/EnvironmentContext';
-import { getApiUrl } from '../../config/environments';
+import { adminFetch } from '../../utils/api-client';
 
 interface ImportMetrics {
   booksPerMinute: number;
@@ -83,25 +82,16 @@ export const ImportMonitoring = () => {
     setLoading(true);
     setError(null);
     try {
-      const env = getStoredEnvironment();
-      const apiUrl = getApiUrl(env);
-      const token = sessionStorage.getItem('adminToken');
-
-      const headers = {
-        'Authorization': `Bearer ${token}`,
-        'X-Admin-Mode': 'true',
-      };
-
-      const [healthRes, activityRes] = await Promise.all([
-        fetch(`${apiUrl}/admin/import/monitoring/health`, { headers }),
-        fetch(`${apiUrl}/admin/import/monitoring/activity?days=7`, { headers }),
+      const [healthData, activityData] = await Promise.allSettled([
+        adminFetch<HealthStatus>('/admin/import/monitoring/health'),
+        adminFetch<ActivitySummary[]>('/admin/import/monitoring/activity?days=7'),
       ]);
 
-      if (healthRes.ok) {
-        setHealth(await healthRes.json());
+      if (healthData.status === 'fulfilled') {
+        setHealth(healthData.value);
       }
-      if (activityRes.ok) {
-        setActivity(await activityRes.json());
+      if (activityData.status === 'fulfilled') {
+        setActivity(activityData.value);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch monitoring data');

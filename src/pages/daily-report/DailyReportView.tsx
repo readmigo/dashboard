@@ -8,8 +8,7 @@ import {
 import RefreshIcon from '@mui/icons-material/Refresh';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
-import { getApiUrl } from '../../config/environments';
-import { getStoredEnvironment } from '../../contexts/EnvironmentContext';
+import { adminFetch } from '../../utils/api-client';
 import { brandColors, semanticColors, textColors, bgColors } from '../../theme/brandTokens';
 
 // ---------------- Types matching api response ----------------
@@ -180,23 +179,15 @@ export function DailyReportView() {
     setLoading(true);
     setError(null);
     try {
-      const env = getStoredEnvironment();
-      const apiUrl = getApiUrl(env);
-      const res = await fetch(`${apiUrl}/api/v1/admin/operations/daily-reports/${targetDate}`, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
-          'X-Admin-Mode': 'true',
-        },
-      });
-      if (res.status === 404) {
+      const result = await adminFetch<ApiResponse>(`/api/v1/admin/operations/daily-reports/${targetDate}`);
+      setData(result);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      if (message.includes('HTTP 404') || message.includes('404')) {
         setData(null);
         setError(translate('dailyReportView.notFound', { _: 'No report found for this date' }));
         return;
       }
-      if (!res.ok) throw new Error(`API error: ${res.status}`);
-      const result: ApiResponse = await res.json();
-      setData(result);
-    } catch (err) {
       setError((err as Error).message);
     } finally {
       setLoading(false);

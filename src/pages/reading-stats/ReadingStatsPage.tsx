@@ -22,7 +22,7 @@ import { BookRankingTable } from './components/BookRankingTable';
 import { UserRankingTable } from './components/UserRankingTable';
 import { CategoryChart } from './components/CategoryChart';
 import { TimeHeatmap } from './components/TimeHeatmap';
-import { useEnvironment } from '../../contexts/EnvironmentContext';
+import { buildAuthHeaders, getApiBaseUrl } from '../../utils/api-client';
 import { useTimezone } from '../../contexts/TimezoneContext';
 import { brandColors, semanticColors } from '../../theme/brandTokens';
 
@@ -87,7 +87,6 @@ interface TrendDataPoint {
 }
 
 export const ReadingStatsPage = () => {
-  const { apiBaseUrl } = useEnvironment();
   const { timezone } = useTimezone();
   const translate = useTranslate();
   const [loading, setLoading] = useState(true);
@@ -106,14 +105,8 @@ export const ReadingStatsPage = () => {
     setError(null);
 
     try {
-      const token = sessionStorage.getItem('adminToken');
-
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        'X-Admin-Mode': 'true',
-      };
-
-      const baseUrl = `${apiBaseUrl}/api/v1/admin/reading-stats`;
+      const headers = buildAuthHeaders();
+      const baseUrl = `${getApiBaseUrl()}/api/v1/admin/reading-stats`;
 
       const now = new Date();
       const defaultStart = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
@@ -197,7 +190,7 @@ export const ReadingStatsPage = () => {
 
   useEffect(() => {
     fetchData();
-  }, [apiBaseUrl, timezone]);
+  }, [timezone]);
 
   if (loading) {
     return (

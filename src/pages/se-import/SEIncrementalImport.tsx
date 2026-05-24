@@ -27,7 +27,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { useTranslate } from 'react-admin';
-import { useEnvironment } from '../../contexts/EnvironmentContext';
+import { adminFetch } from '../../utils/api-client';
 
 type SEEnvironment = 'local' | 'production';
 
@@ -63,7 +63,6 @@ interface SEImportRun {
 }
 
 export function SEIncrementalImport() {
-  const { apiBaseUrl } = useEnvironment();
   const translate = useTranslate();
 
   const environmentOptions: { value: SEEnvironment; label: string; color: string }[] = [
@@ -137,25 +136,13 @@ export function SEIncrementalImport() {
     setError(null);
 
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${apiBaseUrl}/api/v1/admin/pipeline/se-incremental`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-          'X-Admin-Mode': 'true',
-        },
-        body: JSON.stringify({
-          environment: selectedEnvironment,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to start SE import');
-      }
-
-      const data = await response.json();
+      const data = await adminFetch<{ runId: string; environment: SEEnvironment; status: string; startedAt: string; error?: string }>(
+        '/api/v1/admin/pipeline/se-incremental',
+        {
+          method: 'POST',
+          body: { environment: selectedEnvironment },
+        }
+      );
       const newRun: SEImportRun = {
         runId: data.runId,
         environment: data.environment,
@@ -178,35 +165,24 @@ export function SEIncrementalImport() {
 
     setRefreshLoading(true);
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(
-        `${apiBaseUrl}/api/v1/admin/pipeline/se-incremental/${currentRun.runId}/status`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'X-Admin-Mode': 'true',
-          },
-        }
+      const data = await adminFetch<SEImportStatus>(
+        `/api/v1/admin/pipeline/se-incremental/${currentRun.runId}/status`
       );
-
-      if (response.ok) {
-        const data: SEImportStatus = await response.json();
-        setCurrentRun((prev) => {
-          if (!prev) return null;
-          return {
-            ...prev,
-            status: data.status,
-            error: data.error,
-            importStatus: data,
-          };
-        });
-      }
+      setCurrentRun((prev) => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          status: data.status,
+          error: data.error,
+          importStatus: data,
+        };
+      });
     } catch (err) {
       console.error('Failed to refresh status:', err);
     } finally {
       setRefreshLoading(false);
     }
-  }, [apiBaseUrl, currentRun]);
+  }, [currentRun]);
 
   const handleNewImport = () => {
     setCurrentRun(null);

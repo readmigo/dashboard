@@ -9,8 +9,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import { getApiUrl } from '../../config/environments';
-import { getStoredEnvironment } from '../../contexts/EnvironmentContext';
+import { adminFetch } from '../../utils/api-client';
 import { brandColors } from '../../theme/brandTokens';
 
 interface DailyReportRow {
@@ -102,16 +101,7 @@ export function DailyReportTrendsView() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const env = getStoredEnvironment();
-        const apiUrl = getApiUrl(env);
-        const res = await fetch(`${apiUrl}/api/v1/admin/operations/daily-reports?days=${days}`, {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
-            'X-Admin-Mode': 'true',
-          },
-        });
-        if (!res.ok) throw new Error(`API error: ${res.status}`);
-        const result = await res.json();
+        const result = await adminFetch<DailyReportRow[]>(`/api/v1/admin/operations/daily-reports?days=${days}`);
         setData(result);
       } catch (err) {
         setError((err as Error).message);

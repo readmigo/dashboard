@@ -51,7 +51,7 @@ import {
   highlightPlatformQuery,
   buildHogQLRequest,
 } from '../../config/posthog-queries';
-import { useEnvironment } from '../../contexts/EnvironmentContext';
+import { adminFetch } from '../../utils/api-client';
 import { brandColors, semanticColors, chartPalette } from '../../theme/brandTokens';
 
 // Color mapping for highlight colors
@@ -95,7 +95,6 @@ const runHogQL = async (query: string): Promise<HogQLResult> => {
 };
 
 export const HighlightAnalyticsPage = () => {
-  const { apiBaseUrl } = useEnvironment();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -185,14 +184,8 @@ export const HighlightAnalyticsPage = () => {
 
       // Fetch hot paragraphs from self-built API
       try {
-        const token = sessionStorage.getItem('adminToken');
-        const hotRes = await fetch(`${apiBaseUrl}/api/v1/annotations/stats/hot-paragraphs?limit=20`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        });
-        if (hotRes.ok) {
-          const hotData = await hotRes.json();
-          setHotParagraphs(Array.isArray(hotData) ? hotData : hotData.data || []);
-        }
+        const hotData = await adminFetch<HotParagraph[] | { data?: HotParagraph[] }>('/api/v1/annotations/stats/hot-paragraphs?limit=20');
+        setHotParagraphs(Array.isArray(hotData) ? hotData : (hotData as { data?: HotParagraph[] }).data || []);
       } catch {
         // Hot paragraphs are optional, don't fail the page
       }
@@ -201,7 +194,7 @@ export const HighlightAnalyticsPage = () => {
     } finally {
       setLoading(false);
     }
-  }, [apiBaseUrl]);
+  }, []);
 
   useEffect(() => {
     fetchData();

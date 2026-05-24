@@ -29,7 +29,7 @@ import {
 } from 'recharts';
 import { StatCard } from '../../components/common/StatCard';
 import { brandColors, semanticColors } from '../../theme/brandTokens';
-import { useEnvironment } from '../../contexts/EnvironmentContext';
+import { adminFetch } from '../../utils/api-client';
 
 interface SubscriptionStats {
   totalUsers: number;
@@ -46,7 +46,6 @@ interface SubscriptionStats {
 
 export const SubscriptionDashboard = () => {
   const translate = useTranslate();
-  const { apiBaseUrl } = useEnvironment();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState<SubscriptionStats | null>(null);
@@ -56,23 +55,7 @@ export const SubscriptionDashboard = () => {
     setError(null);
 
     try {
-      const token = sessionStorage.getItem('adminToken');
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        'X-Admin-Mode': 'true',
-      };
-
-      const res = await fetch(
-        `${apiBaseUrl}/api/v1/admin/subscriptions/stats/overview`,
-        { headers },
-      );
-
-      if (!res.ok) {
-        const body = await res.text();
-        throw new Error(`API error: ${res.status} ${res.statusText} - ${body}`);
-      }
-
-      const data = await res.json();
+      const data = await adminFetch<SubscriptionStats>('/api/v1/admin/subscriptions/stats/overview');
       setStats(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : translate('subscriptionDashboard.unknownError'));
@@ -83,7 +66,7 @@ export const SubscriptionDashboard = () => {
 
   useEffect(() => {
     fetchData();
-  }, [apiBaseUrl]);
+  }, []);
 
   if (loading) {
     return (
