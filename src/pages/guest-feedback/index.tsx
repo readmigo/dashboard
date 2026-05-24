@@ -46,16 +46,9 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState, useEffect, useMemo } from 'react';
 import DebugErrorBoundary, { debugLog } from '../../components/DebugErrorBoundary';
-import { getStoredEnvironment } from '../../contexts/EnvironmentContext';
-import { getApiUrl } from '../../config/environments';
 import { useTimezone } from '../../contexts/TimezoneContext';
 import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
-
-// Helper to get API base URL for custom fetch calls
-const getApiBaseUrl = () => {
-  const env = getStoredEnvironment();
-  return `${getApiUrl(env)}/api/v1/admin`;
-};
+import { adminFetch } from '../../utils/api-client';
 
 // Enums matching backend - will be translated via useTranslate
 const MESSAGE_TYPE_IDS = ['TECHNICAL_ISSUE', 'FEATURE_SUGGESTION', 'GENERAL_INQUIRY', 'PROBLEM_REPORT', 'COMPLAINT', 'BUSINESS_INQUIRY'] as const;
@@ -302,25 +295,15 @@ const StatusChange = ({ feedbackId, currentStatus, onSuccess }: StatusChangeProp
 
     setUpdating(true);
     try {
-      const apiUrl = getApiBaseUrl();
-      const response = await fetch(`${apiUrl}/guest-feedback/${feedbackId}/status`, {
+      await adminFetch(`/guest-feedback/${feedbackId}/status`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
-          'X-Admin-Mode': 'true',
-        },
-        body: JSON.stringify({ status: newStatus }),
+        body: { status: newStatus },
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to update status');
-      }
 
       setStatus(newStatus);
       notify(translate('resources.guestFeedback.notifications.statusUpdated'), { type: 'success' });
       onSuccess();
-    } catch (error) {
+    } catch {
       notify(translate('resources.guestFeedback.notifications.statusUpdateFailed'), { type: 'error' });
     } finally {
       setUpdating(false);
@@ -372,25 +355,15 @@ const ReplyForm = ({ feedbackId, existingReply, onSuccess }: ReplyFormProps) => 
 
     setSending(true);
     try {
-      const apiUrl = getApiBaseUrl();
-      const response = await fetch(`${apiUrl}/guest-feedback/${feedbackId}/reply`, {
+      await adminFetch(`/guest-feedback/${feedbackId}/reply`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
-          'X-Admin-Mode': 'true',
-        },
-        body: JSON.stringify({ reply: content, closeAfterReply }),
+        body: { reply: content, closeAfterReply },
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to send reply');
-      }
 
       notify(translate('resources.guestFeedback.notifications.replySent'), { type: 'success' });
       setContent('');
       onSuccess();
-    } catch (error) {
+    } catch {
       notify(translate('resources.guestFeedback.notifications.replyFailed'), { type: 'error' });
     } finally {
       setSending(false);

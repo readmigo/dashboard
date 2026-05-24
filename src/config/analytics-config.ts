@@ -9,7 +9,7 @@ export const POSTHOG_CONFIG = {
   // Personal API Key (All Access) - for management API queries
   personalApiKey: import.meta.env.VITE_POSTHOG_PERSONAL_API_KEY || '',
   // Project API Key - for SDK event capture only
-  projectApiKey: 'phc_ChsWRAqbh0LOxd0jmyBLem5oSa1ffqobQZfs5FXc2X0',
+  projectApiKey: import.meta.env.VITE_POSTHOG_PROJECT_API_KEY || '',
 } as const;
 
 export const POSTHOG_API = {

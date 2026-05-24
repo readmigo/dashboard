@@ -27,14 +27,14 @@ import {
   useTranslate,
 } from 'react-admin';
 import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
-import { Chip, Box, Stack, Avatar, AvatarGroup } from '@mui/material';
+import { Chip, Box, Stack, Avatar, AvatarGroup, Tooltip } from '@mui/material';
 import PublishIcon from '@mui/icons-material/Publish';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
-import { Tooltip } from '@mui/material';
+import { adminFetch } from '../../utils/api-client';
 
 // Helper function to get translated choices
 const useBooklistChoices = () => {
@@ -217,13 +217,7 @@ const PublishButton = () => {
 
   const handlePublish = async () => {
     try {
-      const response = await fetch(`/api/v1/admin/booklists/${record.id}/publish`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
-        },
-      });
-      if (!response.ok) throw new Error('Failed to publish');
+      await adminFetch(`/api/v1/admin/booklists/${record.id}/publish`, { method: 'POST' });
       notify(translate('resources.booklists.notifications.published'));
       refresh();
     } catch {
@@ -248,13 +242,7 @@ const UnpublishButton = () => {
 
   const handleUnpublish = async () => {
     try {
-      const response = await fetch(`/api/v1/admin/booklists/${record.id}/unpublish`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
-        },
-      });
-      if (!response.ok) throw new Error('Failed to unpublish');
+      await adminFetch(`/api/v1/admin/booklists/${record.id}/unpublish`, { method: 'POST' });
       notify(translate('resources.booklists.notifications.unpublished'));
       refresh();
     } catch {
@@ -279,13 +267,7 @@ const DuplicateButton = () => {
 
   const handleDuplicate = async () => {
     try {
-      const response = await fetch(`/api/v1/admin/booklists/${record.id}/duplicate`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
-        },
-      });
-      if (!response.ok) throw new Error('Failed to duplicate');
+      await adminFetch(`/api/v1/admin/booklists/${record.id}/duplicate`, { method: 'POST' });
       notify(translate('resources.booklists.notifications.duplicated'));
       refresh();
     } catch {

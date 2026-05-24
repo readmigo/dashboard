@@ -439,8 +439,8 @@ const TemplatesPanel = () => {
   const fetchTemplates = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await adminFetch('/api/v1/admin/notifications/templates');
-      setTemplates(data.items || data || []);
+      const data = await adminFetch<{ items?: PushTemplate[] }>('/api/v1/admin/notifications/templates');
+      setTemplates(data.items || []);
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       notify(

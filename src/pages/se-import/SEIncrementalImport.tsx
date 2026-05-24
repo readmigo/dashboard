@@ -136,7 +136,7 @@ export function SEIncrementalImport() {
     setError(null);
 
     try {
-      const data = await adminFetch<{ runId: string; environment: SEEnvironment; status: string; startedAt: string; error?: string }>(
+      const data = await adminFetch<{ runId: string; environment: SEEnvironment; status: SEImportRun['status'] | 'started'; startedAt: string; error?: string }>(
         '/api/v1/admin/pipeline/se-incremental',
         {
           method: 'POST',

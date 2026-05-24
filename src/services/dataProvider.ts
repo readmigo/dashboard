@@ -1,11 +1,8 @@
 import type { DataProvider } from 'react-admin';
-import { getStoredContentLanguage, getStoredEnvironment } from '../stores/appStore';
-import { getApiUrl } from '../config/environments';
+import { getStoredContentLanguage } from '../stores/appStore';
 import { normalizeListResponse } from '../types/api';
-import { httpRequest } from '../utils/api-client';
+import { adminHttpClient, getApiBaseUrl } from '../utils/api-client';
 import { logger } from '../utils/logger';
-
-const getApiBaseUrl = (): string => getApiUrl(getStoredEnvironment());
 
 const RESOURCES_WITHOUT_CONTENT_LANGUAGE: readonly string[] = [
   'tickets',
@@ -27,17 +24,7 @@ const getResourceApiPath = (resource: string): string => {
   return override ? override(base) : `${base}/api/v1/admin/${resource}`;
 };
 
-const buildAuthHeaders = (): Headers => {
-  const headers = new Headers();
-  const token = sessionStorage.getItem('adminToken');
-  if (token) headers.set('Authorization', `Bearer ${token}`);
-  headers.set('X-Admin-Mode', 'true');
-  headers.set('X-Content-Filter', getStoredContentLanguage());
-  return headers;
-};
-
-const httpClient = (url: string, options: { method?: string; body?: string } = {}) =>
-  httpRequest(url, { ...options, headers: buildAuthHeaders() });
+const httpClient = adminHttpClient;
 
 const shouldFilterByContentLanguage = (resource: string, contentLanguage: string): boolean =>
   contentLanguage !== 'all' &&

@@ -40,7 +40,8 @@ import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import { Tooltip } from '@mui/material';
 import { useContentLanguage } from '../../contexts/ContentLanguageContext';
 import { getStoredEnvironment } from '../../contexts/EnvironmentContext';
-import { getApiUrl, getEnvironmentConfig } from '../../config/environments';
+import { getEnvironmentConfig } from '../../config/environments';
+import { adminFetch } from '../../utils/api-client';
 
 // Book status enum matching Prisma schema
 const BOOK_STATUSES = [
@@ -318,33 +319,17 @@ const AudioIndicatorField = ({ label: _label }: { label?: string }) => {
   );
 };
 
-// Helper to get API base URL
-const getApiBaseUrl = () => {
-  const env = getStoredEnvironment();
-  return `${getApiUrl(env)}/api/v1/admin`;
-};
-
 const PublishButton = () => {
   const record = useRecordContext();
   const notify = useNotify();
   const refresh = useRefresh();
   const translate = useTranslate();
-  const { contentLanguage } = useContentLanguage();
 
   if (!record || record.status === 'ACTIVE') return null;
 
   const handlePublish = async () => {
     try {
-      const apiUrl = getApiBaseUrl();
-      const response = await fetch(`${apiUrl}/books/${record.id}/publish`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
-          'X-Admin-Mode': 'true',
-          'X-Content-Filter': contentLanguage,
-        },
-      });
-      if (!response.ok) throw new Error('Failed to publish');
+      await adminFetch(`/api/v1/admin/books/${record.id}/publish`, { method: 'POST' });
       notify(translate('resources.books.notifications.published'));
       refresh();
     } catch {
@@ -364,22 +349,12 @@ const UnpublishButton = () => {
   const notify = useNotify();
   const refresh = useRefresh();
   const translate = useTranslate();
-  const { contentLanguage } = useContentLanguage();
 
   if (!record || record.status !== 'ACTIVE') return null;
 
   const handleUnpublish = async () => {
     try {
-      const apiUrl = getApiBaseUrl();
-      const response = await fetch(`${apiUrl}/books/${record.id}/unpublish`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
-          'X-Admin-Mode': 'true',
-          'X-Content-Filter': contentLanguage,
-        },
-      });
-      if (!response.ok) throw new Error('Failed to unpublish');
+      await adminFetch(`/api/v1/admin/books/${record.id}/unpublish`, { method: 'POST' });
       notify(translate('resources.books.notifications.unpublished'));
       refresh();
     } catch {
