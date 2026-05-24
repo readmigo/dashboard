@@ -1,9 +1,9 @@
 ---
 title: Software Detailed Design (IEEE 1016)
 phase: sdd
-status: draft
+status: active
 owner: data-team
-last_updated: 2026-05-23
+last_updated: 2026-05-24
 ---
 
 # Software Detailed Design (IEEE 1016)

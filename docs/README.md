@@ -1,9 +1,9 @@
 ---
 title: dashboard docs
 phase: ssad
-status: draft
+status: active
 owner: data-team
-last_updated: 2026-05-23
+last_updated: 2026-05-24
 ---
 
 # dashboard docs
@@ -12,17 +12,17 @@ This directory follows the [Readmigo unified docs standard](https://docs.readmig
 
 ## 9-phase index
 
-| Phase | Directory | Description |
-|---|---|---|
-| ADR | [00-adr/](./00-adr/) | Architecture Decision Records |
-| REQ | [01-req/](./01-req/) | Requirements |
-| SSAD | [02-ssad/](./02-ssad/) | System & Software Architecture Design |
-| SDD | [03-sdd/](./03-sdd/) | Software Detailed Design |
-| UT | [04-ut/](./04-ut/) | Unit Tests |
-| CT | [05-ct/](./05-ct/) | Component / Integration Tests |
-| APP | [06-app/](./06-app/) | Application deliverables |
-| PIPELINE | [07-pipeline/](./07-pipeline/) | CI/CD |
-| DEPLOY | [08-deploy/](./08-deploy/) | Deployment & Operations |
+| Phase | Directory | Description | Status |
+|---|---|---|---|
+| ADR | [00-adr/](./00-adr/) | Architecture Decision Records | active |
+| REQ | [01-req/](./01-req/) | Requirements | active |
+| SSAD | [02-ssad/](./02-ssad/) | System & Software Architecture Design | active |
+| SDD | [03-sdd/](./03-sdd/) | Software Detailed Design | active |
+| UT | [04-ut/](./04-ut/) | Unit Tests | active |
+| CT | [05-ct/](./05-ct/) | Component / Integration Tests | active |
+| APP | [06-app/](./06-app/) | Application deliverables | active |
+| PIPELINE | [07-pipeline/](./07-pipeline/) | CI/CD | active |
+| DEPLOY | [08-deploy/](./08-deploy/) | Deployment & Operations | active |
 
 ## Completeness status
 

@@ -1,9 +1,9 @@
 ---
 title: Requirements (IEEE 29148)
 phase: req
-status: draft
+status: active
 owner: data-team
-last_updated: 2026-05-23
+last_updated: 2026-05-24
 ---
 
 # Requirements (IEEE 29148)

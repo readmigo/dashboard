@@ -1,9 +1,9 @@
 ---
 title: CI / CD Pipeline
 phase: pipeline
-status: draft
+status: active
 owner: data-team
-last_updated: 2026-05-23
+last_updated: 2026-05-24
 ---
 
 # CI / CD Pipeline

@@ -1,9 +1,9 @@
 ---
 title: Deployment & Operations (Google SRE)
 phase: deploy
-status: draft
+status: active
 owner: data-team
-last_updated: 2026-05-23
+last_updated: 2026-05-24
 ---
 
 # Deployment & Operations (Google SRE)
