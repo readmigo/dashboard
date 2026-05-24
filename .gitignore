@@ -11,6 +11,9 @@ test-results/
 playwright-report/
 playwright/.cache/
 
+# Vitest
+coverage/
+
 # Claude Code local config
 .claude/
 .env.analytics

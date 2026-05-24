@@ -1,47 +1,16 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
+import { getLogs, logger, type LogEntry } from '../utils/logger';
 
 interface Props {
   children: ReactNode;
-}
-
-interface ErrorLogEntry {
-  timestamp: string;
-  type: 'error' | 'log' | 'warn' | 'data';
-  message: string;
-  data?: unknown;
 }
 
 interface State {
   hasError: boolean;
   error: Error | null;
   errorInfo: ErrorInfo | null;
-  errorLogs: ErrorLogEntry[];
+  errorLogs: LogEntry[];
 }
-
-// Global error log storage - accessible from anywhere
-declare global {
-  interface Window {
-    __DEBUG_LOGS__: ErrorLogEntry[];
-    __DEBUG_LOG__: (type: ErrorLogEntry['type'], message: string, data?: unknown) => void;
-  }
-}
-
-// Initialize global debug logs
-window.__DEBUG_LOGS__ = window.__DEBUG_LOGS__ || [];
-window.__DEBUG_LOG__ = (type: ErrorLogEntry['type'], message: string, data?: unknown) => {
-  const entry: ErrorLogEntry = {
-    timestamp: new Date().toISOString(),
-    type,
-    message,
-    data,
-  };
-  console.log(`[${entry.timestamp}] [${type.toUpperCase()}] ${message}`, data !== undefined ? data : '');
-  window.__DEBUG_LOGS__.push(entry);
-  // Keep only last 200 logs
-  if (window.__DEBUG_LOGS__.length > 200) {
-    window.__DEBUG_LOGS__.shift();
-  }
-};
 
 class GlobalErrorBoundary extends Component<Props, State> {
   public state: State = {
@@ -52,23 +21,15 @@ class GlobalErrorBoundary extends Component<Props, State> {
   };
 
   public static getDerivedStateFromError(error: Error): Partial<State> {
-    return {
-      hasError: true,
-      error,
-      errorLogs: [...window.__DEBUG_LOGS__],
-    };
+    return { hasError: true, error, errorLogs: getLogs() };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('GlobalErrorBoundary caught error:', error, errorInfo);
-    window.__DEBUG_LOG__('error', `Caught by ErrorBoundary: ${error.message}`, {
+    logger.error(`Caught by ErrorBoundary: ${error.message}`, {
       stack: error.stack,
       componentStack: errorInfo.componentStack,
     });
-    this.setState({
-      errorInfo,
-      errorLogs: [...window.__DEBUG_LOGS__],
-    });
+    this.setState({ errorInfo, errorLogs: getLogs() });
   }
 
   private handleCopyError = () => {
@@ -91,10 +52,10 @@ ${error?.stack || 'No stack trace available'}
 ${errorInfo?.componentStack || 'No component stack available'}
 
 === DEBUG LOGS (${errorLogs.length} entries) ===
-${errorLogs.map(log => `[${log.timestamp}] [${log.type.toUpperCase()}] ${log.message}${log.data ? '\n  Data: ' + JSON.stringify(log.data, null, 2) : ''}`).join('\n')}
+${errorLogs.map((log) => `[${log.timestamp}] [${log.type.toUpperCase()}] ${log.message}${log.data ? '\n  Data: ' + JSON.stringify(log.data, null, 2) : ''}`).join('\n')}
 
 === LOCAL STORAGE ===
-${Object.keys(localStorage).map(key => `${key}: ${localStorage.getItem(key)?.substring(0, 100)}...`).join('\n')}
+${Object.keys(localStorage).map((key) => `${key}: ${localStorage.getItem(key)?.substring(0, 100)}...`).join('\n')}
     `.trim();
 
     navigator.clipboard.writeText(errorReport).then(() => {
@@ -177,7 +138,6 @@ ${Object.keys(localStorage).map(key => `${key}: ${localStorage.getItem(key)?.sub
               </button>
             </div>
 
-            {/* Error Message */}
             <div style={{
               backgroundColor: '#2d2d44',
               padding: '15px',
@@ -196,7 +156,6 @@ ${Object.keys(localStorage).map(key => `${key}: ${localStorage.getItem(key)?.sub
               </pre>
             </div>
 
-            {/* Stack Trace */}
             {error?.stack && (
               <div style={{
                 backgroundColor: '#2d2d44',
@@ -225,7 +184,6 @@ ${Object.keys(localStorage).map(key => `${key}: ${localStorage.getItem(key)?.sub
               </div>
             )}
 
-            {/* Component Stack */}
             {errorInfo?.componentStack && (
               <div style={{
                 backgroundColor: '#2d2d44',
@@ -254,7 +212,6 @@ ${Object.keys(localStorage).map(key => `${key}: ${localStorage.getItem(key)?.sub
               </div>
             )}
 
-            {/* Debug Logs */}
             <div style={{
               backgroundColor: '#2d2d44',
               padding: '15px',

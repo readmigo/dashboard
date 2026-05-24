@@ -7,9 +7,6 @@ import { Dashboard } from './pages/Dashboard';
 import { CustomLayout } from './components/CustomLayout';
 import { CustomLoginPage } from './pages/CustomLoginPage';
 import { readmigoTheme } from './theme';
-import { ContentLanguageProvider } from './contexts/ContentLanguageContext';
-import { EnvironmentProvider } from './contexts/EnvironmentContext';
-import { TimezoneProvider } from './contexts/TimezoneContext';
 import GlobalErrorBoundary from './components/GlobalErrorBoundary';
 import { BookList, BookEdit, BookCreate, BookShow } from './pages/books';
 import { UserList, UserShow } from './pages/users';
@@ -48,114 +45,88 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 export const App = () => (
   <GlobalErrorBoundary>
     <BrowserRouter>
-      <EnvironmentProvider>
-      <TimezoneProvider>
-        <ContentLanguageProvider>
-          <Admin
-            dataProvider={dataProvider}
-            authProvider={authProvider}
-            i18nProvider={i18nProvider}
-            dashboard={Dashboard}
-            layout={CustomLayout}
-            loginPage={CustomLoginPage}
-            theme={readmigoTheme}
-            title="Readmigo Admin"
-          >
-            <Resource
-              name="books"
-              list={BookList}
-              edit={BookEdit}
-              create={BookCreate}
-              show={BookShow}
-              icon={BookIcon}
-            />
-            <Resource
-              name="authors"
-              list={AuthorList}
-              edit={AuthorEdit}
-              show={AuthorShow}
-              icon={PersonIcon}
-            />
-            <Resource
-              name="booklists"
-              list={BookListList}
-              edit={BookListEdit}
-              create={BookListCreate}
-              show={BookListShow}
-              icon={ListAltIcon}
-            />
-            <Resource
-              name="categories"
-              list={CategoryList}
-              edit={CategoryEdit}
-              create={CategoryCreate}
-              icon={CategoryIcon}
-            />
-            <Resource
-              name="users"
-              list={UserList}
-              show={UserShow}
-              icon={PeopleIcon}
-            />
-            <Resource
-              name="quotes"
-              list={QuoteList}
-              edit={QuoteEdit}
-              create={QuoteCreate}
-              show={QuoteShow}
-              icon={FormatQuoteIcon}
-            />
-            <Resource
-              name="messages"
-              list={MessageList}
-              show={MessageShow}
-              icon={MessageIcon}
-            />
-            <Resource
-              name="guest-feedback"
-              list={GuestFeedbackList}
-              show={GuestFeedbackShow}
-              icon={ContactSupportIcon}
-            />
-            <Resource
-              name="import/batches"
-              list={ImportBatchList}
-              show={ImportBatchShow}
-              icon={CloudSyncIcon}
-            />
-            <Resource
-              name="tickets"
-              list={TicketList}
-              show={TicketShow}
-              icon={ConfirmationNumberIcon}
-            />
-            <Resource
-              name="feedback"
-              list={FeedbackList}
-              show={FeedbackShow}
-              icon={FeedbackIcon}
-            />
-            <Resource
-              name="orders"
-              list={OrderList}
-              show={OrderShow}
-              icon={ReceiptIcon}
-            />
-            <CustomRoutes>
-              <Route path="/support-dashboard" element={<SupportDashboard />} />
-              <Route path="/reading-stats" element={<ReadingStatsPage />} />
-              <Route path="/se-import" element={<SEIncrementalImport />} />
-              <Route path="/subscription-dashboard" element={<SubscriptionDashboard />} />
-              <Route path="/services" element={<ServiceHub />} />
-              <Route path="/push-notifications" element={<PushNotificationsPage />} />
-              <Route path="/cost-management" element={<CostManagementPage />} />
-              <Route path="/daily-report" element={<DailyReportPage />} />
-              <Route path="/highlight-analytics" element={<HighlightAnalyticsPage />} />
-            </CustomRoutes>
-          </Admin>
-        </ContentLanguageProvider>
-      </TimezoneProvider>
-    </EnvironmentProvider>
-  </BrowserRouter>
+      <Admin
+        dataProvider={dataProvider}
+        authProvider={authProvider}
+        i18nProvider={i18nProvider}
+        dashboard={Dashboard}
+        layout={CustomLayout}
+        loginPage={CustomLoginPage}
+        theme={readmigoTheme}
+        title="Readmigo Admin"
+      >
+        <Resource
+          name="books"
+          list={BookList}
+          edit={BookEdit}
+          create={BookCreate}
+          show={BookShow}
+          icon={BookIcon}
+        />
+        <Resource
+          name="authors"
+          list={AuthorList}
+          edit={AuthorEdit}
+          show={AuthorShow}
+          icon={PersonIcon}
+        />
+        <Resource
+          name="booklists"
+          list={BookListList}
+          edit={BookListEdit}
+          create={BookListCreate}
+          show={BookListShow}
+          icon={ListAltIcon}
+        />
+        <Resource
+          name="categories"
+          list={CategoryList}
+          edit={CategoryEdit}
+          create={CategoryCreate}
+          icon={CategoryIcon}
+        />
+        <Resource name="users" list={UserList} show={UserShow} icon={PeopleIcon} />
+        <Resource
+          name="quotes"
+          list={QuoteList}
+          edit={QuoteEdit}
+          create={QuoteCreate}
+          show={QuoteShow}
+          icon={FormatQuoteIcon}
+        />
+        <Resource name="messages" list={MessageList} show={MessageShow} icon={MessageIcon} />
+        <Resource
+          name="guest-feedback"
+          list={GuestFeedbackList}
+          show={GuestFeedbackShow}
+          icon={ContactSupportIcon}
+        />
+        <Resource
+          name="import/batches"
+          list={ImportBatchList}
+          show={ImportBatchShow}
+          icon={CloudSyncIcon}
+        />
+        <Resource
+          name="tickets"
+          list={TicketList}
+          show={TicketShow}
+          icon={ConfirmationNumberIcon}
+        />
+        <Resource name="feedback" list={FeedbackList} show={FeedbackShow} icon={FeedbackIcon} />
+        <Resource name="orders" list={OrderList} show={OrderShow} icon={ReceiptIcon} />
+        <CustomRoutes>
+          <Route path="/support-dashboard" element={<SupportDashboard />} />
+          <Route path="/reading-stats" element={<ReadingStatsPage />} />
+          <Route path="/se-import" element={<SEIncrementalImport />} />
+          <Route path="/subscription-dashboard" element={<SubscriptionDashboard />} />
+          <Route path="/services" element={<ServiceHub />} />
+          <Route path="/push-notifications" element={<PushNotificationsPage />} />
+          <Route path="/cost-management" element={<CostManagementPage />} />
+          <Route path="/daily-report" element={<DailyReportPage />} />
+          <Route path="/highlight-analytics" element={<HighlightAnalyticsPage />} />
+        </CustomRoutes>
+      </Admin>
+    </BrowserRouter>
   </GlobalErrorBoundary>
 );

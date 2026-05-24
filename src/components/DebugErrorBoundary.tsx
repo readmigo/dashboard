@@ -4,6 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { clearLogs, getLogs, logger } from '../utils/logger';
 
 interface Props {
   children: ReactNode;
@@ -18,25 +19,20 @@ interface State {
   debugLogs: string[];
 }
 
-// Global debug log storage
-const globalDebugLogs: string[] = [];
-
-export const debugLog = (component: string, action: string, data?: unknown) => {
+const formatLogEntry = (component: string, action: string, data?: unknown): string => {
   const timestamp = new Date().toISOString();
-  const logEntry = `[${timestamp}] [${component}] ${action}${data !== undefined ? `: ${JSON.stringify(data, null, 2)}` : ''}`;
-  console.log(logEntry);
-  globalDebugLogs.push(logEntry);
-  // Keep only last 100 logs
-  if (globalDebugLogs.length > 100) {
-    globalDebugLogs.shift();
-  }
+  const payload = data !== undefined ? `: ${JSON.stringify(data, null, 2)}` : '';
+  return `[${timestamp}] [${component}] ${action}${payload}`;
 };
 
-export const clearDebugLogs = () => {
-  globalDebugLogs.length = 0;
+export const debugLog = (component: string, action: string, data?: unknown): void => {
+  logger.debug(`[${component}] ${action}`, data);
 };
 
-export const getDebugLogs = () => [...globalDebugLogs];
+export const clearDebugLogs = (): void => clearLogs();
+
+export const getDebugLogs = (): string[] =>
+  getLogs().map((entry) => formatLogEntry(entry.type, entry.message, entry.data));
 
 class DebugErrorBoundary extends Component<Props, State> {
   public state: State = {
@@ -56,7 +52,11 @@ class DebugErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('DebugErrorBoundary caught error:', error, errorInfo);
+    logger.error(`DebugErrorBoundary caught: ${error.message}`, {
+      componentName: this.props.componentName,
+      stack: error.stack,
+      componentStack: errorInfo.componentStack,
+    });
     this.setState({
       errorInfo,
       debugLogs: getDebugLogs(),

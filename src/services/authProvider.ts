@@ -1,19 +1,12 @@
-import { AuthProvider } from 'react-admin';
-import { getStoredEnvironment } from '../contexts/EnvironmentContext';
+import type { AuthProvider } from 'react-admin';
+import { getStoredEnvironment } from '../stores/appStore';
 import { getApiUrl } from '../config/environments';
+import { logger } from '../utils/logger';
 
-/**
- * Get the admin API URL based on the current environment
- */
-const getAdminApiUrl = (): string => {
-  const env = getStoredEnvironment();
-  return `${getApiUrl(env)}/api/v1/admin`;
-};
+const getAdminApiUrl = (): string => `${getApiUrl(getStoredEnvironment())}/api/v1/admin`;
 
-// Skip authentication when disabled (works in both dev and prod)
 const AUTH_DISABLED = import.meta.env.VITE_AUTH_DISABLED === 'true';
 
-// Mock admin user for development
 const MOCK_ADMIN = {
   id: 'dev-admin',
   email: 'admin@readmigo.com',
@@ -21,12 +14,41 @@ const MOCK_ADMIN = {
   roles: ['admin'],
 };
 
+const TOKEN_KEY = 'adminToken';
+const USER_KEY = 'adminUser';
+
+const setSession = (token: string, user: typeof MOCK_ADMIN | Record<string, unknown>): void => {
+  sessionStorage.setItem(TOKEN_KEY, token);
+  sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+};
+
+const clearSession = (): void => {
+  sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(USER_KEY);
+};
+
+const ensureMockSession = (): void => {
+  if (!sessionStorage.getItem(TOKEN_KEY)) {
+    setSession('dev-token', MOCK_ADMIN);
+  }
+};
+
+const readUser = (): { id: string; displayName?: string; email?: string; avatarUrl?: string; roles?: string[] } | null => {
+  const raw = sessionStorage.getItem(USER_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    logger.warn('Failed to parse stored admin user; clearing session');
+    clearSession();
+    return null;
+  }
+};
+
 export const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
-    // In dev mode with auth disabled, auto-login
     if (AUTH_DISABLED) {
-      sessionStorage.setItem('adminToken', 'dev-token');
-      sessionStorage.setItem('adminUser', JSON.stringify(MOCK_ADMIN));
+      setSession('dev-token', MOCK_ADMIN);
       return;
     }
 
@@ -41,77 +63,52 @@ export const authProvider: AuthProvider = {
     }
 
     const { accessToken, user } = await response.json();
-    sessionStorage.setItem('adminToken', accessToken);
-    sessionStorage.setItem('adminUser', JSON.stringify(user));
+    setSession(accessToken, user);
   },
 
   logout: () => {
-    sessionStorage.removeItem('adminToken');
-    sessionStorage.removeItem('adminUser');
+    clearSession();
     return Promise.resolve();
   },
 
   checkAuth: () => {
-    // In dev mode, auto-authenticate if no token
     if (AUTH_DISABLED) {
-      if (!sessionStorage.getItem('adminToken')) {
-        sessionStorage.setItem('adminToken', 'dev-token');
-        sessionStorage.setItem('adminUser', JSON.stringify(MOCK_ADMIN));
-      }
+      ensureMockSession();
       return Promise.resolve();
     }
-
-    const token = sessionStorage.getItem('adminToken');
-    return token ? Promise.resolve() : Promise.reject();
+    return sessionStorage.getItem(TOKEN_KEY) ? Promise.resolve() : Promise.reject();
   },
 
   checkError: (error) => {
-    if (AUTH_DISABLED) {
-      return Promise.resolve();
-    }
+    if (AUTH_DISABLED) return Promise.resolve();
 
-    const status = error.status;
+    const status = (error as { status?: number }).status;
     if (status === 401 || status === 403) {
-      sessionStorage.removeItem('adminToken');
-      sessionStorage.removeItem('adminUser');
+      clearSession();
       return Promise.reject();
     }
     return Promise.resolve();
   },
 
   getIdentity: () => {
-    // In dev mode, return mock admin
     if (AUTH_DISABLED) {
-      return Promise.resolve({
-        id: MOCK_ADMIN.id,
-        fullName: MOCK_ADMIN.displayName,
-      });
+      return Promise.resolve({ id: MOCK_ADMIN.id, fullName: MOCK_ADMIN.displayName });
     }
 
-    const userStr = sessionStorage.getItem('adminUser');
-    if (!userStr) {
-      return Promise.reject();
-    }
+    const user = readUser();
+    if (!user) return Promise.reject();
 
-    const user = JSON.parse(userStr);
     return Promise.resolve({
       id: user.id,
-      fullName: user.displayName || user.email,
+      fullName: user.displayName ?? user.email,
       avatar: user.avatarUrl,
     });
   },
 
   getPermissions: () => {
-    if (AUTH_DISABLED) {
-      return Promise.resolve(['admin']);
-    }
+    if (AUTH_DISABLED) return Promise.resolve(['admin']);
 
-    const userStr = sessionStorage.getItem('adminUser');
-    if (!userStr) {
-      return Promise.resolve([]);
-    }
-
-    const user = JSON.parse(userStr);
-    return Promise.resolve(user.roles || ['admin']);
+    const user = readUser();
+    return Promise.resolve(user?.roles ?? []);
   },
 };
