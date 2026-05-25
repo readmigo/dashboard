@@ -17,7 +17,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import CloudIcon from '@mui/icons-material/Cloud';
 import LinkOffIcon from '@mui/icons-material/LinkOff';
 import type { ReactNode } from 'react';
-import { brandColors, semanticColors, textColors, bgColors, alpha } from '../../theme/brandTokens';
+import { brandColors, semanticColors, textColors, bgColors, alpha } from '@/theme/brandTokens';
 
 interface ServiceItem {
   nameKey: string;

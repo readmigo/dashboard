@@ -9,8 +9,8 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import { adminFetch } from '../../utils/api-client';
-import { brandColors } from '../../theme/brandTokens';
+import { adminFetch } from '@/utils/api-client';
+import { brandColors } from '@/theme/brandTokens';
 
 interface DailyReportRow {
   date: string;

@@ -27,7 +27,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { useTranslate } from 'react-admin';
-import { adminFetch } from '../../utils/api-client';
+import { adminFetch } from '@/utils/api-client';
 
 type SEEnvironment = 'local' | 'production';
 

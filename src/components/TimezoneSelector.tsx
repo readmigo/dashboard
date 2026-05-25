@@ -1,7 +1,7 @@
 import { Box, Typography, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { useTimezone } from '../contexts/TimezoneContext';
-import { TIMEZONE_OPTIONS } from '../config/timezones';
+import { useTimezone } from '@/contexts/TimezoneContext';
+import { TIMEZONE_OPTIONS } from '@/config/timezones';
 
 export const TimezoneSelector = () => {
   const { timezone, setTimezone } = useTimezone();

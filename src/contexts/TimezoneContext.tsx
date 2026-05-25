@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
-import { TIMEZONE_OPTIONS, TimezoneOption } from '../config/timezones';
-import { useAppStore } from '../stores/appStore';
+import { TIMEZONE_OPTIONS, TimezoneOption } from '@/config/timezones';
+import { useAppStore } from '@/stores/appStore';
 
 export type { TimezoneOption };
 

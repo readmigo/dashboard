@@ -5,10 +5,10 @@ import {
   EnvironmentConfig,
   getApiUrl,
   getEnvironmentConfig,
-} from '../config/environments';
-import { useAppStore } from '../stores/appStore';
+} from '@/config/environments';
+import { useAppStore } from '@/stores/appStore';
 
-export { getStoredEnvironment } from '../stores/appStore';
+export { getStoredEnvironment } from '@/stores/appStore';
 export type { Environment };
 
 export interface EnvironmentHookValue {

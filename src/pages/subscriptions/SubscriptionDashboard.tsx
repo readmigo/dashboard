@@ -27,9 +27,9 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
-import { StatCard } from '../../components/common/StatCard';
-import { brandColors, semanticColors } from '../../theme/brandTokens';
-import { adminFetch } from '../../utils/api-client';
+import { StatCard } from '@/components/common/StatCard';
+import { brandColors, semanticColors } from '@/theme/brandTokens';
+import { adminFetch } from '@/utils/api-client';
 
 interface SubscriptionStats {
   totalUsers: number;

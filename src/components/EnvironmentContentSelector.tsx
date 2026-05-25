@@ -23,8 +23,8 @@ import ComputerIcon from '@mui/icons-material/Computer';
 import LanguageIcon from '@mui/icons-material/Language';
 import PublishIcon from '@mui/icons-material/Publish';
 import { useRefresh, useTranslate } from 'react-admin';
-import { useEnvironment, Environment } from '../contexts/EnvironmentContext';
-import { useContentLanguage, ContentLanguage } from '../contexts/ContentLanguageContext';
+import { useEnvironment, Environment } from '@/contexts/EnvironmentContext';
+import { useContentLanguage, ContentLanguage } from '@/contexts/ContentLanguageContext';
 
 interface EnvironmentOption {
   value: Environment;

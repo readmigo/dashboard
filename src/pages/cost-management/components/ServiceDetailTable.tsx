@@ -16,8 +16,8 @@ import {
   Typography,
 } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
-import type { ServiceCost } from '../../../config/costConfig';
-import { semanticColors, textColors, bgColors, brandColors } from '../../../theme/brandTokens';
+import type { ServiceCost } from '@/config/costConfig';
+import { semanticColors, textColors, bgColors, brandColors } from '@/theme/brandTokens';
 
 const CURRENT_MONTH = '2026-02';
 

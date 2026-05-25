@@ -1,5 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { getLogs, logger, type LogEntry } from '../utils/logger';
+import { getLogs, logger, type LogEntry } from '@/utils/logger';
 
 interface Props {
   children: ReactNode;
@@ -11,6 +11,15 @@ interface State {
   errorInfo: ErrorInfo | null;
   errorLogs: LogEntry[];
 }
+
+const SENSITIVE_KEY_PATTERN = /token|auth|secret|password|user|credential/i;
+
+// Error reports get pasted into chat/issues; never leak credentials.
+const redactStorageValue = (key: string, value: string | null): string => {
+  if (value == null) return 'null';
+  if (SENSITIVE_KEY_PATTERN.test(key)) return '[redacted]';
+  return `${value.substring(0, 100)}${value.length > 100 ? '…' : ''}`;
+};
 
 class GlobalErrorBoundary extends Component<Props, State> {
   public state: State = {
@@ -55,7 +64,7 @@ ${errorInfo?.componentStack || 'No component stack available'}
 ${errorLogs.map((log) => `[${log.timestamp}] [${log.type.toUpperCase()}] ${log.message}${log.data ? '\n  Data: ' + JSON.stringify(log.data, null, 2) : ''}`).join('\n')}
 
 === LOCAL STORAGE ===
-${Object.keys(localStorage).map((key) => `${key}: ${localStorage.getItem(key)?.substring(0, 100)}...`).join('\n')}
+${Object.keys(localStorage).map((key) => `${key}: ${redactStorageValue(key, localStorage.getItem(key))}`).join('\n')}
     `.trim();
 
     navigator.clipboard.writeText(errorReport).then(() => {

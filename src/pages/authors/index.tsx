@@ -22,9 +22,9 @@ import {
   ListButton,
   useTranslate,
 } from 'react-admin';
-import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
+import { TimezoneAwareDateField } from '@/components/TimezoneAwareDateField';
 import { Chip, Box, Avatar, Stack, Typography, Card, CardContent, Divider, Link } from '@mui/material';
-import { useContentLanguage } from '../../contexts/ContentLanguageContext';
+import { useContentLanguage } from '@/contexts/ContentLanguageContext';
 import PublicIcon from '@mui/icons-material/Public';
 import PlaceIcon from '@mui/icons-material/Place';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';

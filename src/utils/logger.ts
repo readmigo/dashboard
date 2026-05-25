@@ -22,14 +22,24 @@ const append = (entry: LogEntry): void => {
   if (buffer.length > MAX_ENTRIES) buffer.shift();
 };
 
+// Always surface problems; keep verbose levels out of the production console.
+// Routed through console.log on purpose — main.tsx patches console.error, so
+// using it here would recurse. The in-memory buffer is populated regardless,
+// so error reports stay complete.
+const ALWAYS_PRINTED: ReadonlySet<LogLevel> = new Set(['error', 'warn']);
+const shouldPrint = (type: LogLevel): boolean =>
+  import.meta.env.DEV || ALWAYS_PRINTED.has(type);
+
 const write = (type: LogLevel, message: string, data?: unknown): LogEntry => {
   const entry: LogEntry = { timestamp: new Date().toISOString(), type, message, data };
   append(entry);
-  const head = `[${entry.timestamp}] [${type.toUpperCase()}] ${message}`;
-  if (data !== undefined) {
-    console.log(head, data);
-  } else {
-    console.log(head);
+  if (shouldPrint(type)) {
+    const head = `[${entry.timestamp}] [${type.toUpperCase()}] ${message}`;
+    if (data !== undefined) {
+      console.log(head, data);
+    } else {
+      console.log(head);
+    }
   }
   return entry;
 };

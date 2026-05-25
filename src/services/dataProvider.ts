@@ -1,8 +1,8 @@
 import type { DataProvider } from 'react-admin';
-import { getStoredContentLanguage } from '../stores/appStore';
-import { normalizeListResponse } from '../types/api';
-import { adminHttpClient, getApiBaseUrl } from '../utils/api-client';
-import { logger } from '../utils/logger';
+import { getStoredContentLanguage } from '@/stores/appStore';
+import { normalizeListResponse } from '@/types/api';
+import { adminHttpClient, getApiBaseUrl } from '@/utils/api-client';
+import { logger } from '@/utils/logger';
 
 const RESOURCES_WITHOUT_CONTENT_LANGUAGE: readonly string[] = [
   'tickets',

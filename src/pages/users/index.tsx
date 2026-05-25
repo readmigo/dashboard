@@ -20,7 +20,7 @@ import {
   useNotify,
   useRefresh,
 } from 'react-admin';
-import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
+import { TimezoneAwareDateField } from '@/components/TimezoneAwareDateField';
 import {
   Chip,
   Box,
@@ -51,7 +51,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import BlockIcon from '@mui/icons-material/Block';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { adminFetch } from '../../utils/api-client';
+import { adminFetch } from '@/utils/api-client';
 
 // English level enum matching Prisma schema (only 3 levels)
 const useEnglishLevelChoices = () => {

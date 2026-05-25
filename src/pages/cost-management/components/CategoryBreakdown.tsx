@@ -7,8 +7,8 @@ import CloudQueueOutlined from '@mui/icons-material/CloudQueueOutlined';
 import MonitorHeartOutlined from '@mui/icons-material/MonitorHeartOutlined';
 import MoreHorizOutlined from '@mui/icons-material/MoreHorizOutlined';
 import { PieChart, Pie, Cell } from 'recharts';
-import type { CostCategory, ServiceCost } from '../../../config/costConfig';
-import { chartPalette, semanticColors, textColors, bgColors, alpha } from '../../../theme/brandTokens';
+import type { CostCategory, ServiceCost } from '@/config/costConfig';
+import { chartPalette, semanticColors, textColors, bgColors, alpha } from '@/theme/brandTokens';
 
 const CURRENT_MONTH = '2026-02';
 

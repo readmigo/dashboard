@@ -1,8 +1,8 @@
 import { useShallow } from 'zustand/react/shallow';
-import { ContentLanguage, useAppStore } from '../stores/appStore';
+import { ContentLanguage, useAppStore } from '@/stores/appStore';
 
 export type { ContentLanguage };
-export { getStoredContentLanguage } from '../stores/appStore';
+export { getStoredContentLanguage } from '@/stores/appStore';
 
 export interface ContentLanguageHookValue {
   contentLanguage: ContentLanguage;

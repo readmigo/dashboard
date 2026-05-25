@@ -11,8 +11,8 @@ import {
   Box,
 } from '@mui/material';
 import { useTranslate } from 'react-admin';
-import { textColors, bgColors, semanticColors, chartPalette, alpha } from '../../../theme/brandTokens';
-import type { ServiceCost } from '../../../config/costConfig';
+import { textColors, bgColors, semanticColors, chartPalette, alpha } from '@/theme/brandTokens';
+import type { ServiceCost } from '@/config/costConfig';
 
 interface PerformanceCostMatrixProps {
   services: ServiceCost[];

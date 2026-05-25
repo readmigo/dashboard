@@ -8,8 +8,8 @@ import {
 import RefreshIcon from '@mui/icons-material/Refresh';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
-import { adminFetch } from '../../utils/api-client';
-import { brandColors, semanticColors, textColors, bgColors } from '../../theme/brandTokens';
+import { adminFetch } from '@/utils/api-client';
+import { brandColors, semanticColors, textColors, bgColors } from '@/theme/brandTokens';
 
 // ---------------- Types matching api response ----------------
 interface TopItem { title: string; sessions?: number; plays?: number; readers?: number; listeners?: number; }

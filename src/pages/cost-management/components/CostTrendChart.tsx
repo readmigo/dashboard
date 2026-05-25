@@ -10,9 +10,9 @@ import {
   Legend,
 } from 'recharts';
 import { useTranslate } from 'react-admin';
-import { chartPalette, textColors } from '../../../theme/brandTokens';
-import { costConfig } from '../../../config/costConfig';
-import type { ServiceCost, CostCategory } from '../../../config/costConfig';
+import { chartPalette, textColors } from '@/theme/brandTokens';
+import { costConfig } from '@/config/costConfig';
+import type { ServiceCost, CostCategory } from '@/config/costConfig';
 
 interface CostTrendChartProps {
   services: ServiceCost[];

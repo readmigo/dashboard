@@ -13,7 +13,7 @@ import {
   Divider,
 } from '@mui/material';
 import { Visibility, VisibilityOff, Email, Lock } from '@mui/icons-material';
-import { brandColors, gradients, shadows, textColors, bgColors, alpha } from '../theme/brandTokens';
+import { brandColors, gradients, shadows, textColors, bgColors, alpha } from '@/theme/brandTokens';
 
 export const CustomLoginPage = () => {
   const [email, setEmail] = useState('');

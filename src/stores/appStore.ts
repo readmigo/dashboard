@@ -1,14 +1,11 @@
 import { create } from 'zustand';
-import { Environment } from '../config/environments';
-import { DEFAULT_TIMEZONE, isValidTimezoneId } from '../config/timezones';
+import { Environment } from '@/config/environments';
+import { DEFAULT_TIMEZONE, isValidTimezoneId } from '@/config/timezones';
+import { LOCAL_STORAGE_KEYS } from '@/config/storage';
 
 export type ContentLanguage = 'all' | 'en' | 'zh';
 
-export const STORAGE_KEYS = {
-  environment: 'dashboard_environment',
-  timezone: 'dashboard_timezone',
-  contentLanguage: 'contentLanguage',
-} as const;
+export const STORAGE_KEYS = LOCAL_STORAGE_KEYS;
 
 const ENVIRONMENT_CHANGE_DEBOUNCE_MS = 100;
 

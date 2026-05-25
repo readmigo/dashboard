@@ -3,9 +3,9 @@ import { useGetList, useTranslate } from 'react-admin';
 import BookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { useTimezone } from '../contexts/TimezoneContext';
-import { brandColors, semanticColors } from '../theme/brandTokens';
-import { StatCard } from '../components/common/StatCard';
+import { useTimezone } from '@/contexts/TimezoneContext';
+import { brandColors, semanticColors } from '@/theme/brandTokens';
+import { StatCard } from '@/components/common/StatCard';
 
 export const Dashboard = () => {
   const translate = useTranslate();

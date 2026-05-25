@@ -1,132 +1,42 @@
 import { Admin, Resource, CustomRoutes } from 'react-admin';
 import { Route, BrowserRouter } from 'react-router-dom';
-import { dataProvider } from './services/dataProvider';
-import { authProvider } from './services/authProvider';
-import { i18nProvider } from './i18n';
-import { Dashboard } from './pages/Dashboard';
-import { CustomLayout } from './components/CustomLayout';
-import { CustomLoginPage } from './pages/CustomLoginPage';
-import { readmigoTheme } from './theme';
-import GlobalErrorBoundary from './components/GlobalErrorBoundary';
-import { BookList, BookEdit, BookCreate, BookShow } from './pages/books';
-import { UserList, UserShow } from './pages/users';
-import { BookListList, BookListEdit, BookListCreate, BookListShow } from './pages/booklists';
-import { CategoryList, CategoryEdit, CategoryCreate } from './pages/categories';
-import { QuoteList, QuoteEdit, QuoteCreate, QuoteShow } from './pages/quotes';
-import { AuthorList, AuthorEdit, AuthorShow } from './pages/authors';
-import { MessageList, MessageShow } from './pages/messages';
-import { GuestFeedbackList, GuestFeedbackShow } from './pages/guest-feedback';
-import { ImportBatchList, ImportBatchShow } from './pages/import-batches';
-import { TicketList, TicketShow } from './pages/tickets';
-import { FeedbackList, FeedbackShow } from './pages/feedback';
-import { OrderList, OrderShow } from './pages/orders';
-import { SupportDashboard } from './pages/support';
-import { ReadingStatsPage } from './pages/reading-stats';
-import { SEIncrementalImport } from './pages/se-import';
-import { ServiceHub } from './pages/services';
-import { SubscriptionDashboard } from './pages/subscriptions';
-import { PushNotificationsPage } from './pages/push-notifications';
-import { CostManagementPage } from './pages/CostManagement';
-import { DailyReportPage } from './pages/daily-report';
-import { HighlightAnalyticsPage } from './pages/highlight-analytics';
-import BookIcon from '@mui/icons-material/MenuBook';
-import PeopleIcon from '@mui/icons-material/People';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import CategoryIcon from '@mui/icons-material/Category';
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import PersonIcon from '@mui/icons-material/Person';
-import MessageIcon from '@mui/icons-material/Message';
-import CloudSyncIcon from '@mui/icons-material/CloudSync';
-import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import FeedbackIcon from '@mui/icons-material/Feedback';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import { dataProvider } from '@/services/dataProvider';
+import { authProvider } from '@/services/authProvider';
+import { i18nProvider } from '@/i18n';
+import { Dashboard } from '@/pages/Dashboard';
+import { CustomLayout } from '@/components/CustomLayout';
+import { CustomLoginPage } from '@/pages/CustomLoginPage';
+import { readmigoTheme } from '@/theme';
+import { resourceNavItems, routeNavItems } from '@/app/navigation';
 
 export const App = () => (
-  <GlobalErrorBoundary>
-    <BrowserRouter>
-      <Admin
-        dataProvider={dataProvider}
-        authProvider={authProvider}
-        i18nProvider={i18nProvider}
-        dashboard={Dashboard}
-        layout={CustomLayout}
-        loginPage={CustomLoginPage}
-        theme={readmigoTheme}
-        title="Readmigo Admin"
-      >
+  <BrowserRouter>
+    <Admin
+      dataProvider={dataProvider}
+      authProvider={authProvider}
+      i18nProvider={i18nProvider}
+      dashboard={Dashboard}
+      layout={CustomLayout}
+      loginPage={CustomLoginPage}
+      theme={readmigoTheme}
+      title="Readmigo Admin"
+    >
+      {resourceNavItems.map((r) => (
         <Resource
-          name="books"
-          list={BookList}
-          edit={BookEdit}
-          create={BookCreate}
-          show={BookShow}
-          icon={BookIcon}
+          key={r.name}
+          name={r.name}
+          list={r.list}
+          edit={r.edit}
+          create={r.create}
+          show={r.show}
+          icon={r.Icon}
         />
-        <Resource
-          name="authors"
-          list={AuthorList}
-          edit={AuthorEdit}
-          show={AuthorShow}
-          icon={PersonIcon}
-        />
-        <Resource
-          name="booklists"
-          list={BookListList}
-          edit={BookListEdit}
-          create={BookListCreate}
-          show={BookListShow}
-          icon={ListAltIcon}
-        />
-        <Resource
-          name="categories"
-          list={CategoryList}
-          edit={CategoryEdit}
-          create={CategoryCreate}
-          icon={CategoryIcon}
-        />
-        <Resource name="users" list={UserList} show={UserShow} icon={PeopleIcon} />
-        <Resource
-          name="quotes"
-          list={QuoteList}
-          edit={QuoteEdit}
-          create={QuoteCreate}
-          show={QuoteShow}
-          icon={FormatQuoteIcon}
-        />
-        <Resource name="messages" list={MessageList} show={MessageShow} icon={MessageIcon} />
-        <Resource
-          name="guest-feedback"
-          list={GuestFeedbackList}
-          show={GuestFeedbackShow}
-          icon={ContactSupportIcon}
-        />
-        <Resource
-          name="import/batches"
-          list={ImportBatchList}
-          show={ImportBatchShow}
-          icon={CloudSyncIcon}
-        />
-        <Resource
-          name="tickets"
-          list={TicketList}
-          show={TicketShow}
-          icon={ConfirmationNumberIcon}
-        />
-        <Resource name="feedback" list={FeedbackList} show={FeedbackShow} icon={FeedbackIcon} />
-        <Resource name="orders" list={OrderList} show={OrderShow} icon={ReceiptIcon} />
-        <CustomRoutes>
-          <Route path="/support-dashboard" element={<SupportDashboard />} />
-          <Route path="/reading-stats" element={<ReadingStatsPage />} />
-          <Route path="/se-import" element={<SEIncrementalImport />} />
-          <Route path="/subscription-dashboard" element={<SubscriptionDashboard />} />
-          <Route path="/services" element={<ServiceHub />} />
-          <Route path="/push-notifications" element={<PushNotificationsPage />} />
-          <Route path="/cost-management" element={<CostManagementPage />} />
-          <Route path="/daily-report" element={<DailyReportPage />} />
-          <Route path="/highlight-analytics" element={<HighlightAnalyticsPage />} />
-        </CustomRoutes>
-      </Admin>
-    </BrowserRouter>
-  </GlobalErrorBoundary>
+      ))}
+      <CustomRoutes>
+        {routeNavItems.map((r) => (
+          <Route key={r.path} path={r.path} element={<r.Component />} />
+        ))}
+      </CustomRoutes>
+    </Admin>
+  </BrowserRouter>
 );

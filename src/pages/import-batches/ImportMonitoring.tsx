@@ -24,7 +24,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WarningIcon from '@mui/icons-material/Warning';
 import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
-import { adminFetch } from '../../utils/api-client';
+import { adminFetch } from '@/utils/api-client';
 
 interface ImportMetrics {
   booksPerMinute: number;
