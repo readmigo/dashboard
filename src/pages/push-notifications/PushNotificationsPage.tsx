@@ -53,10 +53,10 @@ import {
   Bar,
   Legend,
 } from 'recharts';
-import { StatCard } from '../../components/common/StatCard';
-import { brandColors, semanticColors } from '../../theme/brandTokens';
-import { adminFetch } from '../../utils/api-client';
-import { useTimezone } from '../../contexts/TimezoneContext';
+import { StatCard } from '@/components/common/StatCard';
+import { brandColors, semanticColors } from '@/theme/brandTokens';
+import { adminFetch } from '@/utils/api-client';
+import { useTimezone } from '@/contexts/TimezoneContext';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

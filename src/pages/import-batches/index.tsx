@@ -17,7 +17,7 @@ import {
   FilterButton,
   useTranslate,
 } from 'react-admin';
-import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
+import { TimezoneAwareDateField } from '@/components/TimezoneAwareDateField';
 import {
   Card,
   CardContent,
@@ -44,7 +44,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import CancelIcon from '@mui/icons-material/Cancel';
 import UndoIcon from '@mui/icons-material/Undo';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { adminFetch } from '../../utils/api-client';
+import { adminFetch } from '@/utils/api-client';
 
 // Status colors
 const STATUS_COLORS: Record<string, 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'> = {

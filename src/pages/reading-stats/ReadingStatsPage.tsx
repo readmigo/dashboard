@@ -16,15 +16,15 @@ import PeopleIcon from '@mui/icons-material/People';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { useTranslate } from 'react-admin';
-import { StatCard } from '../../components/common/StatCard';
-import { TrendChart } from '../../components/common/TrendChart';
+import { StatCard } from '@/components/common/StatCard';
+import { TrendChart } from '@/components/common/TrendChart';
 import { BookRankingTable } from './components/BookRankingTable';
 import { UserRankingTable } from './components/UserRankingTable';
 import { CategoryChart } from './components/CategoryChart';
 import { TimeHeatmap } from './components/TimeHeatmap';
-import { buildAuthHeaders, getApiBaseUrl } from '../../utils/api-client';
-import { useTimezone } from '../../contexts/TimezoneContext';
-import { brandColors, semanticColors } from '../../theme/brandTokens';
+import { buildAuthHeaders, getApiBaseUrl } from '@/utils/api-client';
+import { useTimezone } from '@/contexts/TimezoneContext';
+import { brandColors, semanticColors } from '@/theme/brandTokens';
 
 const toMinutes = (seconds: number) => Math.round(seconds / 60);
 

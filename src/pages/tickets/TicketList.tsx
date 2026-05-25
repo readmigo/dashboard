@@ -13,7 +13,7 @@ import {
   useTranslate,
   useListContext,
 } from 'react-admin';
-import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
+import { TimezoneAwareDateField } from '@/components/TimezoneAwareDateField';
 import { Chip, Box, Paper, Typography, Alert, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useMemo, Component, ErrorInfo, ReactNode } from 'react';

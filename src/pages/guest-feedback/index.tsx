@@ -45,10 +45,10 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState, useEffect, useMemo } from 'react';
-import DebugErrorBoundary, { debugLog } from '../../components/DebugErrorBoundary';
-import { useTimezone } from '../../contexts/TimezoneContext';
-import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
-import { adminFetch } from '../../utils/api-client';
+import DebugErrorBoundary, { debugLog } from '@/components/DebugErrorBoundary';
+import { useTimezone } from '@/contexts/TimezoneContext';
+import { TimezoneAwareDateField } from '@/components/TimezoneAwareDateField';
+import { adminFetch } from '@/utils/api-client';
 
 // Enums matching backend - will be translated via useTranslate
 const MESSAGE_TYPE_IDS = ['TECHNICAL_ISSUE', 'FEATURE_SUGGESTION', 'GENERAL_INQUIRY', 'PROBLEM_REPORT', 'COMPLAINT', 'BUSINESS_INQUIRY'] as const;

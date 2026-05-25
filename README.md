@@ -44,8 +44,10 @@ graph LR
 ```
 dashboard/
 ├── src/
+│   ├── app/                     # App wiring
+│   │   └── navigation.tsx       # Single source of truth: resources + routes + sidebar (lazy-loaded)
 │   ├── components/              # React component library
-│   │   ├── CustomMenu.tsx       # Navigation menu
+│   │   ├── CustomMenu.tsx       # Navigation menu (driven by app/navigation)
 │   │   ├── CustomAppBar.tsx     # Header navigation bar
 │   │   ├── common/              # Common components (cards, forms, etc.)
 │   │   └── charts/              # Recharts chart components

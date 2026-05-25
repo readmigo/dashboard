@@ -1,4 +1,5 @@
 import polyglotI18nProvider from 'ra-i18n-polyglot';
+import { LOCAL_STORAGE_KEYS } from '@/config/storage';
 import { englishTranslations } from './en';
 import { chineseTranslations } from './zh-Hans';
 import { traditionalChineseTranslations } from './zh-Hant';
@@ -43,7 +44,7 @@ export const detectLocale = (): SupportedLocale => {
  * Get stored locale from localStorage
  */
 export const getStoredLocale = (): SupportedLocale | null => {
-  const stored = localStorage.getItem('locale');
+  const stored = localStorage.getItem(LOCAL_STORAGE_KEYS.locale);
   if (stored === 'en' || stored === 'zh-Hans' || stored === 'zh-Hant' || stored === 'de') {
     return stored;
   }
@@ -54,7 +55,7 @@ export const getStoredLocale = (): SupportedLocale | null => {
  * Store locale in localStorage
  */
 export const setStoredLocale = (locale: SupportedLocale): void => {
-  localStorage.setItem('locale', locale);
+  localStorage.setItem(LOCAL_STORAGE_KEYS.locale, locale);
 };
 
 /**

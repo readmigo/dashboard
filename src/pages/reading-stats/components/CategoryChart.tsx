@@ -1,5 +1,5 @@
 import { Box, Typography, LinearProgress, Grid } from '@mui/material';
-import { brandColors } from '../../../theme/brandTokens';
+import { brandColors } from '@/theme/brandTokens';
 
 interface CategoryStats {
   categoryId: string;

@@ -24,7 +24,7 @@ import {
   ListButton,
   useTranslate,
 } from 'react-admin';
-import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
+import { TimezoneAwareDateField } from '@/components/TimezoneAwareDateField';
 import { Chip, Box, Stack } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 

@@ -1,6 +1,6 @@
 import { useRecordContext } from 'react-admin';
 import { Typography } from '@mui/material';
-import { useTimezone } from '../contexts/TimezoneContext';
+import { useTimezone } from '@/contexts/TimezoneContext';
 
 interface TimezoneAwareDateFieldProps {
   source: string;

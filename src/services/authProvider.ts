@@ -1,7 +1,8 @@
 import type { AuthProvider } from 'react-admin';
-import { getStoredEnvironment } from '../stores/appStore';
-import { getApiUrl } from '../config/environments';
-import { logger } from '../utils/logger';
+import { getStoredEnvironment } from '@/stores/appStore';
+import { getApiUrl } from '@/config/environments';
+import { SESSION_STORAGE_KEYS } from '@/config/storage';
+import { logger } from '@/utils/logger';
 
 const getAdminApiUrl = (): string => `${getApiUrl(getStoredEnvironment())}/api/v1/admin`;
 
@@ -14,8 +15,8 @@ const MOCK_ADMIN = {
   roles: ['admin'],
 };
 
-const TOKEN_KEY = 'adminToken';
-const USER_KEY = 'adminUser';
+const TOKEN_KEY = SESSION_STORAGE_KEYS.token;
+const USER_KEY = SESSION_STORAGE_KEYS.user;
 
 const setSession = (token: string, user: typeof MOCK_ADMIN | Record<string, unknown>): void => {
   sessionStorage.setItem(TOKEN_KEY, token);

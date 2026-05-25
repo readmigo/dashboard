@@ -10,8 +10,8 @@ import {
   Legend,
 } from 'recharts';
 import { useTranslate } from 'react-admin';
-import { chartPalette, textColors, bgColors, semanticColors, alpha } from '../../../theme/brandTokens';
-import type { ServiceCost } from '../../../config/costConfig';
+import { chartPalette, textColors, bgColors, semanticColors, alpha } from '@/theme/brandTokens';
+import type { ServiceCost } from '@/config/costConfig';
 
 interface FourYearTCOProps {
   services: ServiceCost[];

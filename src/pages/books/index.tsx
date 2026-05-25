@@ -29,7 +29,7 @@ import {
   ListButton,
   useTranslate,
 } from 'react-admin';
-import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
+import { TimezoneAwareDateField } from '@/components/TimezoneAwareDateField';
 import { Chip, Box, LinearProgress, Stack, Alert } from '@mui/material';
 import PublishIcon from '@mui/icons-material/Publish';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
@@ -38,10 +38,10 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import { Tooltip } from '@mui/material';
-import { useContentLanguage } from '../../contexts/ContentLanguageContext';
-import { getStoredEnvironment } from '../../contexts/EnvironmentContext';
-import { getEnvironmentConfig } from '../../config/environments';
-import { adminFetch } from '../../utils/api-client';
+import { useContentLanguage } from '@/contexts/ContentLanguageContext';
+import { getStoredEnvironment } from '@/contexts/EnvironmentContext';
+import { getEnvironmentConfig } from '@/config/environments';
+import { adminFetch } from '@/utils/api-client';
 
 // Book status enum matching Prisma schema
 const BOOK_STATUSES = [

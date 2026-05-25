@@ -2,8 +2,8 @@ import { Card, CardContent, Typography, Box, Grid, LinearProgress } from '@mui/m
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import { useTranslate } from 'react-admin';
-import { semanticColors, textColors } from '../../../theme/brandTokens';
-import type { ServiceCost } from '../../../config/costConfig';
+import { semanticColors, textColors } from '@/theme/brandTokens';
+import type { ServiceCost } from '@/config/costConfig';
 
 interface CostSummaryBarProps {
   services: ServiceCost[];

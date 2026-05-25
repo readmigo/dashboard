@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { useTranslate } from 'react-admin';
 import { Card, CardHeader, CardContent, Alert, Box, Typography } from '@mui/material';
-import type { ServiceCost } from '../../../config/costConfig';
-import { textColors } from '../../../theme/brandTokens';
+import type { ServiceCost } from '@/config/costConfig';
+import { textColors } from '@/theme/brandTokens';
 
 const CURRENT_MONTH = '2026-02';
 

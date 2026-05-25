@@ -38,8 +38,8 @@ import {
   BarChart,
   Bar,
 } from 'recharts';
-import { StatCard } from '../../components/common/StatCard';
-import { POSTHOG_CONFIG, POSTHOG_API } from '../../config/analytics-config';
+import { StatCard } from '@/components/common/StatCard';
+import { POSTHOG_CONFIG, POSTHOG_API } from '@/config/analytics-config';
 import {
   highlightPenetrationQuery,
   highlightsPerUserQuery,
@@ -50,9 +50,9 @@ import {
   highlightCreateDeleteQuery,
   highlightPlatformQuery,
   buildHogQLRequest,
-} from '../../config/posthog-queries';
-import { adminFetch } from '../../utils/api-client';
-import { brandColors, semanticColors, chartPalette } from '../../theme/brandTokens';
+} from '@/config/posthog-queries';
+import { adminFetch } from '@/utils/api-client';
+import { brandColors, semanticColors, chartPalette } from '@/theme/brandTokens';
 
 // Color mapping for highlight colors
 const HIGHLIGHT_COLORS: Record<string, string> = {

@@ -26,7 +26,7 @@ import {
   ListButton,
   useTranslate,
 } from 'react-admin';
-import { TimezoneAwareDateField } from '../../components/TimezoneAwareDateField';
+import { TimezoneAwareDateField } from '@/components/TimezoneAwareDateField';
 import { Chip, Box, Stack, Avatar, AvatarGroup, Tooltip } from '@mui/material';
 import PublishIcon from '@mui/icons-material/Publish';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
@@ -34,7 +34,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
-import { adminFetch } from '../../utils/api-client';
+import { adminFetch } from '@/utils/api-client';
 
 // Helper function to get translated choices
 const useBooklistChoices = () => {

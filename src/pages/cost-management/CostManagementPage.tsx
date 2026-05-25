@@ -1,6 +1,6 @@
 import { Box, Typography, Chip } from '@mui/material';
 import { useTranslate } from 'react-admin';
-import { costConfig } from '../../config/costConfig';
+import { costConfig } from '@/config/costConfig';
 import { CostSummaryBar } from './components/CostSummaryBar';
 import { FourYearTCO } from './components/FourYearTCO';
 import { FreeTierUtilization } from './components/FreeTierUtilization';
@@ -9,7 +9,7 @@ import { PerformanceCostMatrix } from './components/PerformanceCostMatrix';
 import { CategoryBreakdown } from './components/CategoryBreakdown';
 import { ServiceDetailTable } from './components/ServiceDetailTable';
 import { BudgetAlerts } from './components/BudgetAlerts';
-import { textColors } from '../../theme/brandTokens';
+import { textColors } from '@/theme/brandTokens';
 
 export const CostManagementPage = () => {
   const translate = useTranslate();

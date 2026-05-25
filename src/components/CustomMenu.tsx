@@ -1,32 +1,27 @@
+import { Fragment } from 'react';
 import { Menu, MenuItemLink, useSidebarState, useTranslate } from 'react-admin';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Divider, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { gradients, textColors } from '../theme/brandTokens';
-import { useEnvironment } from '../contexts/EnvironmentContext';
-import BookIcon from '@mui/icons-material/MenuBook';
-import PeopleIcon from '@mui/icons-material/People';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import CategoryIcon from '@mui/icons-material/Category';
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import PersonIcon from '@mui/icons-material/Person';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import FeedbackIcon from '@mui/icons-material/Feedback';
-import ContactSupportIcon from '@mui/icons-material/ContactSupport';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import MailIcon from '@mui/icons-material/Mail';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import CloudSyncIcon from '@mui/icons-material/CloudSync';
-import RateReviewIcon from '@mui/icons-material/RateReview';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import HubIcon from '@mui/icons-material/Hub';
-import CardMembershipIcon from '@mui/icons-material/CardMembership';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import HighlightIcon from '@mui/icons-material/Highlight';
+import { gradients, textColors } from '@/theme/brandTokens';
+import { useEnvironment } from '@/contexts/EnvironmentContext';
+import { navItems, type NavItem, type NavSection } from '@/app/navigation';
+
+const SECTION_ORDER: NavSection[] = ['main', 'operations', 'support'];
+
+const SECTION_HEADER_KEY: Partial<Record<NavSection, string>> = {
+  operations: 'sidebar.sections.operations',
+  support: 'sidebar.sections.support',
+};
+
+const sectionLabelSx = {
+  px: 2,
+  py: 0.5,
+  color: textColors.secondary,
+  fontWeight: 600,
+  textTransform: 'uppercase',
+  letterSpacing: '0.08em',
+} as const;
 
 export const CustomMenu = () => {
   const location = useLocation();
@@ -34,13 +29,66 @@ export const CustomMenu = () => {
   const translate = useTranslate();
   const { config } = useEnvironment();
 
-  const isSelected = (path: string) => {
-    return location.pathname.startsWith(path);
+  const label = (item: NavItem) =>
+    item.labelFallback
+      ? translate(item.labelKey, { _: item.labelFallback })
+      : translate(item.labelKey);
+
+  const renderItem = (item: NavItem) => {
+    if (item.kind === 'external') {
+      return (
+        <ListItemButton
+          key={item.path}
+          component="a"
+          href={item.href(config)}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            paddingLeft: '16px',
+            paddingRight: '16px',
+            paddingTop: '6px',
+            paddingBottom: '6px',
+            minHeight: 44,
+            color: 'text.secondary',
+            '&:hover': { backgroundColor: 'action.hover' },
+          }}
+        >
+          <ListItemIcon sx={{ minWidth: 40, color: 'inherit' }}>
+            <item.Icon />
+          </ListItemIcon>
+          {open && (
+            <ListItemText
+              primary={
+                <Box component="span" sx={{ display: 'flex', alignItems: 'center' }}>
+                  {label(item)}
+                  <OpenInNewIcon sx={{ fontSize: 12, ml: 0.5, opacity: 0.7 }} />
+                </Box>
+              }
+            />
+          )}
+        </ListItemButton>
+      );
+    }
+
+    const selected =
+      item.kind === 'dashboard'
+        ? location.pathname === '/'
+        : location.pathname.startsWith(item.path);
+
+    return (
+      <MenuItemLink
+        key={item.path}
+        to={item.path}
+        primaryText={label(item)}
+        leftIcon={<item.Icon />}
+        selected={selected}
+        sidebarIsOpen={open}
+      />
+    );
   };
 
   return (
     <Menu>
-      {/* Logo Section */}
       <Box
         sx={{
           display: 'flex',
@@ -55,11 +103,7 @@ export const CustomMenu = () => {
           component="img"
           src="/app-icon.png"
           alt="Readmigo"
-          sx={{
-            width: 36,
-            height: 36,
-            borderRadius: '8px',
-          }}
+          sx={{ width: 36, height: 36, borderRadius: '8px' }}
         />
         {open && (
           <Typography
@@ -78,212 +122,23 @@ export const CustomMenu = () => {
         )}
       </Box>
       <Divider sx={{ mb: 1, mx: 2 }} />
-      <MenuItemLink
-        to="/"
-        primaryText={translate('sidebar.dashboard')}
-        leftIcon={<DashboardIcon />}
-        selected={location.pathname === '/'}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/services"
-        primaryText={translate('sidebar.platform.serviceHub')}
-        leftIcon={<HubIcon />}
-        selected={isSelected('/services')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/books"
-        primaryText={translate('sidebar.books')}
-        leftIcon={<BookIcon />}
-        selected={isSelected('/books')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/authors"
-        primaryText={translate('sidebar.authors')}
-        leftIcon={<PersonIcon />}
-        selected={isSelected('/authors')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/booklists"
-        primaryText={translate('sidebar.bookLists')}
-        leftIcon={<ListAltIcon />}
-        selected={isSelected('/booklists')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/categories"
-        primaryText={translate('sidebar.categories')}
-        leftIcon={<CategoryIcon />}
-        selected={isSelected('/categories')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/users"
-        primaryText={translate('sidebar.users')}
-        leftIcon={<PeopleIcon />}
-        selected={isSelected('/users')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/quotes"
-        primaryText={translate('sidebar.quotes')}
-        leftIcon={<FormatQuoteIcon />}
-        selected={isSelected('/quotes')}
-        sidebarIsOpen={open}
-      />
-      <Divider sx={{ my: 1, mx: 2 }} />
-      {open && (
-        <Typography
-          variant="caption"
-          sx={{ px: 2, py: 0.5, color: textColors.secondary, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}
-        >
-          {translate('sidebar.sections.operations')}
-        </Typography>
-      )}
-      <MenuItemLink
-        to="/reading-stats"
-        primaryText={translate('sidebar.operations.readingStats')}
-        leftIcon={<BarChartIcon />}
-        selected={isSelected('/reading-stats')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/subscription-dashboard"
-        primaryText={translate('sidebar.operations.subscriptions')}
-        leftIcon={<CardMembershipIcon />}
-        selected={isSelected('/subscription-dashboard')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/import/batches"
-        primaryText={translate('sidebar.operations.importBatches', { _: 'Import Batches' })}
-        leftIcon={<CloudSyncIcon />}
-        selected={isSelected('/import/batches')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/se-import"
-        primaryText={translate('sidebar.operations.seImport', { _: 'SE Import' })}
-        leftIcon={<CloudDownloadIcon />}
-        selected={isSelected('/se-import')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/push-notifications"
-        primaryText={translate('sidebar.operations.pushNotifications', { _: 'Push Notifications' })}
-        leftIcon={<NotificationsActiveIcon />}
-        selected={isSelected('/push-notifications')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/highlight-analytics"
-        primaryText={translate('sidebar.operations.highlightAnalytics', { _: 'Highlight Analytics' })}
-        leftIcon={<HighlightIcon />}
-        selected={isSelected('/highlight-analytics')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/daily-report"
-        primaryText={translate('sidebar.operations.dailyReport', { _: 'Daily Report' })}
-        leftIcon={<TrendingUpIcon />}
-        selected={isSelected('/daily-report')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/cost-management"
-        primaryText={translate('sidebar.operations.costManagement', { _: 'Cost Management' })}
-        leftIcon={<AccountBalanceWalletIcon />}
-        selected={isSelected('/cost-management')}
-        sidebarIsOpen={open}
-      />
-      {/* Content Studio - External Link */}
-      <ListItemButton
-        component="a"
-        href={config.contentStudioUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        sx={{
-          paddingLeft: '16px',
-          paddingRight: '16px',
-          paddingTop: '6px',
-          paddingBottom: '6px',
-          minHeight: 44,
-          color: 'text.secondary',
-          '&:hover': {
-            backgroundColor: 'action.hover',
-          },
-        }}
-      >
-        <ListItemIcon sx={{ minWidth: 40, color: 'inherit' }}>
-          <RateReviewIcon />
-        </ListItemIcon>
-        {open && (
-          <>
-            <ListItemText
-              primary={
-                <Box component="span" sx={{ display: 'flex', alignItems: 'center' }}>
-                  {translate('sidebar.operations.contentStudio', { _: 'Content Studio' })}
-                  <OpenInNewIcon sx={{ fontSize: 12, ml: 0.5, opacity: 0.7 }} />
-                </Box>
-              }
-            />
-          </>
-        )}
-      </ListItemButton>
-      <Divider sx={{ my: 1, mx: 2 }} />
-      {open && (
-        <Typography
-          variant="caption"
-          sx={{ px: 2, py: 0.5, color: textColors.secondary, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}
-        >
-          {translate('sidebar.sections.support')}
-        </Typography>
-      )}
-      <MenuItemLink
-        to="/support-dashboard"
-        primaryText={translate('sidebar.support.overview')}
-        leftIcon={<SupportAgentIcon />}
-        selected={isSelected('/support-dashboard')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/tickets"
-        primaryText={translate('sidebar.support.tickets')}
-        leftIcon={<ConfirmationNumberIcon />}
-        selected={isSelected('/tickets')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/feedback"
-        primaryText={translate('sidebar.support.feedback')}
-        leftIcon={<FeedbackIcon />}
-        selected={isSelected('/feedback')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/guest-feedback"
-        primaryText={translate('sidebar.support.guestFeedback')}
-        leftIcon={<ContactSupportIcon />}
-        selected={isSelected('/guest-feedback')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/orders"
-        primaryText={translate('sidebar.support.orders')}
-        leftIcon={<ShoppingCartIcon />}
-        selected={isSelected('/orders')}
-        sidebarIsOpen={open}
-      />
-      <MenuItemLink
-        to="/messages"
-        primaryText={translate('sidebar.support.messages')}
-        leftIcon={<MailIcon />}
-        selected={isSelected('/messages')}
-        sidebarIsOpen={open}
-      />
+
+      {SECTION_ORDER.map((section, index) => {
+        const items = navItems.filter((item) => item.section === section);
+        if (items.length === 0) return null;
+        const headerKey = SECTION_HEADER_KEY[section];
+        return (
+          <Fragment key={section}>
+            {index > 0 && <Divider sx={{ my: 1, mx: 2 }} />}
+            {open && headerKey && (
+              <Typography variant="caption" sx={sectionLabelSx}>
+                {translate(headerKey)}
+              </Typography>
+            )}
+            {items.map(renderItem)}
+          </Fragment>
+        );
+      })}
     </Menu>
   );
 };

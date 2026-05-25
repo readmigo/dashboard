@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Box, Skeleton } from '@mui/material';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
-import { semanticColors } from '../../theme/brandTokens';
+import { semanticColors } from '@/theme/brandTokens';
 
 interface StatCardProps {
   title: string;

@@ -2,8 +2,8 @@ import { Card, CardContent, Typography, Box, Grid, Chip } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import MoneyOffIcon from '@mui/icons-material/MoneyOff';
 import { useTranslate } from 'react-admin';
-import { semanticColors, textColors, chartPalette, alpha } from '../../../theme/brandTokens';
-import type { ServiceCost } from '../../../config/costConfig';
+import { semanticColors, textColors, chartPalette, alpha } from '@/theme/brandTokens';
+import type { ServiceCost } from '@/config/costConfig';
 
 interface FreeTierUtilizationProps {
   services: ServiceCost[];

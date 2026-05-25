@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { clearLogs, getLogs, logger } from '../utils/logger';
+import { clearLogs, getLogs, logger } from '@/utils/logger';
 
 interface Props {
   children: ReactNode;
